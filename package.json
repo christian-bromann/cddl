@@ -1,0 +1,22 @@
+{
+  "name": "ccdl",
+  "version": "0.0.0",
+  "description": "Concise data definition language (RFC 8610) implementation and JSON validator in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/christian-bromann/ccdl.git"
+  },
+  "keywords": [
+    "ccdl"
+  ],
+  "author": "Christian Bromann <christian@saucelabs.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/christian-bromann/ccdl/issues"
+  },
+  "homepage": "https://github.com/christian-bromann/ccdl#readme"
+}
