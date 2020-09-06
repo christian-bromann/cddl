@@ -1,0 +1,1 @@
+export const WHITESPACE_CHARACTERS = [' ', '\t', '\n', '\r']

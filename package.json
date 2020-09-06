@@ -4,7 +4,8 @@
   "description": "Concise data definition language (RFC 8610) implementation and JSON validator in Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage",
+    "watch": "tsc --watch"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,15 @@
   "bugs": {
     "url": "https://github.com/christian-bromann/cddl/issues"
   },
-  "homepage": "https://github.com/christian-bromann/cddl#readme"
+  "homepage": "https://github.com/christian-bromann/cddl#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.13",
+    "@types/node": "^14.6.4",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.3.0",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "yargs": "^15.4.1"
+  }
 }

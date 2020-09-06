@@ -1,0 +1,8 @@
+Example = {
+   title: tstr,                                 # summary of test
+   ? description: tstr,                         # longer description of test
+   ? fail : bool,                               # Is this a success or failure test
+   "input": Inputs,                               # Inputs to create the test
+   ? intermediates : Intermediates,             # Intermediate values for debugging
+   output: Outputs                              # Outputs of the test
+}
