@@ -1,12 +1,12 @@
 import { Token, Tokens } from './tokens';
-import { isLetter, isDigit } from './utils'
+import { isLetter, isAlphabeticCharacter, isDigit, hasSpecialNumberCharacter } from './utils'
 import { WHITESPACE_CHARACTERS } from './constants';
 
 export default class Lexer {
-    input: string;
-    position: number = 0;
-    readPosition: number = 0;
-    ch: number = 0;
+    input: string
+    position: number = 0
+    readPosition: number = 0
+    ch: number = 0
 
     constructor (source: string) {
         this.input = source
@@ -32,9 +32,6 @@ export default class Lexer {
         switch (this.ch) {
             case '='.charCodeAt(0):
                 token = { Type: Tokens.ASSIGN, Literal }
-                break
-            case ';'.charCodeAt(0):
-                token = { Type: Tokens.SEMICOLON, Literal }
                 break
             case '('.charCodeAt(0):
                 token = { Type: Tokens.LPAREN, Literal }
@@ -75,14 +72,14 @@ export default class Lexer {
             case '"'.charCodeAt(0):
                 token = { Type: Tokens.STRING, Literal: this.readString() }
                 break
-            case '#'.charCodeAt(0):
+            case ';'.charCodeAt(0):
                 token = { Type: Tokens.COMMENT, Literal: this.readComment() }
                 break
             case 0:
                 token = { Type: Tokens.EOF, Literal: '' }
                 break
             default: {
-                if (isLetter(Literal)) {
+                if (isAlphabeticCharacter(Literal)) {
                     return { Type: Tokens.IDENT, Literal: this.readIdentifier() }
                 } else if (isDigit(Literal)) {
                     const numberOrFloat = this.readNumberOrFloat()
@@ -104,29 +101,21 @@ export default class Lexer {
 
         /**
          * an identifier can contain
+         * see https://tools.ietf.org/html/draft-ietf-cbor-cddl-08#section-3.1
          */
         while (
-            /**
-             * things that belong to identifier
-             */
-            (
-                // a letter (a-z, A-Z)
-                isLetter(String.fromCharCode(this.ch)) ||
-                // a digit (0-9)
-                isDigit(String.fromCharCode(this.ch)) ||
-                // a minus ("-")
-                this.ch === Tokens.MINUS.charCodeAt(0) ||
-                // a dot (".")
-                this.ch === Tokens.DOT.charCodeAt(0)
-            )
-            &&
-            /**
-             * things that don't belong into identifier
-             */
-            !(
-                this.ch === Tokens.NL.charCodeAt(0) ||
-                this.ch === Tokens.SPACE.charCodeAt(0)
-            )
+            // a letter (a-z, A-Z)
+            isLetter(String.fromCharCode(this.ch)) ||
+            // a digit (0-9)
+            isDigit(String.fromCharCode(this.ch)) ||
+            // and special characters (-, _, @, ., $)
+            [
+                Tokens.MINUS.charCodeAt(0),
+                Tokens.UNDERSCORE.charCodeAt(0),
+                Tokens.ATSIGN.charCodeAt(0),
+                Tokens.DOT.charCodeAt(0),
+                Tokens.DOLLAR.charCodeAt(0)
+            ].includes(this.ch)
         ) {
             this.readChar()
         }
@@ -157,21 +146,29 @@ export default class Lexer {
 
     private readNumberOrFloat (): string {
         const position = this.position
-        let foundDot = false
+        let foundSpecialCharacter = false
 
-        while (isDigit(String.fromCharCode(this.ch)) || this.ch === Tokens.DOT.charCodeAt(0)) {
+        /**
+         * a number of float can contain
+         */
+        while (
+            // a number
+            isDigit(String.fromCharCode(this.ch)) ||
+            // a special character, e.g. ".", "x" and "b"
+            hasSpecialNumberCharacter(this.ch)
+        ) {
             /**
              * ensure we respect ranges, e.g. 0..10
              * so break after the second dot and adjust read position
              */
-            if (this.ch === Tokens.DOT.charCodeAt(0) && foundDot) {
+            if (hasSpecialNumberCharacter(this.ch) && foundSpecialCharacter) {
                 this.position--
                 this.readPosition--
                 break
             }
 
-            if (this.ch === Tokens.DOT.charCodeAt(0)) {
-                foundDot = true
+            if (hasSpecialNumberCharacter(this.ch)) {
+                foundSpecialCharacter = true
             }
 
             this.readChar() // eat any character until a non digit or a 2nd dot

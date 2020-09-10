@@ -227,6 +227,28 @@ Array [
           },
         ],
       },
+      Object {
+        "Comment": "",
+        "Name": "hexa",
+        "Optional": false,
+        "Type": Array [
+          Object {
+            "Type": "literal",
+            "Value": "0x123",
+          },
+        ],
+      },
+      Object {
+        "Comment": "",
+        "Name": "bin",
+        "Optional": false,
+        "Type": Array [
+          Object {
+            "Type": "literal",
+            "Value": "0b123",
+          },
+        ],
+      },
     ],
   },
 ]

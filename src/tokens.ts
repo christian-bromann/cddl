@@ -10,6 +10,9 @@ export enum Tokens {
     EOF = 'EOF',
     NL = '\n',
     SPACE = ' ',
+    UNDERSCORE = '_',
+    DOLLAR = '$',
+    ATSIGN = '@',
 
     // Identifiers + literals,
     IDENT = 'IDENT',

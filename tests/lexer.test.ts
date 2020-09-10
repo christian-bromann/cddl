@@ -3,7 +3,7 @@ import Lexer from '../src/lexer'
 
 describe('lexer', () => {
     it('should allow to read token', () => {
-        const input = '=+(){},;'
+        const input = '=+(){},/'
         const tests = [
             [Tokens.ASSIGN, '='],
             [Tokens.PLUS, '+'],
@@ -12,7 +12,7 @@ describe('lexer', () => {
             [Tokens.LBRACE, '{'],
             [Tokens.RBRACE, '}'],
             [Tokens.COMMA, ','],
-            [Tokens.SEMICOLON, ';']
+            [Tokens.SLASH, '/']
         ]
 
         const l = new Lexer(input)
@@ -24,11 +24,11 @@ describe('lexer', () => {
     })
 
     it('should read identifiers and comments', () => {
-        const input = '   headers,       # Headers for the recipient'
+        const input = '   headers,       ; Headers for the recipient'
         const tests = [
             [Tokens.IDENT, 'headers'],
             [Tokens.COMMA, ','],
-            [Tokens.COMMENT, '# Headers for the recipient']
+            [Tokens.COMMENT, '; Headers for the recipient']
         ]
 
         const l = new Lexer(input)

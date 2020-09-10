@@ -1,12 +1,14 @@
 Example = {
-   title: tstr,                                 # summary of test
-   ? description: tstr,                         # longer description of test
-   ? fail : bool,                               # Is this a success or failure test
-   "input": Inputs,                             # Inputs to create the test
-   ? intermediates : Intermediates,             # Intermediate values for debugging
-   output: Outputs,                             # Outputs of the test
+   title: tstr,                                 ; summary of test
+   ? description: tstr,                         ; longer description of test
+   ? fail : bool,                               ; Is this a success or failure test
+   "input": Inputs,                             ; Inputs to create the test
+   ? intermediates : Intermediates,             ; Intermediate values for debugging
+   output: Outputs,                             ; Outputs of the test
    attire: "bow tie",
    count: 123,
    ?"rating": 0.5724646875815566,
+   hexa: 0x123,
+   bin: 0b123, 
    foobar
 }

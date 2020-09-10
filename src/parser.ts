@@ -1,5 +1,7 @@
 import Lexer from './lexer'
 import { Token, Tokens } from './tokens';
+import { PREDEFINED_IDENTIFIER } from './constants'
+import { parseNumberValue } from './utils'
 import {
     Group, Type, PropertyName, PropertyType, PropertyReferenceType,
     Variable, RangePropertyReference
@@ -183,6 +185,11 @@ export default class Parser {
          */
         if (this.curToken.Type === Tokens.IDENT || this.curToken.Type === Tokens.STRING) {
             const name = this.curToken.Literal
+
+            if (PREDEFINED_IDENTIFIER.includes(name)) {
+                throw new Error(`Name ${name} is a reserved word`)
+            }
+
             this.nextToken()
             return name
         }
@@ -216,14 +223,9 @@ export default class Parser {
                         Value: this.curToken.Literal
                     }
                 } else if (this.curToken.Type === Tokens.NUMBER || this.curToken.Type === Tokens.FLOAT) {
-                    const ValueType = this.curToken.Type
-                    const Value = ValueType === Tokens.NUMBER
-                        ? parseInt(this.curToken.Literal, 10)
-                        : parseFloat(this.curToken.Literal)
-
                     type = {
                         Type: 'literal' as PropertyReferenceType,
-                        Value
+                        Value: parseNumberValue(this.curToken)
                     }
                 } else {
                     throw new Error(`Invalid property type "${this.curToken.Literal}"`)
