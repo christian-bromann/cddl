@@ -1,6 +1,9 @@
 import Lexer from './lexer'
 import { Token, Tokens } from './tokens';
-import { Group, Type, PropertyName, PropertyType, PropertyReferenceType, Variable } from './ast'
+import {
+    Group, Type, PropertyName, PropertyType, PropertyReferenceType,
+    Variable, RangePropertyReference
+} from './ast'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
 
@@ -20,7 +23,7 @@ export default class Parser {
     private nextToken () {
         this.curToken = this.peekToken
         this.peekToken = this.l.nextToken()
-        
+        return true
     }
 
     private parseGroupOrVariableAssignments (): Group | Variable {
@@ -188,7 +191,7 @@ export default class Parser {
     }
 
     private parsePropertyType (): PropertyType {
-        let type
+        let type: PropertyType
         
         switch (this.curToken.Literal) {
             case Type.BOOL:
@@ -207,17 +210,56 @@ export default class Parser {
             default: {
                 if (this.curToken.Type === Tokens.IDENT) {
                     type = this.curToken.Literal
-                } else if (this.curToken.Type === Tokens.STRING || this.curToken.Type === Tokens.NUMBER || this.curToken.Type === Tokens.FLOAT) {
+                } else if (this.curToken.Type === Tokens.STRING) {
                     type = {
                         Type: 'literal' as PropertyReferenceType,
-                        Value: this.curToken.Type === Tokens.NUMBER
-                            ? parseInt(this.curToken.Literal, 10)
-                            : this.curToken.Type === Tokens.FLOAT
-                                ? parseFloat(this.curToken.Literal)
-                                : this.curToken.Literal
+                        Value: this.curToken.Literal
+                    }
+                } else if (this.curToken.Type === Tokens.NUMBER || this.curToken.Type === Tokens.FLOAT) {
+                    const ValueType = this.curToken.Type
+                    const Value = ValueType === Tokens.NUMBER
+                        ? parseInt(this.curToken.Literal, 10)
+                        : parseFloat(this.curToken.Literal)
+
+                    type = {
+                        Type: 'literal' as PropertyReferenceType,
+                        Value
                     }
                 } else {
                     throw new Error(`Invalid property type "${this.curToken.Literal}"`)
+                }
+            }
+        }
+
+        /**
+         * check if type continue as a range
+         */
+        if (
+            this.peekToken.Type === Tokens.DOT &&
+            this.nextToken() &&
+            this.peekToken.Type === Tokens.DOT
+        ) {
+            this.nextToken()
+            let Inclusive = true
+
+            /**
+             * check if range excludes upper bound
+             */
+            if (this.peekToken.Type === Tokens.DOT) {
+                Inclusive = false
+                this.nextToken()
+            }
+
+            this.nextToken()
+            const Min: RangePropertyReference = typeof type === 'string'
+                ? type as string
+                : type.Value as (number | string)
+            type = {
+                Type: 'range' as PropertyReferenceType,
+                Value: {
+                    Inclusive,
+                    Min,
+                    Max: this.parsePropertyType() as RangePropertyReference
                 }
             }
         }

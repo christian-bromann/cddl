@@ -69,10 +69,34 @@ export enum Type {
     TEXT = 'text'
 }
 
-export type PropertyReferenceType = 'literal' | 'group' | 'group_array'
+/**
+ * can be a number, e.g. "foo = 0..10"
+ * ```
+ * {
+ *   Type: "int",
+ *   Value: 6
+ * }
+ * ```
+ * or a literal, e.g. "foo = 0..max-byte"
+ * ```
+ * {
+ *   Type: "literal",
+ *   Value: "max-byte"
+ * }
+ * ```
+ */
+export type RangePropertyReference = number | string
+
+export type Range = {
+    Min: RangePropertyReference,
+    Max: RangePropertyReference,
+    Inclusive: boolean
+}
+
+export type PropertyReferenceType = 'literal' | 'group' | 'group_array' | 'range'
 export type PropertyReference = {
     Type: PropertyReferenceType;
-    Value: string | number | Group;
+    Value: string | number | Group | Range;
 }
 
 export type PropertyType = Group | PropertyReference | string

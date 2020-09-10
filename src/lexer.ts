@@ -157,9 +157,24 @@ export default class Lexer {
 
     private readNumberOrFloat (): string {
         const position = this.position
+        let foundDot = false
 
         while (isDigit(String.fromCharCode(this.ch)) || this.ch === Tokens.DOT.charCodeAt(0)) {
-            this.readChar() // eat any character until "
+            /**
+             * ensure we respect ranges, e.g. 0..10
+             * so break after the second dot and adjust read position
+             */
+            if (this.ch === Tokens.DOT.charCodeAt(0) && foundDot) {
+                this.position--
+                this.readPosition--
+                break
+            }
+
+            if (this.ch === Tokens.DOT.charCodeAt(0)) {
+                foundDot = true
+            }
+
+            this.readChar() // eat any character until a non digit or a 2nd dot
         }
 
         return this.input.slice(position, this.position).trim()

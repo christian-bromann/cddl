@@ -1,3 +1,8 @@
 device-address = byte
 max-byte = 255
-min..max = "foo"
+byte = 0..max-byte
+first-non-byte = 256
+byte1 = 0...first-non-byte
+min..max = 0
+byte2 = min..max...first-non-byte
+byte3 = min..max ... first-non-byte

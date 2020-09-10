@@ -88,10 +88,54 @@ Array [
     },
   },
   Object {
+    "Name": "byte",
+    "PropertyType": Object {
+      "Type": "range",
+      "Value": Object {
+        "Inclusive": true,
+        "Max": "max-byte",
+        "Min": 0,
+      },
+    },
+  },
+  Object {
+    "Name": "first-non-byte",
+    "PropertyType": Object {
+      "Type": "literal",
+      "Value": 256,
+    },
+  },
+  Object {
+    "Name": "byte1",
+    "PropertyType": Object {
+      "Type": "range",
+      "Value": Object {
+        "Inclusive": false,
+        "Max": "first-non-byte",
+        "Min": 0,
+      },
+    },
+  },
+  Object {
     "Name": "min..max",
     "PropertyType": Object {
       "Type": "literal",
-      "Value": "foo",
+      "Value": 0,
+    },
+  },
+  Object {
+    "Name": "byte2",
+    "PropertyType": "min..max...first-non-byte",
+  },
+  Object {
+    "Name": "byte3",
+    "PropertyType": Object {
+      "Type": "range",
+      "Value": Object {
+        "Inclusive": false,
+        "Max": "first-non-byte",
+        "Min": "min..max",
+      },
     },
   },
 ]
