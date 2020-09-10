@@ -69,6 +69,9 @@ export default class Lexer {
             case '?'.charCodeAt(0):
                 token = { Type: Tokens.QUEST, Literal }
                 break
+            case '/'.charCodeAt(0):
+                token = { Type: Tokens.SLASH, Literal }
+                break
             case '"'.charCodeAt(0):
                 token = { Type: Tokens.STRING, Literal: this.readString() }
                 break

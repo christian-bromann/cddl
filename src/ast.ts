@@ -6,7 +6,7 @@ export type Group = {
 export type Property = {
     Optional: boolean;
     Name: PropertyName;
-    Type: PropertyType;
+    Type: PropertyType[];
     Comment: string;
 }
 

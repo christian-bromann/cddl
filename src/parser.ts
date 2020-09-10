@@ -23,13 +23,6 @@ export default class Parser {
         
     }
 
-    private advanceUntil (tok: TokenType) {
-        while (this.curToken.Type !== tok) {
-            this.nextToken()
-        }
-        this.nextToken()
-    }
-
     private parseGroup (): Group {
         if (this.curToken.Type !== Tokens.IDENT && this.peekToken.Type !== Tokens.ASSIGN) {
             throw new Error(`group identifier expected, received "${JSON.stringify(this.curToken)}"`)
@@ -46,9 +39,9 @@ export default class Parser {
 
         while (!closingTokens.includes(this.curToken.Type)) {
             let optional = false
-            let propertyName
-            let propertyType
-            let comment: string = ''
+            let propertyName = ''
+            let propertyType: PropertyType[] = []
+            let comment = ''
 
             /**
              * check for optional property
@@ -84,10 +77,10 @@ export default class Parser {
                 group.Properties.push({
                     Optional: optional,
                     Name: '',
-                    Type: {
+                    Type: [{
                         Type: 'group' as PropertyReferenceType,
                         Value: propertyName
-                    },
+                    }],
                     Comment: comment
                 })
                 continue
@@ -105,7 +98,12 @@ export default class Parser {
             /**
              * parse property value
              */
-            propertyType = this.parsePropertyType()
+            propertyType.push(this.parsePropertyType())
+            // @ts-ignore
+            while (this.curToken.Type === Tokens.SLASH) {
+                this.nextToken()
+                propertyType.push(this.parsePropertyType())
+            }
 
             /**
              * advance comma
@@ -140,8 +138,6 @@ export default class Parser {
             }
         }
 
-        console.log('RETURN', group);
-        
         return group
     }
 
