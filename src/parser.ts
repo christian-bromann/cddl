@@ -31,8 +31,6 @@ export default class Parser {
     }
 
     private parseGroup (): Group {
-        const token = this.curToken
-
         if (this.curToken.Type !== Tokens.IDENT && this.peekToken.Type !== Tokens.ASSIGN) {
             throw new Error(`group identifier expected, received "${JSON.stringify(this.curToken)}"`)
         }
@@ -42,9 +40,11 @@ export default class Parser {
             Properties: []
         }
 
-        this.advanceUntil(Tokens.LBRACE)
+        this.nextToken() // eat group identifier
+        this.nextToken() // eat `=`
+        const closingTokens = this.openGroupSegment()
 
-        while (this.curToken.Type !== Tokens.RBRACE) {
+        while (!closingTokens.includes(this.curToken.Type)) {
             let optional = false
             let propertyName
             let propertyType
@@ -63,13 +63,13 @@ export default class Parser {
             /**
              * if `}` is found we are at the end of the group
              */
-            if (this.curToken.Type === Tokens.RBRACE) {
+            if (closingTokens.includes(this.curToken.Type)) {
                 this.nextToken()
                 break
             }
 
             /**
-             * if `,` is found we jump to next line
+             * if `,` is found we have a group reference and jump to the next line
              */
             else if (this.curToken.Type === Tokens.COMMA) {
                 /**
@@ -81,7 +81,15 @@ export default class Parser {
                 }
 
                 this.nextToken()
-                console.log('No property type')
+                group.Properties.push({
+                    Optional: optional,
+                    Name: '',
+                    Type: {
+                        Type: 'group' as PropertyReferenceType,
+                        Value: propertyName
+                    },
+                    Comment: comment
+                })
                 continue
             }
 
@@ -127,13 +135,36 @@ export default class Parser {
              * if `}` is found we are at the end of the group
              */
             // @ts-ignore
-            if (this.curToken.Type === Tokens.RBRACE) {
-                this.nextToken()
+            if (closingTokens.includes(this.curToken.Type)) {
                 break
             }
         }
 
+        console.log('RETURN', group);
+        
         return group
+    }
+
+    /**
+     * checks if group segment is opened and forwards to beginning of
+     * first property declaration
+     * @returns {String[]}  closing tokens for group (either `}`, `)` or both)
+     */
+    private openGroupSegment (): string[] {
+        if (this.curToken.Type === Tokens.LBRACE) {
+            this.nextToken()
+
+            if (this.peekToken.Type === Tokens.LPAREN) {
+                this.nextToken()
+                return [Tokens.RPAREN, Tokens.RBRACE]
+            }
+            return [Tokens.RBRACE]
+        } else if (this.curToken.Type === Tokens.LPAREN) {
+            this.nextToken()
+            return [Tokens.RPAREN]
+        }
+
+        throw new Error(`Expected opening group segement but found ${this.curToken.Type}`)
     }
 
     private parsePropertyName (): PropertyName {

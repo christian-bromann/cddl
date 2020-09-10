@@ -99,7 +99,17 @@ export default class Lexer {
     private readIdentifier (): string {
         const position = this.position
 
-        while (isLetter(String.fromCharCode(this.ch)) || isDigit(String.fromCharCode(this.ch))) {
+        /**
+         * an identifier can contain
+         */
+        while (
+            // a letter (a-z, A-Z)
+            isLetter(String.fromCharCode(this.ch)) ||
+            // a digit (0-9)
+            isDigit(String.fromCharCode(this.ch)) ||
+            // a minus ("-")
+            this.ch === Tokens.MINUS.charCodeAt(0)
+        ) {
             this.readChar()
         }
 
@@ -120,7 +130,7 @@ export default class Lexer {
         const position = this.position
 
         this.readChar() // eat "
-        while (this.ch && String.fromCharCode(this.ch) !== '"') {
+        while (this.ch && String.fromCharCode(this.ch) !== Tokens.QUOT) {
             this.readChar() // eat any character until "
         }
 
@@ -130,7 +140,7 @@ export default class Lexer {
     private readNumberOrFloat (): string {
         const position = this.position
 
-        while (isDigit(String.fromCharCode(this.ch)) || this.ch === '.'.charCodeAt(0)) {
+        while (isDigit(String.fromCharCode(this.ch)) || this.ch === Tokens.DOT.charCodeAt(0)) {
             this.readChar() // eat any character until "
         }
 

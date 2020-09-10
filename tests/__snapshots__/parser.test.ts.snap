@@ -1,5 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`parser can parse compositions 1`] = `
+Array [
+  Object {
+    "GroupName": "person ",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "Name": "",
+        "Optional": false,
+        "Type": Object {
+          "Type": "group",
+          "Value": "identity",
+        },
+      },
+      Object {
+        "Comment": "",
+        "Name": "employer",
+        "Optional": false,
+        "Type": "tstr",
+      },
+    ],
+  },
+  Object {
+    "GroupName": "dog ",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "Name": "",
+        "Optional": false,
+        "Type": Object {
+          "Type": "group",
+          "Value": "identity",
+        },
+      },
+      Object {
+        "Comment": "",
+        "Name": "leash-length",
+        "Optional": false,
+        "Type": "float",
+      },
+    ],
+  },
+  Object {
+    "GroupName": "identity ",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "Name": "age",
+        "Optional": false,
+        "Type": "int",
+      },
+      Object {
+        "Comment": "",
+        "Name": "name",
+        "Optional": false,
+        "Type": "tstr",
+      },
+    ],
+  },
+]
+`;
+
 exports[`parser should correctly parse CDDL file 1`] = `
 Array [
   Object {

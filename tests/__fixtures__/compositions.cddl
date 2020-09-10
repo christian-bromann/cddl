@@ -1,0 +1,14 @@
+person = {
+    identity,
+    employer: tstr,
+}
+
+dog = {
+    identity,
+    leash-length: float,
+}
+
+identity = (
+    age: int,
+    name: tstr,
+)

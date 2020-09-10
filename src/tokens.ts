@@ -20,6 +20,7 @@ export enum Tokens {
     // Operators,
     ASSIGN = '=',
     PLUS = '+',
+    MINUS = '-',
     SLASH = '/',
     QUEST = '?',
     ASTERISK = '*',
