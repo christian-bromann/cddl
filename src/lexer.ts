@@ -60,6 +60,9 @@ export default class Lexer {
             case ','.charCodeAt(0):
                 token = { Type: Tokens.COMMA, Literal }
                 break
+            case '.'.charCodeAt(0):
+                token = { Type: Tokens.DOT, Literal }
+                break
             case ':'.charCodeAt(0):
                 token = { Type: Tokens.COLON, Literal }
                 break
@@ -76,8 +79,14 @@ export default class Lexer {
                 token = { Type: Tokens.EOF, Literal: '' }
                 break
             default: {
-                if (isLetter(Literal) || isDigit(Literal)) {
+                if (isLetter(Literal)) {
                     return { Type: Tokens.IDENT, Literal: this.readIdentifier() }
+                } else if (isDigit(Literal)) {
+                    const numberOrFloat = this.readNumberOrFloat()
+                    return {
+                        Type: numberOrFloat.includes(Tokens.DOT) ? Tokens.FLOAT : Tokens.NUMBER,
+                        Literal: numberOrFloat
+                    }
                 }
                 token = { Type: Tokens.ILLEGAL, Literal: '' }
             }
@@ -116,6 +125,16 @@ export default class Lexer {
         }
 
         return this.input.slice(position + 1, this.position).trim()
+    }
+
+    private readNumberOrFloat (): string {
+        const position = this.position
+
+        while (isDigit(String.fromCharCode(this.ch)) || this.ch === '.'.charCodeAt(0)) {
+            this.readChar() // eat any character until "
+        }
+
+        return this.input.slice(position, this.position).trim()
     }
 
     private skipWhitespace () {

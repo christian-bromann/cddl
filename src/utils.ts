@@ -3,5 +3,5 @@ export function isLetter (ch: string): boolean {
 }
 
 export function isDigit (ch: string): boolean {
-    return Boolean(Number(ch))
+    return !isNaN(ch as unknown as number)
 }

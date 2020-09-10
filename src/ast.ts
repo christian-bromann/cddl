@@ -48,5 +48,11 @@ export enum Type {
     TEXT = 'text'
 }
 
-export type PropertyType = Group | string
+export type PropertyReferenceType = 'literal' | 'group' | 'group_array'
+export type PropertyReference = {
+    Type: PropertyReferenceType;
+    Value: string | number | Group;
+}
+
+export type PropertyType = Group | PropertyReference | string
 export type PropertyName = string

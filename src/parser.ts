@@ -1,6 +1,6 @@
 import Lexer from './lexer'
 import { Token, Tokens, TokenType } from './tokens';
-import { Group, Property, Type, PropertyName, PropertyType } from './ast'
+import { Group, Property, Type, PropertyName, PropertyType, PropertyReferenceType } from './ast'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
 
@@ -100,15 +100,6 @@ export default class Parser {
             propertyType = this.parsePropertyType()
 
             /**
-             * if `}` is found we are at the end of the group
-             */
-            // @ts-ignore
-            if (this.curToken.Type === Tokens.RBRACE) {
-                this.nextToken()
-                break
-            }
-
-            /**
              * advance comma
              */
             // @ts-ignore
@@ -178,6 +169,15 @@ export default class Parser {
             default: {
                 if (this.curToken.Type === Tokens.IDENT) {
                     type = this.curToken.Literal
+                } else if (this.curToken.Type === Tokens.STRING || this.curToken.Type === Tokens.NUMBER || this.curToken.Type === Tokens.FLOAT) {
+                    type = {
+                        Type: 'literal' as PropertyReferenceType,
+                        Value: this.curToken.Type === Tokens.NUMBER
+                            ? parseInt(this.curToken.Literal, 10)
+                            : this.curToken.Type === Tokens.FLOAT
+                                ? parseFloat(this.curToken.Literal)
+                                : this.curToken.Literal
+                    }
                 } else {
                     throw new Error(`Invalid property type "${this.curToken.Literal}"`)
                 }

@@ -14,6 +14,8 @@ export enum Tokens {
     INT = 'INT',
     COMMENT = 'COMMENT',
     STRING = 'STRING',
+    NUMBER = 'NUMBER',
+    FLOAT = 'FLOAT',
 
     // Operators,
     ASSIGN = '=',
@@ -24,6 +26,7 @@ export enum Tokens {
 
     // Delimiters,
     COMMA = ',',
+    DOT = '.',
     COLON = ':',
     SEMICOLON = ';',
     LPAREN = '(',
