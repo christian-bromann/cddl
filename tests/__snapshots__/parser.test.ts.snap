@@ -3,7 +3,7 @@
 exports[`parser can parse compositions 1`] = `
 Array [
   Object {
-    "Name": "person ",
+    "Name": "person",
     "Properties": Array [
       Object {
         "Comment": "",
@@ -27,7 +27,7 @@ Array [
     ],
   },
   Object {
-    "Name": "dog ",
+    "Name": "dog",
     "Properties": Array [
       Object {
         "Comment": "",
@@ -51,7 +51,7 @@ Array [
     ],
   },
   Object {
-    "Name": "identity ",
+    "Name": "identity",
     "Properties": Array [
       Object {
         "Comment": "",
@@ -77,14 +77,21 @@ Array [
 exports[`parser can parse ranges 1`] = `
 Array [
   Object {
-    "Name": "device-address ",
+    "Name": "device-address",
     "PropertyType": "byte",
   },
   Object {
-    "Name": "max-byte ",
+    "Name": "max-byte",
     "PropertyType": Object {
       "Type": "literal",
       "Value": 255,
+    },
+  },
+  Object {
+    "Name": "min..max",
+    "PropertyType": Object {
+      "Type": "literal",
+      "Value": "foo",
     },
   },
 ]
@@ -93,7 +100,7 @@ Array [
 exports[`parser should correctly parse CDDL file 1`] = `
 Array [
   Object {
-    "Name": "Example ",
+    "Name": "Example",
     "Properties": Array [
       Object {
         "Comment": "summary of test",
@@ -113,7 +120,7 @@ Array [
       },
       Object {
         "Comment": "Is this a success or failure test",
-        "Name": "fail ",
+        "Name": "fail",
         "Optional": true,
         "Type": Array [
           "bool",
@@ -129,7 +136,7 @@ Array [
       },
       Object {
         "Comment": "Intermediate values for debugging",
-        "Name": "intermediates ",
+        "Name": "intermediates",
         "Optional": true,
         "Type": Array [
           "Intermediates",

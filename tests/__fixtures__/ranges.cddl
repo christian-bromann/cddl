@@ -1,2 +1,3 @@
 device-address = byte
 max-byte = 255
+min..max = "foo"

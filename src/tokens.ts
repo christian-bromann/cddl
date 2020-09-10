@@ -9,6 +9,7 @@ export enum Tokens {
     ILLEGAL = 'ILLEGAL',
     EOF = 'EOF',
     NL = '\n',
+    SPACE = ' ',
 
     // Identifiers + literals,
     IDENT = 'IDENT',

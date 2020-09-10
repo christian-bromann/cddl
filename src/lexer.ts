@@ -115,14 +115,17 @@ export default class Lexer {
                 // a digit (0-9)
                 isDigit(String.fromCharCode(this.ch)) ||
                 // a minus ("-")
-                this.ch === Tokens.MINUS.charCodeAt(0)
+                this.ch === Tokens.MINUS.charCodeAt(0) ||
+                // a dot (".")
+                this.ch === Tokens.DOT.charCodeAt(0)
             )
             &&
             /**
              * things that don't belong into identifier
              */
             !(
-                this.ch === Tokens.NL.charCodeAt(0)
+                this.ch === Tokens.NL.charCodeAt(0) ||
+                this.ch === Tokens.SPACE.charCodeAt(0)
             )
         ) {
             this.readChar()
