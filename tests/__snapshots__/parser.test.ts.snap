@@ -3,43 +3,70 @@
 exports[`parser should correctly parse CDDL file 1`] = `
 Array [
   Object {
-    "GroupName": "Example",
+    "GroupName": "Example ",
     "Properties": Array [
       Object {
-        "Comment": "# summary of test",
+        "Comment": "summary of test",
         "Name": "title",
         "Optional": false,
         "Type": "tstr",
       },
       Object {
-        "Comment": "# longer description of test",
+        "Comment": "longer description of test",
         "Name": "description",
         "Optional": true,
         "Type": "tstr",
       },
       Object {
-        "Comment": "# Is this a success or failure test",
-        "Name": "fail",
+        "Comment": "Is this a success or failure test",
+        "Name": "fail ",
         "Optional": true,
         "Type": "bool",
       },
       Object {
-        "Comment": "# Inputs to create the test",
+        "Comment": "Inputs to create the test",
         "Name": "input",
         "Optional": false,
         "Type": "Inputs",
       },
       Object {
-        "Comment": "# Intermediate values for debugging",
-        "Name": "intermediates",
+        "Comment": "Intermediate values for debugging",
+        "Name": "intermediates ",
         "Optional": true,
         "Type": "Intermediates",
       },
       Object {
-        "Comment": "# Outputs of the test",
+        "Comment": "Outputs of the test",
         "Name": "output",
         "Optional": false,
         "Type": "Outputs",
+      },
+      Object {
+        "Comment": "",
+        "Name": "attire",
+        "Optional": false,
+        "Type": Object {
+          "Type": "literal",
+          "Value": "bow tie",
+        },
+      },
+      Object {
+        "Comment": "",
+        "Name": "count",
+        "Optional": false,
+        "Type": Object {
+          "Type": "literal",
+          "Value": 123,
+        },
+      },
+      Object {
+        "Comment": "",
+        "Name": "rating",
+        "Optional": true,
+        "Type": Object {
+          "Type": "literal",
+          "Value": 0.5724646875815566,
+        },
       },
     ],
   },
