@@ -3,7 +3,7 @@
 exports[`parser can parse compositions 1`] = `
 Array [
   Object {
-    "GroupName": "person ",
+    "Name": "person ",
     "Properties": Array [
       Object {
         "Comment": "",
@@ -27,7 +27,7 @@ Array [
     ],
   },
   Object {
-    "GroupName": "dog ",
+    "Name": "dog ",
     "Properties": Array [
       Object {
         "Comment": "",
@@ -51,7 +51,7 @@ Array [
     ],
   },
   Object {
-    "GroupName": "identity ",
+    "Name": "identity ",
     "Properties": Array [
       Object {
         "Comment": "",
@@ -74,10 +74,26 @@ Array [
 ]
 `;
 
+exports[`parser can parse ranges 1`] = `
+Array [
+  Object {
+    "Name": "device-address ",
+    "PropertyType": "byte",
+  },
+  Object {
+    "Name": "max-byte ",
+    "PropertyType": Object {
+      "Type": "literal",
+      "Value": 255,
+    },
+  },
+]
+`;
+
 exports[`parser should correctly parse CDDL file 1`] = `
 Array [
   Object {
-    "GroupName": "Example ",
+    "Name": "Example ",
     "Properties": Array [
       Object {
         "Comment": "summary of test",

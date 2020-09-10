@@ -1,6 +1,27 @@
+/**
+ * a group definition
+ * ```
+ * person = {
+ *     age: int,
+ *     name: tstr,
+ *     employer: tstr,
+ * }
+ * ```
+ */
 export type Group = {
-    GroupName: string;
+    Name: string;
     Properties: Property[];
+}
+
+/**
+ * a variable assignment
+ * ```
+ * device-address = byte
+ * ```
+ */
+export type Variable = {
+    Name: string;
+    PropertyType: PropertyType;
 }
 
 export type Property = {

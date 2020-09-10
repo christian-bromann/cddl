@@ -1,6 +1,6 @@
 import Lexer from './lexer'
-import { Token, Tokens, TokenType } from './tokens';
-import { Group, Property, Type, PropertyName, PropertyType, PropertyReferenceType } from './ast'
+import { Token, Tokens } from './tokens';
+import { Group, Type, PropertyName, PropertyType, PropertyReferenceType, Variable } from './ast'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
 
@@ -23,19 +23,30 @@ export default class Parser {
         
     }
 
-    private parseGroup (): Group {
+    private parseGroupOrVariableAssignments (): Group | Variable {
         if (this.curToken.Type !== Tokens.IDENT && this.peekToken.Type !== Tokens.ASSIGN) {
             throw new Error(`group identifier expected, received "${JSON.stringify(this.curToken)}"`)
         }
 
         const group: Group = {
-            GroupName: this.curToken.Literal,
+            Name: this.curToken.Literal,
             Properties: []
         }
 
         this.nextToken() // eat group identifier
         this.nextToken() // eat `=`
         const closingTokens = this.openGroupSegment()
+
+        /**
+         * if no group segment was opened we have a variable assignment
+         */
+        if (!closingTokens) {
+            const variable: Variable = {
+                Name: group.Name,
+                PropertyType: this.parsePropertyType()
+            }
+            return variable
+        }
 
         while (!closingTokens.includes(this.curToken.Type)) {
             let optional = false
@@ -99,10 +110,12 @@ export default class Parser {
              * parse property value
              */
             propertyType.push(this.parsePropertyType())
+            this.nextToken()
             // @ts-ignore
             while (this.curToken.Type === Tokens.SLASH) {
-                this.nextToken()
+                this.nextToken() // eat `/`
                 propertyType.push(this.parsePropertyType())
+                this.nextToken()
             }
 
             /**
@@ -146,7 +159,7 @@ export default class Parser {
      * first property declaration
      * @returns {String[]}  closing tokens for group (either `}`, `)` or both)
      */
-    private openGroupSegment (): string[] {
+    private openGroupSegment (): string[] | void {
         if (this.curToken.Type === Tokens.LBRACE) {
             this.nextToken()
 
@@ -159,8 +172,6 @@ export default class Parser {
             this.nextToken()
             return [Tokens.RPAREN]
         }
-
-        throw new Error(`Expected opening group segement but found ${this.curToken.Type}`)
     }
 
     private parsePropertyName (): PropertyName {
@@ -211,15 +222,14 @@ export default class Parser {
             }
         }
 
-        this.nextToken()
         return type
     }
 
     parse () {
-        const definition: Group[] = []
+        const definition: (Group | Variable)[] = []
 
         while (this.curToken.Type !== Tokens.EOF) {
-            const group = this.parseGroup()
+            const group = this.parseGroupOrVariableAssignments()
             if (group) {
                 definition.push(group)
             }

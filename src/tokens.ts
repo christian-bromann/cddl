@@ -8,6 +8,7 @@ export type Token = {
 export enum Tokens {
     ILLEGAL = 'ILLEGAL',
     EOF = 'EOF',
+    NL = '\n',
 
     // Identifiers + literals,
     IDENT = 'IDENT',

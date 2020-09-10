@@ -106,12 +106,24 @@ export default class Lexer {
          * an identifier can contain
          */
         while (
-            // a letter (a-z, A-Z)
-            isLetter(String.fromCharCode(this.ch)) ||
-            // a digit (0-9)
-            isDigit(String.fromCharCode(this.ch)) ||
-            // a minus ("-")
-            this.ch === Tokens.MINUS.charCodeAt(0)
+            /**
+             * things that belong to identifier
+             */
+            (
+                // a letter (a-z, A-Z)
+                isLetter(String.fromCharCode(this.ch)) ||
+                // a digit (0-9)
+                isDigit(String.fromCharCode(this.ch)) ||
+                // a minus ("-")
+                this.ch === Tokens.MINUS.charCodeAt(0)
+            )
+            &&
+            /**
+             * things that don't belong into identifier
+             */
+            !(
+                this.ch === Tokens.NL.charCodeAt(0)
+            )
         ) {
             this.readChar()
         }
