@@ -13,6 +13,7 @@ export enum Tokens {
     IDENT = 'IDENT',
     INT = 'INT',
     COMMENT = 'COMMENT',
+    STRING = 'STRING',
 
     // Operators,
     ASSIGN = '=',

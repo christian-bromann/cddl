@@ -149,24 +149,8 @@ export default class Parser {
         /**
          * property name without quotes
          */
-        if (this.curToken.Type === Tokens.IDENT) {
+        if (this.curToken.Type === Tokens.IDENT || this.curToken.Type === Tokens.STRING) {
             const name = this.curToken.Literal
-            this.nextToken()
-            return name
-        }
-
-        /**
-         * property name with quotes
-         */
-        if (this.curToken.Type === Tokens.QUOT && this.peekToken.Type === Tokens.IDENT) {
-            this.nextToken()
-            const name = this.curToken.Literal
-
-            this.nextToken()
-            if (this.curToken.Type !== Tokens.QUOT) {
-                throw new Error('Expected closing quotation mark for property name')
-            }
-
             this.nextToken()
             return name
         }

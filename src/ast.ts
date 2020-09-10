@@ -14,6 +14,7 @@ export enum Type {
     /**
      * boolean types
      */
+    // Boolean value (major type 7, additional information 20 or 21).
     BOOL = 'bool',
 
     /**

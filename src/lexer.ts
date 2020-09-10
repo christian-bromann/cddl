@@ -67,7 +67,7 @@ export default class Lexer {
                 token = { Type: Tokens.QUEST, Literal }
                 break
             case '"'.charCodeAt(0):
-                token = { Type: Tokens.QUOT, Literal }
+                token = { Type: Tokens.STRING, Literal: this.readString() }
                 break
             case '#'.charCodeAt(0):
                 token = { Type: Tokens.COMMENT, Literal: this.readComment() }
@@ -105,6 +105,17 @@ export default class Lexer {
         }
 
         return this.input.slice(position, this.position).trim()
+    }
+
+    private readString (): string {
+        const position = this.position
+
+        this.readChar() // eat "
+        while (this.ch && String.fromCharCode(this.ch) !== '"') {
+            this.readChar() // eat any character until "
+        }
+
+        return this.input.slice(position + 1, this.position).trim()
     }
 
     private skipWhitespace () {
