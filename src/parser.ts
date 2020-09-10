@@ -112,7 +112,7 @@ export default class Parser {
              */
             // @ts-ignore
             if (this.curToken.Type === Tokens.COMMENT) {
-                comment = this.curToken.Literal
+                comment = this.curToken.Literal.slice(2)
                 this.nextToken()
             }
 
