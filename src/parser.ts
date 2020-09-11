@@ -4,7 +4,7 @@ import { PREDEFINED_IDENTIFIER } from './constants'
 import { parseNumberValue } from './utils'
 import {
     Group, Type, PropertyName, PropertyType, PropertyReferenceType,
-    Variable, RangePropertyReference, Occurrence
+    Variable, RangePropertyReference, Occurrence, Property
 } from './ast'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
@@ -41,6 +41,32 @@ export default class Parser {
 
         this.nextToken() // eat group identifier
         this.nextToken() // eat `=`
+
+        /**
+         * check for array definition, e.g.:
+         * ```
+         *  unlimited-people = [* person]
+         * ```
+         */
+        if (this.curToken.Type === Tokens.LBRACK) {
+            this.nextToken() // eat "["
+            const arrayGroup: Property = {
+                Occurrence: this.parseOccurrences(),
+                Name: '',
+                Type: [{
+                    Type: 'group',
+                    Value: this.curToken.Literal
+                }],
+                Comment: ''
+            }
+            this.nextToken() // eat group reference
+            this.nextToken() // eat "]"
+
+            arrayGroup.Comment = this.parseComment()
+            group.Properties.push(arrayGroup)
+            return group
+        }
+
         const closingTokens = this.openGroupSegment()
 
         /**
@@ -51,52 +77,16 @@ export default class Parser {
                 Name: group.Name,
                 PropertyType: this.parsePropertyType()
             }
+            this.nextToken()
             return variable
         }
 
         while (!closingTokens.includes(this.curToken.Type)) {
-            let occurrence = DEFAULT_OCCURRENCE
             let propertyName = ''
             let propertyType: PropertyType[] = []
             let comment = ''
 
-            /**
-             * check for non-numbered occurrence indicator, e.g.
-             * ```
-             *  * bedroom: size,
-             * ```
-             * which is the same as:
-             * ```
-             *  ? bedroom: size,
-             * ```
-             * or have miniumum of 1 occurrence
-             * ```
-             *  + bedroom: size,
-             * ```
-             */
-            if (this.curToken.Type === Tokens.QUEST || this.curToken.Type === Tokens.ASTERISK || this.curToken.Type === Tokens.PLUS) {
-                occurrence = {
-                    n: this.curToken.Type === Tokens.PLUS ? 1 : 0,
-                    m: Infinity
-                }
-                this.nextToken()
-            /**
-             * numbered occurrence indicator, e.g.
-             * ```
-             *  1*10 bedroom: size,
-             * ```
-             */
-            } else if (
-                this.curToken.Type === Tokens.NUMBER &&
-                this.peekToken.Type === Tokens.ASTERISK
-            ) {
-                const n = parseInt(this.curToken.Literal, 10)
-                this.nextToken() // eat "n"
-                this.nextToken() // eat "*"
-                const m = parseInt(this.curToken.Literal, 10)
-                occurrence = { n, m }
-                this.nextToken()
-            }
+            const occurrence = this.parseOccurrences()
 
             propertyName = this.parsePropertyName()
 
@@ -162,14 +152,7 @@ export default class Parser {
                 this.nextToken()
             }
 
-            /**
-             * check if line has a comment
-             */
-            // @ts-ignore
-            if (this.curToken.Type === Tokens.COMMENT) {
-                comment = this.curToken.Literal.slice(2)
-                this.nextToken()
-            }
+            comment = this.parseComment()
 
             group.Properties.push({
                 Occurrence: occurrence,
@@ -187,6 +170,7 @@ export default class Parser {
             }
         }
 
+        this.nextToken()
         return group
     }
 
@@ -300,6 +284,63 @@ export default class Parser {
         return type
     }
 
+    private parseOccurrences () {
+        let occurrence = DEFAULT_OCCURRENCE
+
+        /**
+         * check for non-numbered occurrence indicator, e.g.
+         * ```
+         *  * bedroom: size,
+         * ```
+         * which is the same as:
+         * ```
+         *  ? bedroom: size,
+         * ```
+         * or have miniumum of 1 occurrence
+         * ```
+         *  + bedroom: size,
+         * ```
+         */
+        if (this.curToken.Type === Tokens.QUEST || this.curToken.Type === Tokens.ASTERISK || this.curToken.Type === Tokens.PLUS) {
+            occurrence = {
+                n: this.curToken.Type === Tokens.PLUS ? 1 : 0,
+                m: Infinity
+            }
+            this.nextToken()
+        /**
+         * numbered occurrence indicator, e.g.
+         * ```
+         *  1*10 bedroom: size,
+         * ```
+         */
+        } else if (
+            this.curToken.Type === Tokens.NUMBER &&
+            this.peekToken.Type === Tokens.ASTERISK
+        ) {
+            const n = parseInt(this.curToken.Literal, 10)
+            this.nextToken() // eat "n"
+            this.nextToken() // eat "*"
+            const m = parseInt(this.curToken.Literal, 10)
+            occurrence = { n, m }
+            this.nextToken()
+        }
+
+        return occurrence
+    }
+
+    /**
+     * check if line has a comment
+     */
+    private parseComment () {
+        let comment = ''
+        if (this.curToken.Type === Tokens.COMMENT) {
+            comment = this.curToken.Literal.slice(2)
+            this.nextToken()
+        }
+
+        return comment
+    }
+
     parse () {
         const definition: (Group | Variable)[] = []
 
@@ -308,7 +349,6 @@ export default class Parser {
             if (group) {
                 definition.push(group)
             }
-            this.nextToken()
         }
 
         return definition
