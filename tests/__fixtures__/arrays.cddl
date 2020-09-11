@@ -2,6 +2,8 @@ unlimited-people = [* person]
 at-least-one-person = [+ person]    ; some
 zero-or-one-person = [? person]     ; comment
 one-or-two-people = [1*2 person]
+zero-or-two-people = [*2 person]
+two-or-infinity-people = [2* person]
 person = (
     name: tstr,
     age: uint,

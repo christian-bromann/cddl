@@ -79,6 +79,44 @@ Array [
     ],
   },
   Object {
+    "Name": "zero-or-two-people",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "Name": "",
+        "Occurrence": Object {
+          "m": 2,
+          "n": 0,
+        },
+        "Type": Array [
+          Object {
+            "Type": "group",
+            "Value": "person",
+          },
+        ],
+      },
+    ],
+  },
+  Object {
+    "Name": "two-or-infinity-people",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "Name": "",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 2,
+        },
+        "Type": Array [
+          Object {
+            "Type": "group",
+            "Value": "person",
+          },
+        ],
+      },
+    ],
+  },
+  Object {
     "Name": "person",
     "Properties": Array [
       Object {
@@ -243,6 +281,28 @@ Array [
         "Name": "numberedOccurence",
         "Occurrence": Object {
           "m": 42,
+          "n": 23,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "Name": "withoutLeftSide",
+        "Occurrence": Object {
+          "m": 42,
+          "n": 0,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "Name": "withoutRightSide",
+        "Occurrence": Object {
+          "m": Infinity,
           "n": 23,
         },
         "Type": Array [

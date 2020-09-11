@@ -302,10 +302,18 @@ export default class Parser {
          * ```
          */
         if (this.curToken.Type === Tokens.QUEST || this.curToken.Type === Tokens.ASTERISK || this.curToken.Type === Tokens.PLUS) {
-            occurrence = {
-                n: this.curToken.Type === Tokens.PLUS ? 1 : 0,
-                m: Infinity
+            const n = this.curToken.Type === Tokens.PLUS ? 1 : 0
+            let m = Infinity
+
+            /**
+             * check if there is a max definition
+             */
+            if (this.peekToken.Type === Tokens.NUMBER) {
+                m = parseInt(this.peekToken.Literal, 10)
+                this.nextToken()
             }
+
+            occurrence = { n, m }
             this.nextToken()
         /**
          * numbered occurrence indicator, e.g.
@@ -318,11 +326,19 @@ export default class Parser {
             this.peekToken.Type === Tokens.ASTERISK
         ) {
             const n = parseInt(this.curToken.Literal, 10)
+            let m = Infinity
             this.nextToken() // eat "n"
             this.nextToken() // eat "*"
-            const m = parseInt(this.curToken.Literal, 10)
+
+            /**
+             * check if there is a max definition
+             */
+            if (this.curToken.Type === Tokens.NUMBER) {
+                m = parseInt(this.curToken.Literal, 10)
+                this.nextToken()
+            }
+
             occurrence = { n, m }
-            this.nextToken()
         }
 
         return occurrence
