@@ -24,8 +24,13 @@ export type Variable = {
     PropertyType: PropertyType;
 }
 
+export type Occurrence = {
+    n: number;
+    m: number;
+}
+
 export type Property = {
-    Optional: boolean;
+    Occurrence: Occurrence;
     Name: PropertyName;
     Type: PropertyType[];
     Comment: string;

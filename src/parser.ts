@@ -4,10 +4,11 @@ import { PREDEFINED_IDENTIFIER } from './constants'
 import { parseNumberValue } from './utils'
 import {
     Group, Type, PropertyName, PropertyType, PropertyReferenceType,
-    Variable, RangePropertyReference
+    Variable, RangePropertyReference, Occurrence
 } from './ast'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
+const DEFAULT_OCCURRENCE: Occurrence = { n: 1, m: 1 } // exactly one time
 
 export default class Parser {
     l: Lexer;
@@ -54,16 +55,46 @@ export default class Parser {
         }
 
         while (!closingTokens.includes(this.curToken.Type)) {
-            let optional = false
+            let occurrence = DEFAULT_OCCURRENCE
             let propertyName = ''
             let propertyType: PropertyType[] = []
             let comment = ''
 
             /**
-             * check for optional property
+             * check for non-numbered occurrence indicator, e.g.
+             * ```
+             *  * bedroom: size,
+             * ```
+             * which is the same as:
+             * ```
+             *  ? bedroom: size,
+             * ```
+             * or have miniumum of 1 occurrence
+             * ```
+             *  + bedroom: size,
+             * ```
              */
-            if (this.curToken.Type === Tokens.QUEST) {
-                optional = true
+            if (this.curToken.Type === Tokens.QUEST || this.curToken.Type === Tokens.ASTERISK || this.curToken.Type === Tokens.PLUS) {
+                occurrence = {
+                    n: this.curToken.Type === Tokens.PLUS ? 1 : 0,
+                    m: Infinity
+                }
+                this.nextToken()
+            /**
+             * numbered occurrence indicator, e.g.
+             * ```
+             *  1*10 bedroom: size,
+             * ```
+             */
+            } else if (
+                this.curToken.Type === Tokens.NUMBER &&
+                this.peekToken.Type === Tokens.ASTERISK
+            ) {
+                const n = parseInt(this.curToken.Literal, 10)
+                this.nextToken() // eat "n"
+                this.nextToken() // eat "*"
+                const m = parseInt(this.curToken.Literal, 10)
+                occurrence = { n, m }
                 this.nextToken()
             }
 
@@ -91,7 +122,7 @@ export default class Parser {
 
                 this.nextToken()
                 group.Properties.push({
-                    Optional: optional,
+                    Occurrence: occurrence,
                     Name: '',
                     Type: [{
                         Type: 'group' as PropertyReferenceType,
@@ -141,7 +172,7 @@ export default class Parser {
             }
 
             group.Properties.push({
-                Optional: optional,
+                Occurrence: occurrence,
                 Name: propertyName,
                 Type: propertyType,
                 Comment: comment

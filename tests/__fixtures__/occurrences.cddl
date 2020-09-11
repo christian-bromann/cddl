@@ -1,0 +1,6 @@
+someGroup = {
+    ? optional: tstr,
+    * anotherOptional: tstr,
+    + atLeastOne: tstr,
+    23*42numberedOccurence: tstr
+}

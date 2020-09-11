@@ -8,7 +8,10 @@ Array [
       Object {
         "Comment": "",
         "Name": "",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           Object {
             "Type": "group",
@@ -19,7 +22,10 @@ Array [
       Object {
         "Comment": "",
         "Name": "employer",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           "tstr",
         ],
@@ -32,7 +38,10 @@ Array [
       Object {
         "Comment": "",
         "Name": "",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           Object {
             "Type": "group",
@@ -43,7 +52,10 @@ Array [
       Object {
         "Comment": "",
         "Name": "leash-length",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           "float",
         ],
@@ -56,7 +68,10 @@ Array [
       Object {
         "Comment": "",
         "Name": "age",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           "int",
         ],
@@ -64,7 +79,64 @@ Array [
       Object {
         "Comment": "",
         "Name": "name",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+    ],
+  },
+]
+`;
+
+exports[`parser can parse occurrences 1`] = `
+Array [
+  Object {
+    "Name": "someGroup",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "Name": "optional",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "Name": "anotherOptional",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "Name": "atLeastOne",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 1,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "Name": "numberedOccurence",
+        "Occurrence": Object {
+          "m": 42,
+          "n": 23,
+        },
         "Type": Array [
           "tstr",
         ],
@@ -149,7 +221,10 @@ Array [
       Object {
         "Comment": "summary of test",
         "Name": "title",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           "tstr",
         ],
@@ -157,7 +232,10 @@ Array [
       Object {
         "Comment": "longer description of test",
         "Name": "description",
-        "Optional": true,
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
         "Type": Array [
           "tstr",
         ],
@@ -165,7 +243,10 @@ Array [
       Object {
         "Comment": "Is this a success or failure test",
         "Name": "fail",
-        "Optional": true,
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
         "Type": Array [
           "bool",
         ],
@@ -173,7 +254,10 @@ Array [
       Object {
         "Comment": "Inputs to create the test",
         "Name": "input",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           "Inputs",
         ],
@@ -181,7 +265,10 @@ Array [
       Object {
         "Comment": "Intermediate values for debugging",
         "Name": "intermediates",
-        "Optional": true,
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
         "Type": Array [
           "Intermediates",
         ],
@@ -189,7 +276,10 @@ Array [
       Object {
         "Comment": "Outputs of the test",
         "Name": "output",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           "Outputs",
         ],
@@ -197,7 +287,10 @@ Array [
       Object {
         "Comment": "",
         "Name": "attire",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           Object {
             "Type": "literal",
@@ -208,7 +301,10 @@ Array [
       Object {
         "Comment": "",
         "Name": "count",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           Object {
             "Type": "literal",
@@ -219,7 +315,10 @@ Array [
       Object {
         "Comment": "",
         "Name": "rating",
-        "Optional": true,
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
         "Type": Array [
           Object {
             "Type": "literal",
@@ -230,7 +329,10 @@ Array [
       Object {
         "Comment": "",
         "Name": "hexa",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           Object {
             "Type": "literal",
@@ -241,7 +343,10 @@ Array [
       Object {
         "Comment": "",
         "Name": "bin",
-        "Optional": false,
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
         "Type": Array [
           Object {
             "Type": "literal",

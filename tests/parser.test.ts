@@ -37,4 +37,15 @@ describe('parser', () => {
         const p = new Parser(l)
         expect(p.parse()).toMatchSnapshot()
     })
+
+    it('can parse occurrences', () => {
+        const input = fs.readFileSync(
+            path.join(__dirname, '__fixtures__', 'occurrences.cddl'),
+            'utf-8'
+        )
+
+        const l = new Lexer(input)
+        const p = new Parser(l)
+        expect(p.parse()).toMatchSnapshot()
+    })
 })
