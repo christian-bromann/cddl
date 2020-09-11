@@ -1,14 +1,49 @@
 person = {
+    identity,                         ; an identity
+    employer: tstr,                   ; some employer
+}
+
+dog = {
+    identity,                         ; an identity again
+    leash-length: float,              ; some length
+}
+
+identity = (
+    age: int,                         ; an age
+    name: tstr,                       ; a name
+)
+
+Geography = [
+    city           : tstr,            ; a city
+    gpsCoordinates : GpsCoordinates,  ; some coordinates
+]
+
+GpsCoordinates = {
+    longitude      : uint,            ; degrees, scaled by 10^7
+    latitude       : uint,            ; degreed, scaled by 10^7
+}
+
+personWithoutComment = {
     identity,
     employer: tstr,
 }
 
-dog = {
+dogWithoutComment = {
     identity,
     leash-length: float,
 }
 
-identity = (
+identityWithoutComment = (
     age: int,
     name: tstr,
 )
+
+GeographyWithoutComment = [
+    city           : tstr,
+    gpsCoordinates : GpsCoordinates,
+]
+
+GpsCoordinatesWithoutComment = {
+    longitude      : uint,
+    latitude       : uint,
+}

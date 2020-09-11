@@ -9,8 +9,23 @@
  * ```
  */
 export type Group = {
+    Type: 'group';
     Name: string;
     Properties: Property[];
+}
+
+/**
+ * an array definition
+ * ```
+ * Geography = [
+ *     city: tstr
+ * ]
+ * ```
+ */
+export type Array = {
+    Type: 'array';
+    Name: string;
+    Values: Property[];
 }
 
 /**
@@ -20,9 +35,12 @@ export type Group = {
  * ```
  */
 export type Variable = {
+    Type: 'variable';
     Name: string;
     PropertyType: PropertyType;
 }
+
+export type Assignment = Group | Array | Variable;
 
 export type Occurrence = {
     n: number;
@@ -101,8 +119,8 @@ export type Range = {
 export type PropertyReferenceType = 'literal' | 'group' | 'group_array' | 'range'
 export type PropertyReference = {
     Type: PropertyReferenceType;
-    Value: string | number | Group | Range;
+    Value: string | number | Group | Array | Range;
 }
 
-export type PropertyType = Group | PropertyReference | string
+export type PropertyType = Group | Array | PropertyReference | string
 export type PropertyName = string

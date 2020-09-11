@@ -4,7 +4,7 @@ import { PREDEFINED_IDENTIFIER } from './constants'
 import { parseNumberValue } from './utils'
 import {
     Group, Type, PropertyName, PropertyType, PropertyReferenceType,
-    Variable, RangePropertyReference, Occurrence, Property
+    Variable, RangePropertyReference, Occurrence, Property, Assignment
 } from './ast'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
@@ -29,58 +29,51 @@ export default class Parser {
         return true
     }
 
-    private parseGroupOrVariableAssignments (): Group | Variable {
+    private parseAssignments (): Assignment {
+        let assignment: Assignment
+
         if (this.curToken.Type !== Tokens.IDENT && this.peekToken.Type !== Tokens.ASSIGN) {
             throw new Error(`group identifier expected, received "${JSON.stringify(this.curToken)}"`)
         }
 
-        const group: Group = {
-            Name: this.curToken.Literal,
-            Properties: []
-        }
-
+        const groupName = this.curToken.Literal
         this.nextToken() // eat group identifier
         this.nextToken() // eat `=`
-
-        /**
-         * check for array definition, e.g.:
-         * ```
-         *  unlimited-people = [* person]
-         * ```
-         */
-        if (this.curToken.Type === Tokens.LBRACK) {
-            this.nextToken() // eat "["
-            const arrayGroup: Property = {
-                Occurrence: this.parseOccurrences(),
-                Name: '',
-                Type: [{
-                    Type: 'group',
-                    Value: this.curToken.Literal
-                }],
-                Comment: ''
-            }
-            this.nextToken() // eat group reference
-            this.nextToken() // eat "]"
-
-            arrayGroup.Comment = this.parseComment()
-            group.Properties.push(arrayGroup)
-            return group
-        }
-
-        const closingTokens = this.openGroupSegment()
+        const closingTokens = this.openSegment()
 
         /**
          * if no group segment was opened we have a variable assignment
+         * and can return immediatelly
          */
-        if (!closingTokens) {
+        if (closingTokens.length === 0) {
             const variable: Variable = {
-                Name: group.Name,
+                Type: 'variable',
+                Name: groupName,
                 PropertyType: this.parsePropertyType()
             }
             this.nextToken()
             return variable
+        /**
+         * if last closing token is "]" we have an array
+         */
+        } else if (closingTokens[closingTokens.length - 1] === Tokens.RBRACK) {
+            assignment = {
+                Type: 'array',
+                Name: groupName,
+                Values: []
+            }
+        /**
+         * otherwise a group
+         */
+        } else {
+            assignment = {
+                Type: 'group',
+                Name: groupName,
+                Properties: []
+            }
         }
 
+        const valuesOrProperties = []
         while (!closingTokens.includes(this.curToken.Type)) {
             let propertyName = ''
             let propertyType: PropertyType[] = []
@@ -91,27 +84,22 @@ export default class Parser {
             propertyName = this.parsePropertyName()
 
             /**
-             * if `}` is found we are at the end of the group
-             */
-            if (closingTokens.includes(this.curToken.Type)) {
-                this.nextToken()
-                break
-            }
-
-            /**
              * if `,` is found we have a group reference and jump to the next line
              */
-            else if (this.curToken.Type === Tokens.COMMA) {
+            if (this.curToken.Type === Tokens.COMMA || closingTokens.includes(this.curToken.Type)) {
+                const tokenType = this.curToken.Type
+                let parsedComments = false
+
                 /**
                  * check if line has a comment
                  */
                 if (this.peekToken.Type === Tokens.COMMENT) {
                     this.nextToken()
-                    comment = this.curToken.Literal
+                    comment = this.parseComment()
+                    parsedComments = true
                 }
 
-                this.nextToken()
-                group.Properties.push({
+                valuesOrProperties.push({
                     Occurrence: occurrence,
                     Name: '',
                     Type: [{
@@ -120,7 +108,22 @@ export default class Parser {
                     }],
                     Comment: comment
                 })
-                continue
+
+                if (!parsedComments) {
+                    this.nextToken()
+                }
+
+                /**
+                 * only continue if next token contains a comma
+                 */
+                if (tokenType === Tokens.COMMA) {
+                    continue
+                }
+
+                /**
+                 * otherwise break
+                 */
+                break
             }
 
             /**
@@ -154,7 +157,7 @@ export default class Parser {
 
             comment = this.parseComment()
 
-            group.Properties.push({
+            valuesOrProperties.push({
                 Occurrence: occurrence,
                 Name: propertyName,
                 Type: propertyType,
@@ -170,8 +173,23 @@ export default class Parser {
             }
         }
 
-        this.nextToken()
-        return group
+        /**
+         * attach values or properties to assignment
+         */
+        if (assignment.Type === 'group') {
+            assignment.Properties = valuesOrProperties
+        } else {
+            assignment.Values = valuesOrProperties
+        }
+
+        /**
+         * close segment
+         */
+        while (this.curToken.Type === closingTokens.shift()) {
+            this.nextToken()
+        }
+
+        return assignment
     }
 
     /**
@@ -179,7 +197,7 @@ export default class Parser {
      * first property declaration
      * @returns {String[]}  closing tokens for group (either `}`, `)` or both)
      */
-    private openGroupSegment (): string[] | void {
+    private openSegment (): string[] {
         if (this.curToken.Type === Tokens.LBRACE) {
             this.nextToken()
 
@@ -191,7 +209,12 @@ export default class Parser {
         } else if (this.curToken.Type === Tokens.LPAREN) {
             this.nextToken()
             return [Tokens.RPAREN]
+        } else if (this.curToken.Type === Tokens.LBRACK) {
+            this.nextToken()
+            return [Tokens.RBRACK]
         }
+
+        return []
     }
 
     private parsePropertyName (): PropertyName {
@@ -358,10 +381,10 @@ export default class Parser {
     }
 
     parse () {
-        const definition: (Group | Variable)[] = []
+        const definition: Assignment[] = []
 
         while (this.curToken.Type !== Tokens.EOF) {
-            const group = this.parseGroupOrVariableAssignments()
+            const group = this.parseAssignments()
             if (group) {
                 definition.push(group)
             }

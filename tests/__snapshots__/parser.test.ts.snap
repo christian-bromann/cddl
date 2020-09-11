@@ -4,7 +4,8 @@ exports[`parser can parse arrays 1`] = `
 Array [
   Object {
     "Name": "unlimited-people",
-    "Properties": Array [
+    "Type": "array",
+    "Values": Array [
       Object {
         "Comment": "",
         "Name": "",
@@ -23,7 +24,8 @@ Array [
   },
   Object {
     "Name": "at-least-one-person",
-    "Properties": Array [
+    "Type": "array",
+    "Values": Array [
       Object {
         "Comment": "some",
         "Name": "",
@@ -42,7 +44,8 @@ Array [
   },
   Object {
     "Name": "zero-or-one-person",
-    "Properties": Array [
+    "Type": "array",
+    "Values": Array [
       Object {
         "Comment": "comment",
         "Name": "",
@@ -61,7 +64,8 @@ Array [
   },
   Object {
     "Name": "one-or-two-people",
-    "Properties": Array [
+    "Type": "array",
+    "Values": Array [
       Object {
         "Comment": "",
         "Name": "",
@@ -80,7 +84,8 @@ Array [
   },
   Object {
     "Name": "zero-or-two-people",
-    "Properties": Array [
+    "Type": "array",
+    "Values": Array [
       Object {
         "Comment": "",
         "Name": "",
@@ -99,7 +104,8 @@ Array [
   },
   Object {
     "Name": "two-or-infinity-people",
-    "Properties": Array [
+    "Type": "array",
+    "Values": Array [
       Object {
         "Comment": "",
         "Name": "",
@@ -142,6 +148,7 @@ Array [
         ],
       },
     ],
+    "Type": "group",
   },
 ]
 `;
@@ -150,6 +157,152 @@ exports[`parser can parse compositions 1`] = `
 Array [
   Object {
     "Name": "person",
+    "Properties": Array [
+      Object {
+        "Comment": "an identity",
+        "Name": "",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "group",
+            "Value": "identity",
+          },
+        ],
+      },
+      Object {
+        "Comment": "some employer",
+        "Name": "employer",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  Object {
+    "Name": "dog",
+    "Properties": Array [
+      Object {
+        "Comment": "an identity again",
+        "Name": "",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "group",
+            "Value": "identity",
+          },
+        ],
+      },
+      Object {
+        "Comment": "some length",
+        "Name": "leash-length",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "float",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  Object {
+    "Name": "identity",
+    "Properties": Array [
+      Object {
+        "Comment": "an age",
+        "Name": "age",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "int",
+        ],
+      },
+      Object {
+        "Comment": "a name",
+        "Name": "name",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  Object {
+    "Name": "Geography",
+    "Type": "array",
+    "Values": Array [
+      Object {
+        "Comment": "a city",
+        "Name": "city",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+      Object {
+        "Comment": "some coordinates",
+        "Name": "gpsCoordinates",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "GpsCoordinates",
+        ],
+      },
+    ],
+  },
+  Object {
+    "Name": "GpsCoordinates",
+    "Properties": Array [
+      Object {
+        "Comment": "degrees, scaled by 10^7",
+        "Name": "longitude",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "uint",
+        ],
+      },
+      Object {
+        "Comment": "degreed, scaled by 10^7",
+        "Name": "latitude",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "uint",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  Object {
+    "Name": "personWithoutComment",
     "Properties": Array [
       Object {
         "Comment": "",
@@ -177,9 +330,10 @@ Array [
         ],
       },
     ],
+    "Type": "group",
   },
   Object {
-    "Name": "dog",
+    "Name": "dogWithoutComment",
     "Properties": Array [
       Object {
         "Comment": "",
@@ -207,9 +361,10 @@ Array [
         ],
       },
     ],
+    "Type": "group",
   },
   Object {
-    "Name": "identity",
+    "Name": "identityWithoutComment",
     "Properties": Array [
       Object {
         "Comment": "",
@@ -234,6 +389,63 @@ Array [
         ],
       },
     ],
+    "Type": "group",
+  },
+  Object {
+    "Name": "GeographyWithoutComment",
+    "Type": "array",
+    "Values": Array [
+      Object {
+        "Comment": "",
+        "Name": "city",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "Name": "gpsCoordinates",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "GpsCoordinates",
+        ],
+      },
+    ],
+  },
+  Object {
+    "Name": "GpsCoordinatesWithoutComment",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "Name": "longitude",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "uint",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "Name": "latitude",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "uint",
+        ],
+      },
+    ],
+    "Type": "group",
   },
 ]
 `;
@@ -310,6 +522,7 @@ Array [
         ],
       },
     ],
+    "Type": "group",
   },
 ]
 `;
@@ -319,6 +532,7 @@ Array [
   Object {
     "Name": "device-address",
     "PropertyType": "byte",
+    "Type": "variable",
   },
   Object {
     "Name": "max-byte",
@@ -326,6 +540,7 @@ Array [
       "Type": "literal",
       "Value": 255,
     },
+    "Type": "variable",
   },
   Object {
     "Name": "byte",
@@ -337,6 +552,7 @@ Array [
         "Min": 0,
       },
     },
+    "Type": "variable",
   },
   Object {
     "Name": "first-non-byte",
@@ -344,6 +560,7 @@ Array [
       "Type": "literal",
       "Value": 256,
     },
+    "Type": "variable",
   },
   Object {
     "Name": "byte1",
@@ -355,6 +572,7 @@ Array [
         "Min": 0,
       },
     },
+    "Type": "variable",
   },
   Object {
     "Name": "min..max",
@@ -362,10 +580,12 @@ Array [
       "Type": "literal",
       "Value": 0,
     },
+    "Type": "variable",
   },
   Object {
     "Name": "byte2",
     "PropertyType": "min..max...first-non-byte",
+    "Type": "variable",
   },
   Object {
     "Name": "byte3",
@@ -377,6 +597,7 @@ Array [
         "Min": "min..max",
       },
     },
+    "Type": "variable",
   },
 ]
 `;
@@ -522,7 +743,22 @@ Array [
           },
         ],
       },
+      Object {
+        "Comment": "",
+        "Name": "",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "group",
+            "Value": "foobar",
+          },
+        ],
+      },
     ],
+    "Type": "group",
   },
 ]
 `;
