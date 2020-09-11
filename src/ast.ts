@@ -50,7 +50,7 @@ export type Occurrence = {
 export type Property = {
     Occurrence: Occurrence;
     Name: PropertyName;
-    Type: PropertyType[];
+    Type: PropertyType | PropertyType[];
     Comment: string;
 }
 
@@ -122,5 +122,5 @@ export type PropertyReference = {
     Value: string | number | Group | Array | Range;
 }
 
-export type PropertyType = Group | Array | PropertyReference | string
+export type PropertyType = Assignment | Array | PropertyReference | string
 export type PropertyName = string

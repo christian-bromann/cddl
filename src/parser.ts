@@ -30,8 +30,6 @@ export default class Parser {
     }
 
     private parseAssignments (): Assignment {
-        let assignment: Assignment
-
         if (this.curToken.Type !== Tokens.IDENT && this.peekToken.Type !== Tokens.ASSIGN) {
             throw new Error(`group identifier expected, received "${JSON.stringify(this.curToken)}"`)
         }
@@ -39,6 +37,13 @@ export default class Parser {
         const groupName = this.curToken.Literal
         this.nextToken() // eat group identifier
         this.nextToken() // eat `=`
+
+        return this.parseAssignmentValue(groupName) as Assignment
+    }
+
+    private parseAssignmentValue (groupName?: string): Assignment | PropertyType {
+        let assignment: Assignment
+        const valuesOrProperties = []
         const closingTokens = this.openSegment()
 
         /**
@@ -46,34 +51,19 @@ export default class Parser {
          * and can return immediatelly
          */
         if (closingTokens.length === 0) {
-            const variable: Variable = {
-                Type: 'variable',
-                Name: groupName,
-                PropertyType: this.parsePropertyType()
+            if (groupName) {
+                const variable: Variable = {
+                    Type: 'variable',
+                    Name: groupName,
+                    PropertyType: this.parsePropertyType()
+                }
+                this.nextToken()
+                return variable
             }
-            this.nextToken()
-            return variable
-        /**
-         * if last closing token is "]" we have an array
-         */
-        } else if (closingTokens[closingTokens.length - 1] === Tokens.RBRACK) {
-            assignment = {
-                Type: 'array',
-                Name: groupName,
-                Values: []
-            }
-        /**
-         * otherwise a group
-         */
-        } else {
-            assignment = {
-                Type: 'group',
-                Name: groupName,
-                Properties: []
-            }
-        }
 
-        const valuesOrProperties = []
+            return this.parsePropertyType()
+        }
+    
         while (!closingTokens.includes(this.curToken.Type)) {
             let propertyName = ''
             let propertyType: PropertyType[] = []
@@ -102,10 +92,12 @@ export default class Parser {
                 valuesOrProperties.push({
                     Occurrence: occurrence,
                     Name: '',
-                    Type: [{
-                        Type: 'group' as PropertyReferenceType,
-                        Value: propertyName
-                    }],
+                    Type: PREDEFINED_IDENTIFIER.includes(propertyName)
+                        ? propertyName
+                        : [{
+                            Type: 'group' as PropertyReferenceType,
+                            Value: propertyName
+                        }],
                     Comment: comment
                 })
 
@@ -138,7 +130,7 @@ export default class Parser {
             /**
              * parse property value
              */
-            propertyType.push(this.parsePropertyType())
+            propertyType.push(this.parseAssignmentValue())
             this.nextToken()
             // @ts-ignore
             while (this.curToken.Type === Tokens.SLASH) {
@@ -174,22 +166,31 @@ export default class Parser {
         }
 
         /**
-         * attach values or properties to assignment
-         */
-        if (assignment.Type === 'group') {
-            assignment.Properties = valuesOrProperties
-        } else {
-            assignment.Values = valuesOrProperties
-        }
-
-        /**
          * close segment
          */
-        while (this.curToken.Type === closingTokens.shift()) {
+        while (this.curToken.Type === [...closingTokens].shift()) {
             this.nextToken()
         }
 
-        return assignment
+        /**
+         * if last closing token is "]" we have an array
+         */
+        if (closingTokens[closingTokens.length - 1] === Tokens.RBRACK) {
+            return {
+                Type: 'array',
+                Name: groupName || '',
+                Values: valuesOrProperties
+            }
+        }
+
+        /**
+         * otherwise a group
+         */
+        return {
+            Type: 'group',
+            Name: groupName || '',
+            Properties: valuesOrProperties
+        }
     }
 
     /**
@@ -223,11 +224,6 @@ export default class Parser {
          */
         if (this.curToken.Type === Tokens.IDENT || this.curToken.Type === Tokens.STRING) {
             const name = this.curToken.Literal
-
-            if (PREDEFINED_IDENTIFIER.includes(name)) {
-                throw new Error(`Name ${name} is a reserved word`)
-            }
-
             this.nextToken()
             return name
         }

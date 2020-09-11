@@ -757,6 +757,31 @@ Array [
           },
         ],
       },
+      Object {
+        "Comment": "",
+        "Name": "samples",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Name": "",
+            "Type": "array",
+            "Values": Array [
+              Object {
+                "Comment": "",
+                "Name": "",
+                "Occurrence": Object {
+                  "m": Infinity,
+                  "n": 1,
+                },
+                "Type": "float",
+              },
+            ],
+          },
+        ],
+      },
     ],
     "Type": "group",
   },

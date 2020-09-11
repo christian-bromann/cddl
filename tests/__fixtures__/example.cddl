@@ -10,5 +10,6 @@ Example = {
    ?"rating": 0.5724646875815566,
    hexa: 0x123,
    bin: 0b123, 
-   foobar
+   foobar,
+   samples: [+ float],
 }
