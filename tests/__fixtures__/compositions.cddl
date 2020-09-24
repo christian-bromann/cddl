@@ -23,6 +23,11 @@ GpsCoordinates = {
     latitude       : uint,            ; degreed, scaled by 10^7
 }
 
+located-samples = {
+    "sample-point" => int,            ; some
+    "samples" => [+ float],           ; comments
+}
+
 personWithoutComment = {
     identity,
     employer: tstr,
@@ -48,7 +53,7 @@ GpsCoordinatesWithoutComment = {
     latitude       : uint,
 }
 
-located-samples = {
+located-samples-without-comments = {
     "sample-point" => int,
     "samples" => [+ float],
 }

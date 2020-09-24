@@ -8,5 +8,6 @@ __Note:__ this is work in progress, feel free to have a look at the code or cont
 ## ToDo
 
 - [ ] Support [Root types](https://tools.ietf.org/html/draft-ietf-cbor-cddl-08#section-2.2.4)
+- [ ] Array in Array (e.g. `equipment-tolerances = [+ [float, float]]`)
 - [ ] Test failure cases (e.g. using predefined identifier etc.)
 - [ ] Documentation
