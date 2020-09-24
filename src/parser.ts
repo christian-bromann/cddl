@@ -65,6 +65,7 @@ export default class Parser {
     
         while (!closingTokens.includes(this.curToken.Type)) {
             const propertyType: PropertyType[] = []
+            let hasCut = false
             let propertyName = ''
             let comment = ''
 
@@ -89,6 +90,7 @@ export default class Parser {
                 }
 
                 valuesOrProperties.push({
+                    HasCut: hasCut,
                     Occurrence: occurrence,
                     Name: '',
                     Type: PREDEFINED_IDENTIFIER.includes(propertyName)
@@ -118,9 +120,22 @@ export default class Parser {
             }
 
             /**
+             * check if property has cut, which happens if a property is described as
+             * - `? "optional-key" ^ => int,`
+             * - `? optional-key: int,` - since the colon shortcut includes cuts
+             */
+            if (this.curToken.Type === Tokens.CARET || this.curToken.Type === Tokens.COLON) {
+                hasCut = true
+
+                if (this.curToken.Type === Tokens.CARET) {
+                    this.nextToken() // eat ^
+                }
+            }
+
+            /**
              * else if no colon was found, throw
              */
-            else if (!this.isPropertyValueSeparator()) {
+            if (!this.isPropertyValueSeparator()) {
                 throw new Error('Expected ":" or "=>')
             }
 
@@ -148,6 +163,7 @@ export default class Parser {
             comment = this.parseComment()
 
             valuesOrProperties.push({
+                HasCut: hasCut,
                 Occurrence: occurrence,
                 Name: propertyName,
                 Type: propertyType,

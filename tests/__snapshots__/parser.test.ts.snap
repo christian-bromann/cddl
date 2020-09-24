@@ -8,6 +8,7 @@ Array [
     "Values": Array [
       Object {
         "Comment": "",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": Infinity,
@@ -28,6 +29,7 @@ Array [
     "Values": Array [
       Object {
         "Comment": "some",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": Infinity,
@@ -48,6 +50,7 @@ Array [
     "Values": Array [
       Object {
         "Comment": "comment",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": Infinity,
@@ -68,6 +71,7 @@ Array [
     "Values": Array [
       Object {
         "Comment": "",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": 2,
@@ -88,6 +92,7 @@ Array [
     "Values": Array [
       Object {
         "Comment": "",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": 2,
@@ -108,6 +113,7 @@ Array [
     "Values": Array [
       Object {
         "Comment": "",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": Infinity,
@@ -127,6 +133,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "name",
         "Occurrence": Object {
           "m": 1,
@@ -138,6 +145,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "age",
         "Occurrence": Object {
           "m": 1,
@@ -160,6 +168,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "an identity",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": 1,
@@ -174,6 +183,7 @@ Array [
       },
       Object {
         "Comment": "some employer",
+        "HasCut": true,
         "Name": "employer",
         "Occurrence": Object {
           "m": 1,
@@ -191,6 +201,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "an identity again",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": 1,
@@ -205,6 +216,7 @@ Array [
       },
       Object {
         "Comment": "some length",
+        "HasCut": true,
         "Name": "leash-length",
         "Occurrence": Object {
           "m": 1,
@@ -222,6 +234,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "an age",
+        "HasCut": true,
         "Name": "age",
         "Occurrence": Object {
           "m": 1,
@@ -233,6 +246,7 @@ Array [
       },
       Object {
         "Comment": "a name",
+        "HasCut": true,
         "Name": "name",
         "Occurrence": Object {
           "m": 1,
@@ -251,6 +265,7 @@ Array [
     "Values": Array [
       Object {
         "Comment": "a city",
+        "HasCut": true,
         "Name": "city",
         "Occurrence": Object {
           "m": 1,
@@ -262,6 +277,7 @@ Array [
       },
       Object {
         "Comment": "some coordinates",
+        "HasCut": true,
         "Name": "gpsCoordinates",
         "Occurrence": Object {
           "m": 1,
@@ -278,6 +294,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "degrees, scaled by 10^7",
+        "HasCut": true,
         "Name": "longitude",
         "Occurrence": Object {
           "m": 1,
@@ -289,6 +306,7 @@ Array [
       },
       Object {
         "Comment": "degreed, scaled by 10^7",
+        "HasCut": true,
         "Name": "latitude",
         "Occurrence": Object {
           "m": 1,
@@ -306,6 +324,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "some",
+        "HasCut": false,
         "Name": "sample-point",
         "Occurrence": Object {
           "m": 1,
@@ -317,6 +336,7 @@ Array [
       },
       Object {
         "Comment": "comments",
+        "HasCut": false,
         "Name": "samples",
         "Occurrence": Object {
           "m": 1,
@@ -329,6 +349,7 @@ Array [
             "Values": Array [
               Object {
                 "Comment": "",
+                "HasCut": false,
                 "Name": "",
                 "Occurrence": Object {
                   "m": Infinity,
@@ -344,10 +365,65 @@ Array [
     "Type": "group",
   },
   Object {
+    "Name": "extensible-map-example",
+    "Properties": Array [
+      Object {
+        "Comment": "some",
+        "HasCut": true,
+        "Name": "optional-key",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "int",
+        ],
+      },
+      Object {
+        "Comment": "really",
+        "HasCut": true,
+        "Name": "optional-key2",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "int",
+        ],
+      },
+      Object {
+        "Comment": "interesting",
+        "HasCut": true,
+        "Name": "optional-key3",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "int",
+        ],
+      },
+      Object {
+        "Comment": "comments",
+        "HasCut": false,
+        "Name": "tstr",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "any",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  Object {
     "Name": "personWithoutComment",
     "Properties": Array [
       Object {
         "Comment": "",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": 1,
@@ -362,6 +438,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "employer",
         "Occurrence": Object {
           "m": 1,
@@ -379,6 +456,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": 1,
@@ -393,6 +471,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "leash-length",
         "Occurrence": Object {
           "m": 1,
@@ -410,6 +489,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "age",
         "Occurrence": Object {
           "m": 1,
@@ -421,6 +501,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "name",
         "Occurrence": Object {
           "m": 1,
@@ -439,6 +520,7 @@ Array [
     "Values": Array [
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "city",
         "Occurrence": Object {
           "m": 1,
@@ -450,6 +532,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "gpsCoordinates",
         "Occurrence": Object {
           "m": 1,
@@ -466,6 +549,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "longitude",
         "Occurrence": Object {
           "m": 1,
@@ -477,6 +561,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "latitude",
         "Occurrence": Object {
           "m": 1,
@@ -494,6 +579,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "",
+        "HasCut": false,
         "Name": "sample-point",
         "Occurrence": Object {
           "m": 1,
@@ -505,6 +591,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": false,
         "Name": "samples",
         "Occurrence": Object {
           "m": 1,
@@ -517,6 +604,7 @@ Array [
             "Values": Array [
               Object {
                 "Comment": "",
+                "HasCut": false,
                 "Name": "",
                 "Occurrence": Object {
                   "m": Infinity,
@@ -526,6 +614,60 @@ Array [
               },
             ],
           },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  Object {
+    "Name": "extensible-map-example-without-comments",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "optional-key",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "int",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "optional-key2",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "int",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "optional-key3",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "int",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": false,
+        "Name": "tstr",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "any",
         ],
       },
     ],
@@ -541,6 +683,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "optional",
         "Occurrence": Object {
           "m": Infinity,
@@ -552,6 +695,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "anotherOptional",
         "Occurrence": Object {
           "m": Infinity,
@@ -563,6 +707,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "atLeastOne",
         "Occurrence": Object {
           "m": Infinity,
@@ -574,6 +719,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "numberedOccurence",
         "Occurrence": Object {
           "m": 42,
@@ -585,6 +731,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "withoutLeftSide",
         "Occurrence": Object {
           "m": 42,
@@ -596,6 +743,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "withoutRightSide",
         "Occurrence": Object {
           "m": Infinity,
@@ -711,6 +859,7 @@ Array [
     "Properties": Array [
       Object {
         "Comment": "summary of test",
+        "HasCut": true,
         "Name": "title",
         "Occurrence": Object {
           "m": 1,
@@ -722,6 +871,7 @@ Array [
       },
       Object {
         "Comment": "longer description of test",
+        "HasCut": true,
         "Name": "description",
         "Occurrence": Object {
           "m": Infinity,
@@ -733,6 +883,7 @@ Array [
       },
       Object {
         "Comment": "Is this a success or failure test",
+        "HasCut": true,
         "Name": "fail",
         "Occurrence": Object {
           "m": Infinity,
@@ -744,6 +895,7 @@ Array [
       },
       Object {
         "Comment": "Inputs to create the test",
+        "HasCut": true,
         "Name": "input",
         "Occurrence": Object {
           "m": 1,
@@ -755,6 +907,7 @@ Array [
       },
       Object {
         "Comment": "Intermediate values for debugging",
+        "HasCut": true,
         "Name": "intermediates",
         "Occurrence": Object {
           "m": Infinity,
@@ -766,6 +919,7 @@ Array [
       },
       Object {
         "Comment": "Outputs of the test",
+        "HasCut": true,
         "Name": "output",
         "Occurrence": Object {
           "m": 1,
@@ -777,6 +931,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "attire",
         "Occurrence": Object {
           "m": 1,
@@ -791,6 +946,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "count",
         "Occurrence": Object {
           "m": 1,
@@ -805,6 +961,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "rating",
         "Occurrence": Object {
           "m": Infinity,
@@ -819,6 +976,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "hexa",
         "Occurrence": Object {
           "m": 1,
@@ -833,6 +991,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "bin",
         "Occurrence": Object {
           "m": 1,
@@ -847,6 +1006,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": false,
         "Name": "",
         "Occurrence": Object {
           "m": 1,
@@ -861,6 +1021,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "samples",
         "Occurrence": Object {
           "m": 1,
@@ -873,6 +1034,7 @@ Array [
             "Values": Array [
               Object {
                 "Comment": "",
+                "HasCut": false,
                 "Name": "",
                 "Occurrence": Object {
                   "m": Infinity,
@@ -886,6 +1048,7 @@ Array [
       },
       Object {
         "Comment": "",
+        "HasCut": true,
         "Name": "multitype",
         "Occurrence": Object {
           "m": 1,

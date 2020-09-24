@@ -13,6 +13,7 @@ export enum Tokens {
     UNDERSCORE = '_',
     DOLLAR = '$',
     ATSIGN = '@',
+    CARET = '^',
 
     // Identifiers + literals,
     IDENT = 'IDENT',

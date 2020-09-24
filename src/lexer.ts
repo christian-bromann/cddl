@@ -78,6 +78,9 @@ export default class Lexer {
             case '*'.charCodeAt(0):
                 token = { Type: Tokens.ASTERISK, Literal }
                 break
+            case '^'.charCodeAt(0):
+                token = { Type: Tokens.CARET, Literal }
+                break
             case '"'.charCodeAt(0):
                 token = { Type: Tokens.STRING, Literal: this.readString() }
                 break

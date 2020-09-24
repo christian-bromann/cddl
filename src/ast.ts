@@ -48,6 +48,7 @@ export type Occurrence = {
 }
 
 export type Property = {
+    HasCut: boolean;
     Occurrence: Occurrence;
     Name: PropertyName;
     Type: PropertyType | PropertyType[];

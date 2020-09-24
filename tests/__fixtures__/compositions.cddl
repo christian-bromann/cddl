@@ -28,6 +28,13 @@ located-samples = {
     "samples" => [+ float],           ; comments
 }
 
+extensible-map-example = {
+    ? "optional-key" ^ => int,        ; some
+    ? "optional-key2": int,           ; really
+    ? optional-key3: int,             ; interesting
+    * tstr => any                     ; comments
+}
+
 personWithoutComment = {
     identity,
     employer: tstr,
@@ -56,4 +63,11 @@ GpsCoordinatesWithoutComment = {
 located-samples-without-comments = {
     "sample-point" => int,
     "samples" => [+ float],
+}
+
+extensible-map-example-without-comments = {
+    ? "optional-key" ^ => int,
+    ? "optional-key2": int,
+    ? optional-key3: int,
+    * tstr => any
 }
