@@ -615,72 +615,90 @@ exports[`parser can parse ranges 1`] = `
 Array [
   Object {
     "Name": "device-address",
-    "PropertyType": "byte",
+    "PropertyType": Array [
+      "byte",
+    ],
     "Type": "variable",
   },
   Object {
     "Name": "max-byte",
-    "PropertyType": Object {
-      "Type": "literal",
-      "Value": 255,
-    },
+    "PropertyType": Array [
+      Object {
+        "Type": "literal",
+        "Value": 255,
+      },
+      "float",
+      "int",
+    ],
     "Type": "variable",
   },
   Object {
     "Name": "byte",
-    "PropertyType": Object {
-      "Type": "range",
-      "Value": Object {
-        "Inclusive": true,
-        "Max": "max-byte",
-        "Min": 0,
+    "PropertyType": Array [
+      Object {
+        "Type": "range",
+        "Value": Object {
+          "Inclusive": true,
+          "Max": "max-byte",
+          "Min": 0,
+        },
       },
-    },
+    ],
     "Type": "variable",
   },
   Object {
     "Name": "first-non-byte",
-    "PropertyType": Object {
-      "Type": "literal",
-      "Value": 256,
-    },
+    "PropertyType": Array [
+      Object {
+        "Type": "literal",
+        "Value": 256,
+      },
+    ],
     "Type": "variable",
   },
   Object {
     "Name": "byte1",
-    "PropertyType": Object {
-      "Type": "range",
-      "Value": Object {
-        "Inclusive": false,
-        "Max": "first-non-byte",
-        "Min": 0,
+    "PropertyType": Array [
+      Object {
+        "Type": "range",
+        "Value": Object {
+          "Inclusive": false,
+          "Max": "first-non-byte",
+          "Min": 0,
+        },
       },
-    },
+    ],
     "Type": "variable",
   },
   Object {
     "Name": "min..max",
-    "PropertyType": Object {
-      "Type": "literal",
-      "Value": 0,
-    },
+    "PropertyType": Array [
+      Object {
+        "Type": "literal",
+        "Value": 0,
+      },
+    ],
     "Type": "variable",
   },
   Object {
     "Name": "byte2",
-    "PropertyType": "min..max...first-non-byte",
+    "PropertyType": Array [
+      "min..max...first-non-byte",
+    ],
     "Type": "variable",
   },
   Object {
     "Name": "byte3",
-    "PropertyType": Object {
-      "Type": "range",
-      "Value": Object {
-        "Inclusive": false,
-        "Max": "first-non-byte",
-        "Min": "min..max",
+    "PropertyType": Array [
+      Object {
+        "Type": "range",
+        "Value": Object {
+          "Inclusive": false,
+          "Max": "first-non-byte",
+          "Min": "min..max",
+        },
       },
-    },
+    ],
     "Type": "variable",
   },
 ]
@@ -863,6 +881,22 @@ Array [
                 "Type": "float",
               },
             ],
+          },
+        ],
+      },
+      Object {
+        "Comment": "",
+        "Name": "multitype",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "float",
+          "tstr",
+          Object {
+            "Type": "literal",
+            "Value": "foobar",
           },
         ],
       },

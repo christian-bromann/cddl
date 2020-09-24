@@ -37,7 +37,7 @@ export type Array = {
 export type Variable = {
     Type: 'variable';
     Name: string;
-    PropertyType: PropertyType;
+    PropertyType: PropertyType | PropertyType[];
 }
 
 export type Assignment = Group | Array | Variable;

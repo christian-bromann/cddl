@@ -12,4 +12,5 @@ Example = {
    bin: 0b123, 
    foobar,
    samples: [+ float],
+   multitype: float / tstr / "foobar",
 }

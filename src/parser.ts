@@ -55,9 +55,8 @@ export default class Parser {
                 const variable: Variable = {
                     Type: 'variable',
                     Name: groupName,
-                    PropertyType: this.parsePropertyType()
+                    PropertyType: this.parsePropertyTypes()
                 }
-                this.nextToken()
                 return variable
             }
 
@@ -65,8 +64,8 @@ export default class Parser {
         }
     
         while (!closingTokens.includes(this.curToken.Type)) {
+            const propertyType: PropertyType[] = []
             let propertyName = ''
-            let propertyType: PropertyType[] = []
             let comment = ''
 
             const occurrence = this.parseOccurrences()
@@ -132,12 +131,11 @@ export default class Parser {
              */
             propertyType.push(this.parseAssignmentValue())
             this.nextToken()
-            // @ts-ignore
-            while (this.curToken.Type === Tokens.SLASH) {
-                this.nextToken() // eat `/`
-                propertyType.push(this.parsePropertyType())
-                this.nextToken()
-            }
+
+            /**
+             * continue parse possible other types (e.g. `float / tstr / int`)
+             */
+            propertyType.push(...this.parsePropertyTypes(true))
 
             /**
              * advance comma
@@ -314,6 +312,29 @@ export default class Parser {
         }
 
         return type
+    }
+
+    private parsePropertyTypes (parseFromWithin?: boolean): PropertyType[] {
+        const propertyTypes: PropertyType[] = []
+
+        /**
+         * if the first part of the property was parsed skip this step
+         */
+        if (!parseFromWithin) {
+            propertyTypes.push(this.parsePropertyType())
+            this.nextToken() // eat `/`
+        }
+
+        /**
+         * capture more if available (e.g. `tstr / float / boolean`)
+         */
+        while (this.curToken.Type === Tokens.SLASH) {
+            this.nextToken() // eat `/`
+            propertyTypes.push(this.parsePropertyType())
+            this.nextToken()
+        }
+
+        return propertyTypes
     }
 
     private parseOccurrences () {
