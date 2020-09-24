@@ -1,5 +1,6 @@
 device-address = byte
 max-byte = 255 / float / int
+my_uri = #6.32(tstr) / tstr
 byte = 0..max-byte
 first-non-byte = 256
 byte1 = 0...first-non-byte

@@ -288,6 +288,20 @@ export default class Parser {
                         Type: 'literal' as PropertyReferenceType,
                         Value: parseNumberValue(this.curToken)
                     }
+                } else if (this.curToken.Type === Tokens.HASH) {
+                    this.nextToken()
+                    const n = parseNumberValue(this.curToken)
+                    this.nextToken() // eat numeric value
+                    this.nextToken() // eat (
+                    const t = this.parsePropertyType()
+                    this.nextToken() // eat )
+                    type = {
+                        Type: 'tag',
+                        Value: {
+                            NumericPart: n as number,
+                            TypePart: t as string
+                        }
+                    }
                 } else {
                     throw new Error(`Invalid property type "${this.curToken.Literal}"`)
                 }

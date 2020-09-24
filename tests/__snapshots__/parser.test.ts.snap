@@ -781,6 +781,20 @@ Array [
     "Type": "variable",
   },
   Object {
+    "Name": "my_uri",
+    "PropertyType": Array [
+      Object {
+        "Type": "tag",
+        "Value": Object {
+          "NumericPart": 6.32,
+          "TypePart": "tstr",
+        },
+      },
+      "tstr",
+    ],
+    "Type": "variable",
+  },
+  Object {
     "Name": "byte",
     "PropertyType": Array [
       Object {
@@ -1061,6 +1075,25 @@ Array [
             "Type": "literal",
             "Value": "foobar",
           },
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "my_uri",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "tag",
+            "Value": Object {
+              "NumericPart": 6.32,
+              "TypePart": "tstr",
+            },
+          },
+          "tstr",
         ],
       },
     ],

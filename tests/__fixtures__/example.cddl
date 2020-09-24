@@ -13,4 +13,5 @@ Example = {
    foobar,
    samples: [+ float],
    multitype: float / tstr / "foobar",
+   my_uri: #6.32(tstr) / tstr,
 }

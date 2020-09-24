@@ -29,6 +29,17 @@ export type Array = {
 }
 
 /**
+ * a tag definition
+ * ```
+ * #6.32(tstr)
+ * ```
+ */
+export type Tag = {
+    NumericPart: number;
+    TypePart: string;
+}
+
+/**
  * a variable assignment
  * ```
  * device-address = byte
@@ -117,10 +128,10 @@ export type Range = {
     Inclusive: boolean
 }
 
-export type PropertyReferenceType = 'literal' | 'group' | 'group_array' | 'range'
+export type PropertyReferenceType = 'literal' | 'group' | 'group_array' | 'range' | 'tag'
 export type PropertyReference = {
     Type: PropertyReferenceType;
-    Value: string | number | Group | Array | Range;
+    Value: string | number | Group | Array | Range | Tag;
 }
 
 export type PropertyType = Assignment | Array | PropertyReference | string

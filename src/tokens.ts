@@ -14,6 +14,7 @@ export enum Tokens {
     DOLLAR = '$',
     ATSIGN = '@',
     CARET = '^',
+    HASH = '#',
 
     // Identifiers + literals,
     IDENT = 'IDENT',
