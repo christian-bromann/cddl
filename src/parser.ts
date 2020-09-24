@@ -65,11 +65,20 @@ export default class Parser {
     
         while (!closingTokens.includes(this.curToken.Type)) {
             const propertyType: PropertyType[] = []
+            let isUnwrapped = false
             let hasCut = false
             let propertyName = ''
             let comment = ''
 
             const occurrence = this.parseOccurrences()
+
+            /**
+             * check if variable name is unwrapped
+             */
+            if (this.curToken.Literal === Tokens.TILDE) {
+                isUnwrapped = true
+                this.nextToken() // eat ~
+            }
 
             propertyName = this.parsePropertyName()
 
@@ -97,7 +106,8 @@ export default class Parser {
                         ? propertyName
                         : [{
                             Type: 'group' as PropertyReferenceType,
-                            Value: propertyName
+                            Value: propertyName,
+                            Unwrapped: isUnwrapped
                         }],
                     Comment: comment
                 })
@@ -260,6 +270,15 @@ export default class Parser {
 
     private parsePropertyType (): PropertyType {
         let type: PropertyType
+        let isUnwrapped = false
+
+        /**
+         * check if variable name is unwrapped
+         */
+        if (this.curToken.Literal === Tokens.TILDE) {
+            isUnwrapped = true
+            this.nextToken() // eat ~
+        }
         
         switch (this.curToken.Literal) {
             case Type.BOOL:
@@ -275,18 +294,25 @@ export default class Parser {
             case Type.TSTR:
             case Type.TEXT:
                 type = this.curToken.Literal
+                break
             default: {
                 if (this.curToken.Type === Tokens.IDENT) {
-                    type = this.curToken.Literal
+                    type = {
+                        Type: 'group' as PropertyReferenceType,
+                        Value: this.curToken.Literal,
+                        Unwrapped: isUnwrapped
+                    }
                 } else if (this.curToken.Type === Tokens.STRING) {
                     type = {
                         Type: 'literal' as PropertyReferenceType,
-                        Value: this.curToken.Literal
+                        Value: this.curToken.Literal,
+                        Unwrapped: isUnwrapped
                     }
                 } else if (this.curToken.Type === Tokens.NUMBER || this.curToken.Type === Tokens.FLOAT) {
                     type = {
                         Type: 'literal' as PropertyReferenceType,
-                        Value: parseNumberValue(this.curToken)
+                        Value: parseNumberValue(this.curToken),
+                        Unwrapped: isUnwrapped
                     }
                 } else if (this.curToken.Type === Tokens.HASH) {
                     this.nextToken()
@@ -300,7 +326,8 @@ export default class Parser {
                         Value: {
                             NumericPart: n as number,
                             TypePart: t as string
-                        }
+                        },
+                        Unwrapped: isUnwrapped
                     }
                 } else {
                     throw new Error(`Invalid property type "${this.curToken.Literal}"`)
@@ -337,7 +364,8 @@ export default class Parser {
                     Inclusive,
                     Min,
                     Max: this.parsePropertyType() as RangePropertyReference
-                }
+                },
+                Unwrapped: isUnwrapped
             }
         }
 

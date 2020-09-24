@@ -132,6 +132,7 @@ export type PropertyReferenceType = 'literal' | 'group' | 'group_array' | 'range
 export type PropertyReference = {
     Type: PropertyReferenceType;
     Value: string | number | Group | Array | Range | Tag;
+    Unwrapped: boolean;
 }
 
 export type PropertyType = Assignment | Array | PropertyReference | string

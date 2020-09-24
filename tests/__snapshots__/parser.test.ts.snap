@@ -17,6 +17,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "person",
           },
         ],
@@ -38,6 +39,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "person",
           },
         ],
@@ -59,6 +61,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "person",
           },
         ],
@@ -80,6 +83,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "person",
           },
         ],
@@ -101,6 +105,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "person",
           },
         ],
@@ -122,6 +127,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "person",
           },
         ],
@@ -177,6 +183,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "identity",
           },
         ],
@@ -210,6 +217,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "identity",
           },
         ],
@@ -284,7 +292,11 @@ Array [
           "n": 1,
         },
         "Type": Array [
-          "GpsCoordinates",
+          Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "GpsCoordinates",
+          },
         ],
       },
     ],
@@ -412,7 +424,11 @@ Array [
           "n": 0,
         },
         "Type": Array [
-          "any",
+          Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "any",
+          },
         ],
       },
     ],
@@ -432,6 +448,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "identity",
           },
         ],
@@ -465,6 +482,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "identity",
           },
         ],
@@ -539,7 +557,11 @@ Array [
           "n": 1,
         },
         "Type": Array [
-          "GpsCoordinates",
+          Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "GpsCoordinates",
+          },
         ],
       },
     ],
@@ -667,7 +689,11 @@ Array [
           "n": 0,
         },
         "Type": Array [
-          "any",
+          Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "any",
+          },
         ],
       },
     ],
@@ -764,7 +790,11 @@ Array [
   Object {
     "Name": "device-address",
     "PropertyType": Array [
-      "byte",
+      Object {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "byte",
+      },
     ],
     "Type": "variable",
   },
@@ -773,6 +803,7 @@ Array [
     "PropertyType": Array [
       Object {
         "Type": "literal",
+        "Unwrapped": false,
         "Value": 255,
       },
       "float",
@@ -785,6 +816,7 @@ Array [
     "PropertyType": Array [
       Object {
         "Type": "tag",
+        "Unwrapped": false,
         "Value": Object {
           "NumericPart": 6.32,
           "TypePart": "tstr",
@@ -799,9 +831,14 @@ Array [
     "PropertyType": Array [
       Object {
         "Type": "range",
+        "Unwrapped": false,
         "Value": Object {
           "Inclusive": true,
-          "Max": "max-byte",
+          "Max": Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "max-byte",
+          },
           "Min": 0,
         },
       },
@@ -813,6 +850,7 @@ Array [
     "PropertyType": Array [
       Object {
         "Type": "literal",
+        "Unwrapped": false,
         "Value": 256,
       },
     ],
@@ -823,9 +861,14 @@ Array [
     "PropertyType": Array [
       Object {
         "Type": "range",
+        "Unwrapped": false,
         "Value": Object {
           "Inclusive": false,
-          "Max": "first-non-byte",
+          "Max": Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "first-non-byte",
+          },
           "Min": 0,
         },
       },
@@ -837,6 +880,7 @@ Array [
     "PropertyType": Array [
       Object {
         "Type": "literal",
+        "Unwrapped": false,
         "Value": 0,
       },
     ],
@@ -845,7 +889,11 @@ Array [
   Object {
     "Name": "byte2",
     "PropertyType": Array [
-      "min..max...first-non-byte",
+      Object {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "min..max...first-non-byte",
+      },
     ],
     "Type": "variable",
   },
@@ -854,14 +902,104 @@ Array [
     "PropertyType": Array [
       Object {
         "Type": "range",
+        "Unwrapped": false,
         "Value": Object {
           "Inclusive": false,
-          "Max": "first-non-byte",
+          "Max": Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "first-non-byte",
+          },
           "Min": "min..max",
         },
       },
     ],
     "Type": "variable",
+  },
+]
+`;
+
+exports[`parser can parse unwrapped arrays 1`] = `
+Array [
+  Object {
+    "Name": "basic-header",
+    "Type": "array",
+    "Values": Array [
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "field1",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "int",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "field2",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "text",
+        ],
+      },
+    ],
+  },
+  Object {
+    "Name": "advanced-header",
+    "Type": "array",
+    "Values": Array [
+      Object {
+        "Comment": "",
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "group",
+            "Unwrapped": true,
+            "Value": "basic-header",
+          },
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "field3",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "bytes",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "field4",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "group",
+            "Unwrapped": true,
+            "Value": "time",
+          },
+        ],
+      },
+    ],
   },
 ]
 `;
@@ -916,7 +1054,11 @@ Array [
           "n": 1,
         },
         "Type": Array [
-          "Inputs",
+          Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "Inputs",
+          },
         ],
       },
       Object {
@@ -928,7 +1070,11 @@ Array [
           "n": 0,
         },
         "Type": Array [
-          "Intermediates",
+          Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "Intermediates",
+          },
         ],
       },
       Object {
@@ -940,7 +1086,11 @@ Array [
           "n": 1,
         },
         "Type": Array [
-          "Outputs",
+          Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "Outputs",
+          },
         ],
       },
       Object {
@@ -954,6 +1104,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "literal",
+            "Unwrapped": false,
             "Value": "bow tie",
           },
         ],
@@ -969,6 +1120,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "literal",
+            "Unwrapped": false,
             "Value": 123,
           },
         ],
@@ -984,6 +1136,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "literal",
+            "Unwrapped": false,
             "Value": 0.5724646875815566,
           },
         ],
@@ -999,6 +1152,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "literal",
+            "Unwrapped": false,
             "Value": "0x123",
           },
         ],
@@ -1014,6 +1168,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "literal",
+            "Unwrapped": false,
             "Value": "0b123",
           },
         ],
@@ -1029,6 +1184,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "group",
+            "Unwrapped": false,
             "Value": "foobar",
           },
         ],
@@ -1073,6 +1229,7 @@ Array [
           "tstr",
           Object {
             "Type": "literal",
+            "Unwrapped": false,
             "Value": "foobar",
           },
         ],
@@ -1088,6 +1245,7 @@ Array [
         "Type": Array [
           Object {
             "Type": "tag",
+            "Unwrapped": false,
             "Value": Object {
               "NumericPart": 6.32,
               "TypePart": "tstr",

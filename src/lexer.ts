@@ -84,6 +84,9 @@ export default class Lexer {
             case '#'.charCodeAt(0):
                 token = { Type: Tokens.HASH, Literal }
                 break
+            case '~'.charCodeAt(0):
+                token = { Type: Tokens.TILDE, Literal }
+                break
             case '"'.charCodeAt(0):
                 token = { Type: Tokens.STRING, Literal: this.readString() }
                 break

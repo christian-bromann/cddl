@@ -15,6 +15,7 @@ export enum Tokens {
     ATSIGN = '@',
     CARET = '^',
     HASH = '#',
+    TILDE = '~',
 
     // Identifiers + literals,
     IDENT = 'IDENT',
