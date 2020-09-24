@@ -121,8 +121,8 @@ export default class Parser {
             /**
              * else if no colon was found, throw
              */
-            else if (this.curToken.Type !== Tokens.COLON) {
-                throw new Error('Expected ":"')
+            else if (!this.isPropertyValueSeparator()) {
+                throw new Error('Expected ":" or "=>')
             }
 
             this.nextToken()
@@ -191,6 +191,19 @@ export default class Parser {
             Name: groupName || '',
             Properties: valuesOrProperties
         }
+    }
+
+    private isPropertyValueSeparator () {
+        if (this.curToken.Type === Tokens.COLON) {
+            return true
+        }
+
+        if (this.curToken.Type === Tokens.ASSIGN && this.peekToken.Type === Tokens.GT) {
+            this.nextToken() // eat <
+            return true
+        }
+
+        return false
     }
 
     /**

@@ -51,6 +51,12 @@ export default class Lexer {
             case ']'.charCodeAt(0):
                 token = { Type: Tokens.RBRACK, Literal }
                 break
+            case '<'.charCodeAt(0):
+                token = { Type: Tokens.LT, Literal }
+                break
+            case '>'.charCodeAt(0):
+                token = { Type: Tokens.GT, Literal }
+                break
             case '+'.charCodeAt(0):
                 token = { Type: Tokens.PLUS, Literal }
                 break

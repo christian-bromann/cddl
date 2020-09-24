@@ -47,3 +47,8 @@ GpsCoordinatesWithoutComment = {
     longitude      : uint,
     latitude       : uint,
 }
+
+located-samples = {
+    "sample-point" => int,
+    "samples" => [+ float],
+}

@@ -41,5 +41,7 @@ export enum Tokens {
     RBRACE = '}',
     LBRACK = '[',
     RBRACK = ']',
+    LT = '<',
+    GT = '>',
     QUOT = '"'
 }
