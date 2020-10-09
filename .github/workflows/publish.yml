@@ -1,4 +1,4 @@
-name: Manual NPM Publish
+name: NPM Publish
 
 on:
   workflow_dispatch:
@@ -16,7 +16,7 @@ env:
   NPM_TOKEN: ${{secrets.NPM_TOKEN}}
 
 jobs:
-  unit:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -52,4 +52,4 @@ jobs:
         run: npm run release:ci -- ${{github.event.inputs.releaseType}}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_AUTH}}
