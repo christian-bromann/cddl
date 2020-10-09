@@ -4,8 +4,16 @@
   "description": "Concise data definition language (RFC 8610) implementation and JSON validator in Node.js",
   "main": "index.js",
   "scripts": {
+    "build": "run-s clean compile",
+    "clean": "rm -rf ./build ./coverage",
+    "compile": "tsc",
     "test": "jest --coverage",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "release": "release-it --github.release",
+    "release:ci": "npm run release -- --ci --npm.skipChecks --no-git.requireCleanWorkingDir",
+    "release:patch": "npm run release -- patch",
+    "release:minor": "npm run release -- minor",
+    "release:major": "npm run release -- major"
   },
   "repository": {
     "type": "git",
@@ -24,6 +32,8 @@
     "@types/jest": "^26.0.13",
     "@types/node": "^14.6.4",
     "jest": "^26.4.2",
+    "npm-run-all": "^4.1.5",
+    "release-it": "^14.0.4",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
   },
