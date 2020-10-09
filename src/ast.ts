@@ -51,7 +51,16 @@ export type Variable = {
     PropertyType: PropertyType | PropertyType[];
 }
 
-export type Assignment = Group | Array | Variable;
+/**
+ * a comment statement
+ * ```
+ * ; This is a comment
+ * ```
+ */
+export type Comment = {
+    Type: 'comment';
+    Content: string;
+}
 
 export type Occurrence = {
     n: number;
@@ -135,5 +144,6 @@ export type PropertyReference = {
     Unwrapped: boolean;
 }
 
+export type Assignment = Group | Array | Variable | Comment;
 export type PropertyType = Assignment | Array | PropertyReference | string
 export type PropertyName = string

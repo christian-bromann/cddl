@@ -1,0 +1,12 @@
+; This is a comment
+person = {
+    employer: tstr ; a good employer
+} ; foobar
+
+; This is another
+; very nice comment
+
+foo = { bar } ; some comment
+; another comment
+
+som = { g } ; some g

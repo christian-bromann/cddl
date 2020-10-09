@@ -5,69 +5,26 @@ import Lexer from '../src/lexer'
 import Parser from '../src/parser'
 
 describe('parser', () => {
-    it('should correctly parse CDDL file', () => {
-        const input = fs.readFileSync(
-            path.join(__dirname, '__fixtures__', 'example.cddl'),
-            'utf-8'
-        )
+    const testCases: { name: string, fixture: string }[] = [
+        { name: 'should correctly parse CDDL file', fixture: 'example.cddl' },
+        { name: 'can parse compositions', fixture: 'compositions.cddl' },
+        { name: 'can parse ranges', fixture: 'ranges.cddl' },
+        { name: 'can parse occurrences', fixture: 'occurrences.cddl' },
+        { name: 'can parse arrays', fixture: 'arrays.cddl' },
+        { name: 'can parse unwrapped arrays', fixture: 'unwrapping.cddl' },
+        { name: 'can parse comments', fixture: 'comments.cddl' },
+    ]
 
-        const l = new Lexer(input)
-        const p = new Parser(l)
-        expect(p.parse()).toMatchSnapshot()
-    })
+    for (const { name, fixture } of testCases) {
+        it(name, () => {
+            const input = fs.readFileSync(
+                path.join(__dirname, '__fixtures__', fixture),
+                'utf-8'
+            )
 
-    it('can parse compositions', () => {
-        const input = fs.readFileSync(
-            path.join(__dirname, '__fixtures__', 'compositions.cddl'),
-            'utf-8'
-        )
-
-        const l = new Lexer(input)
-        const p = new Parser(l)
-        expect(p.parse()).toMatchSnapshot()
-    })
-
-    it('can parse ranges', () => {
-        const input = fs.readFileSync(
-            path.join(__dirname, '__fixtures__', 'ranges.cddl'),
-            'utf-8'
-        )
-
-        const l = new Lexer(input)
-        const p = new Parser(l)
-        expect(p.parse()).toMatchSnapshot()
-    })
-
-    it('can parse occurrences', () => {
-        const input = fs.readFileSync(
-            path.join(__dirname, '__fixtures__', 'occurrences.cddl'),
-            'utf-8'
-        )
-
-        const l = new Lexer(input)
-        const p = new Parser(l)
-        expect(p.parse()).toMatchSnapshot()
-    })
-
-    it('can parse arrays', () => {
-        const input = fs.readFileSync(
-            path.join(__dirname, '__fixtures__', 'arrays.cddl'),
-            'utf-8'
-        )
-
-        const l = new Lexer(input)
-        const p = new Parser(l)
-        expect(p.parse()).toMatchSnapshot()
-    })
-
-    it('can parse unwrapped arrays', () => {
-        const input = fs.readFileSync(
-            path.join(__dirname, '__fixtures__', 'unwrapping.cddl'),
-            'utf-8'
-        )
-
-        const l = new Lexer(input)
-        const p = new Parser(l)
-        expect(p.parse()).toMatchSnapshot()
-    })
+            const l = new Lexer(input)
+            const p = new Parser(l)
+            expect(p.parse()).toMatchSnapshot()
+        })
+    }
 })

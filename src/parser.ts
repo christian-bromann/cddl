@@ -3,8 +3,9 @@ import { Token, Tokens } from './tokens';
 import { PREDEFINED_IDENTIFIER } from './constants'
 import { parseNumberValue } from './utils'
 import {
-    Group, Type, PropertyName, PropertyType, PropertyReferenceType,
-    Variable, RangePropertyReference, Occurrence, Property, Assignment
+    Type, PropertyName, PropertyType, PropertyReferenceType,
+    Variable, RangePropertyReference, Occurrence, Assignment,
+    Comment
 } from './ast'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
@@ -92,7 +93,7 @@ export default class Parser {
                 /**
                  * check if line has a comment
                  */
-                if (this.peekToken.Type === Tokens.COMMENT) {
+                if (this.curToken.Type === Tokens.COMMA && this.peekToken.Type === Tokens.COMMENT) {
                     this.nextToken()
                     comment = this.parseComment()
                     parsedComments = true
@@ -472,6 +473,16 @@ export default class Parser {
         const definition: Assignment[] = []
 
         while (this.curToken.Type !== Tokens.EOF) {
+            if (this.curToken.Type === Tokens.COMMENT) {
+                const comment: Comment = {
+                    Type: 'comment',
+                    Content: this.curToken.Literal.slice(1).trim()
+                }
+                definition.push(comment)
+                this.nextToken()
+                continue
+            }
+
             const group = this.parseAssignments()
             if (group) {
                 definition.push(group)

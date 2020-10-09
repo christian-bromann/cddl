@@ -29,7 +29,7 @@ Array [
     "Type": "array",
     "Values": Array [
       Object {
-        "Comment": "some",
+        "Comment": "",
         "HasCut": false,
         "Name": "",
         "Occurrence": Object {
@@ -47,11 +47,15 @@ Array [
     ],
   },
   Object {
+    "Content": "some",
+    "Type": "comment",
+  },
+  Object {
     "Name": "zero-or-one-person",
     "Type": "array",
     "Values": Array [
       Object {
-        "Comment": "comment",
+        "Comment": "",
         "HasCut": false,
         "Name": "",
         "Occurrence": Object {
@@ -67,6 +71,10 @@ Array [
         ],
       },
     ],
+  },
+  Object {
+    "Content": "comment",
+    "Type": "comment",
   },
   Object {
     "Name": "one-or-two-people",
@@ -163,6 +171,101 @@ Array [
       },
     ],
     "Type": "group",
+  },
+]
+`;
+
+exports[`parser can parse comments 1`] = `
+Array [
+  Object {
+    "Content": "This is a comment",
+    "Type": "comment",
+  },
+  Object {
+    "Name": "person",
+    "Properties": Array [
+      Object {
+        "Comment": "a good employer",
+        "HasCut": true,
+        "Name": "employer",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  Object {
+    "Content": "foobar",
+    "Type": "comment",
+  },
+  Object {
+    "Content": "This is another",
+    "Type": "comment",
+  },
+  Object {
+    "Content": "very nice comment",
+    "Type": "comment",
+  },
+  Object {
+    "Name": "foo",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "bar",
+          },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  Object {
+    "Content": "some comment",
+    "Type": "comment",
+  },
+  Object {
+    "Content": "another comment",
+    "Type": "comment",
+  },
+  Object {
+    "Name": "som",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "g",
+          },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  Object {
+    "Content": "some g",
+    "Type": "comment",
   },
 ]
 `;
