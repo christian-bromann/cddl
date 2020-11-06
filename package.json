@@ -1,6 +1,6 @@
 {
   "name": "cddl",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Concise data definition language (RFC 8610) implementation and JSON validator in Node.js",
   "main": "index.js",
   "scripts": {
