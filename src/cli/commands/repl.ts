@@ -13,15 +13,14 @@ export const builder = (yargs: yargs.Argv<{}>) => {
         .help()
 }
 
-export const handler = (argv: yargs.Argv<{}>) => {
+export const handler = (argv: yargs.Arguments) => {
     const r = repl.start({
         prompt: '> ',
         eval: evaluate
     })
-    
 }
 
-function evaluate (evalCmd: string, _: any, file: string, callback: (err: Error | null, result: any) => void) {
+export function evaluate (evalCmd: string, _: any, file: string, callback: (err: Error | null, result: any) => void) {
     if (!evalCmd) {
         return callback(new Error('No input'), null)
     }
