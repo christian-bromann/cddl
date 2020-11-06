@@ -10,7 +10,8 @@
  */
 export type Group = {
     Type: 'group';
-    Name: string;
+    Name: string
+    IsChoiceAddition: boolean;
     Properties: (Property|Property[])[];
 }
 
@@ -48,6 +49,7 @@ export type Tag = {
 export type Variable = {
     Type: 'variable';
     Name: string;
+    IsChoiceAddition: boolean;
     PropertyType: PropertyType | PropertyType[];
 }
 

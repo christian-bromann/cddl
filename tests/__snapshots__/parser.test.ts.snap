@@ -143,6 +143,7 @@ Array [
     ],
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "person",
     "Properties": Array [
       Object {
@@ -178,6 +179,7 @@ Array [
 exports[`parser can parse choices 1`] = `
 Array [
   Object {
+    "IsChoiceAddition": false,
     "Name": "attire",
     "PropertyType": Array [
       Object {
@@ -199,6 +201,7 @@ Array [
     "Type": "variable",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "protocol",
     "PropertyType": Array [
       Object {
@@ -215,6 +218,7 @@ Array [
     "Type": "variable",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "address",
     "Properties": Array [
       Object {
@@ -237,6 +241,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "delivery",
     "Properties": Array [
       Object {
@@ -354,6 +359,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "city",
     "Properties": Array [
       Object {
@@ -383,6 +389,61 @@ Array [
     ],
     "Type": "group",
   },
+  Object {
+    "IsChoiceAddition": true,
+    "Name": "attire",
+    "PropertyType": Array [
+      Object {
+        "Type": "literal",
+        "Unwrapped": false,
+        "Value": "swimwear",
+      },
+    ],
+    "Type": "variable",
+  },
+  Object {
+    "IsChoiceAddition": true,
+    "Name": "delivery",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "lat",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "float",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "long",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "float",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "drone-type",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
 ]
 `;
 
@@ -393,6 +454,7 @@ Array [
     "Type": "comment",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "person",
     "Properties": Array [
       Object {
@@ -423,6 +485,7 @@ Array [
     "Type": "comment",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "foo",
     "Properties": Array [
       Object {
@@ -453,6 +516,7 @@ Array [
     "Type": "comment",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "som",
     "Properties": Array [
       Object {
@@ -484,6 +548,7 @@ Array [
 exports[`parser can parse compositions 1`] = `
 Array [
   Object {
+    "IsChoiceAddition": false,
     "Name": "person",
     "Properties": Array [
       Object {
@@ -518,6 +583,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "dog",
     "Properties": Array [
       Object {
@@ -552,6 +618,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "identity",
     "Properties": Array [
       Object {
@@ -616,6 +683,7 @@ Array [
     ],
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "GpsCoordinates",
     "Properties": Array [
       Object {
@@ -646,6 +714,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "located-samples",
     "Properties": Array [
       Object {
@@ -691,6 +760,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "extensible-map-example",
     "Properties": Array [
       Object {
@@ -749,6 +819,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "personWithoutComment",
     "Properties": Array [
       Object {
@@ -783,6 +854,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "dogWithoutComment",
     "Properties": Array [
       Object {
@@ -817,6 +889,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "identityWithoutComment",
     "Properties": Array [
       Object {
@@ -881,6 +954,7 @@ Array [
     ],
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "GpsCoordinatesWithoutComment",
     "Properties": Array [
       Object {
@@ -911,6 +985,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "located-samples-without-comments",
     "Properties": Array [
       Object {
@@ -956,6 +1031,7 @@ Array [
     "Type": "group",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "extensible-map-example-without-comments",
     "Properties": Array [
       Object {
@@ -1019,6 +1095,7 @@ Array [
 exports[`parser can parse occurrences 1`] = `
 Array [
   Object {
+    "IsChoiceAddition": false,
     "Name": "someGroup",
     "Properties": Array [
       Object {
@@ -1102,6 +1179,7 @@ Array [
 exports[`parser can parse ranges 1`] = `
 Array [
   Object {
+    "IsChoiceAddition": false,
     "Name": "device-address",
     "PropertyType": Array [
       Object {
@@ -1113,6 +1191,7 @@ Array [
     "Type": "variable",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "max-byte",
     "PropertyType": Array [
       Object {
@@ -1126,6 +1205,7 @@ Array [
     "Type": "variable",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "my_uri",
     "PropertyType": Array [
       Object {
@@ -1141,6 +1221,7 @@ Array [
     "Type": "variable",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "byte",
     "PropertyType": Array [
       Object {
@@ -1160,6 +1241,7 @@ Array [
     "Type": "variable",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "first-non-byte",
     "PropertyType": Array [
       Object {
@@ -1171,6 +1253,7 @@ Array [
     "Type": "variable",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "byte1",
     "PropertyType": Array [
       Object {
@@ -1190,6 +1273,7 @@ Array [
     "Type": "variable",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "min..max",
     "PropertyType": Array [
       Object {
@@ -1201,6 +1285,7 @@ Array [
     "Type": "variable",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "byte2",
     "PropertyType": Array [
       Object {
@@ -1212,6 +1297,7 @@ Array [
     "Type": "variable",
   },
   Object {
+    "IsChoiceAddition": false,
     "Name": "byte3",
     "PropertyType": Array [
       Object {
@@ -1321,6 +1407,7 @@ Array [
 exports[`parser should correctly parse CDDL file 1`] = `
 Array [
   Object {
+    "IsChoiceAddition": false,
     "Name": "Example",
     "Properties": Array [
       Object {

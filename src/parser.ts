@@ -32,19 +32,36 @@ export default class Parser {
     }
 
     private parseAssignments (): Assignment {
-        if (this.curToken.Type !== Tokens.IDENT && this.peekToken.Type !== Tokens.ASSIGN) {
+        /**
+         * expect group identifier, e.g.
+         * groupName =
+         * groupName /=
+         * groupName //=
+         */
+        if (this.curToken.Type !== Tokens.IDENT || !(this.peekToken.Type === Tokens.ASSIGN || this.peekToken.Type === Tokens.SLASH)) {
             throw new Error(`group identifier expected, received "${JSON.stringify(this.curToken)}"`)
         }
 
+        let isChoiceAddition = false
         const groupName = this.curToken.Literal
         this.nextToken() // eat group identifier
-        this.nextToken() // eat `=`
 
-        return this.parseAssignmentValue(groupName) as Assignment
+        // @ts-ignore
+        if (this.curToken.Type === Tokens.SLASH) {
+            isChoiceAddition = true
+            this.nextToken() // eat `/`
+        }
+
+        // @ts-ignore
+        if (this.curToken.Type === Tokens.SLASH) {
+            this.nextToken() // eat `/`
+        }
+
+        this.nextToken() // eat `=`
+        return this.parseAssignmentValue(groupName, isChoiceAddition) as Assignment
     }
 
-    private parseAssignmentValue (groupName?: string): Assignment | PropertyType[] {
-        let assignment: Assignment
+    private parseAssignmentValue (groupName?: string, isChoiceAddition = false): Assignment | PropertyType[] {
         let isChoice = false
         const valuesOrProperties: (Property | Property[])[] = []
         const closingTokens = this.openSegment()
@@ -58,6 +75,7 @@ export default class Parser {
                 const variable: Variable = {
                     Type: 'variable',
                     Name: groupName,
+                    IsChoiceAddition: isChoiceAddition,
                     PropertyType: this.parsePropertyTypes()
                 }
                 return variable
@@ -274,7 +292,8 @@ export default class Parser {
         return {
             Type: 'group',
             Name: groupName || '',
-            Properties: valuesOrProperties
+            Properties: valuesOrProperties,
+            IsChoiceAddition: isChoiceAddition
         }
     }
 

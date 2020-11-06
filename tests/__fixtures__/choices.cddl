@@ -14,3 +14,9 @@ city = (
     name: tstr,
     zip-code: uint
 )
+
+attire /= "swimwear"
+
+delivery //= (
+    lat: float, long: float, drone-type: tstr
+)
