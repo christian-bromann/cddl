@@ -175,6 +175,217 @@ Array [
 ]
 `;
 
+exports[`parser can parse choices 1`] = `
+Array [
+  Object {
+    "Name": "attire",
+    "PropertyType": Array [
+      Object {
+        "Type": "literal",
+        "Unwrapped": false,
+        "Value": "bow tie",
+      },
+      Object {
+        "Type": "literal",
+        "Unwrapped": false,
+        "Value": "necktie",
+      },
+      Object {
+        "Type": "literal",
+        "Unwrapped": false,
+        "Value": "Internet attire",
+      },
+    ],
+    "Type": "variable",
+  },
+  Object {
+    "Name": "protocol",
+    "PropertyType": Array [
+      Object {
+        "Type": "literal",
+        "Unwrapped": false,
+        "Value": 6,
+      },
+      Object {
+        "Type": "literal",
+        "Unwrapped": false,
+        "Value": 17,
+      },
+    ],
+    "Type": "variable",
+  },
+  Object {
+    "Name": "address",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "delivery",
+          },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  Object {
+    "Name": "delivery",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "street",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "number",
+        "Occurrence": Object {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": Array [
+          "uint",
+        ],
+      },
+      Array [
+        Object {
+          "Comment": "",
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": Object {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "city",
+          },
+        },
+        Object {
+          "Comment": "",
+          "HasCut": true,
+          "Name": "po-box",
+          "Occurrence": Object {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": Array [
+            "uint",
+          ],
+        },
+      ],
+      Array [
+        Object {
+          "Comment": "",
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": Object {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "city",
+          },
+        },
+        Object {
+          "Comment": "",
+          "HasCut": true,
+          "Name": "foo",
+          "Occurrence": Object {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": Array [
+            "tstr",
+            "uint",
+          ],
+        },
+        Object {
+          "Comment": "",
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": Object {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": Object {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "foobar",
+          },
+        },
+        Object {
+          "Comment": "",
+          "HasCut": true,
+          "Name": "per-pickup",
+          "Occurrence": Object {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": Array [
+            Object {
+              "Type": "literal",
+              "Unwrapped": false,
+              "Value": true,
+            },
+          ],
+        },
+      ],
+    ],
+    "Type": "group",
+  },
+  Object {
+    "Name": "city",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "name",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "tstr",
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "zip-code",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          "uint",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
+
 exports[`parser can parse comments 1`] = `
 Array [
   Object {

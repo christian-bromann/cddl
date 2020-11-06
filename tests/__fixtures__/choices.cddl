@@ -1,0 +1,16 @@
+attire = "bow tie" / "necktie" / "Internet attire"
+protocol = 6 / 17
+
+address = { delivery }
+
+delivery = (
+    street: tstr,
+    ?number: uint,
+    city // po-box: uint,
+    city // foo: tstr / uint // foobar // per-pickup: true
+)
+
+city = (
+    name: tstr,
+    zip-code: uint
+)

@@ -1,4 +1,5 @@
 import Lexer from './lexer'
+import { Property } from './ast'
 import { Token, Tokens } from './tokens';
 import { PREDEFINED_IDENTIFIER, BOOLEAN_LITERALS } from './constants'
 import { parseNumberValue } from './utils'
@@ -42,9 +43,10 @@ export default class Parser {
         return this.parseAssignmentValue(groupName) as Assignment
     }
 
-    private parseAssignmentValue (groupName?: string): Assignment | PropertyType {
+    private parseAssignmentValue (groupName?: string): Assignment | PropertyType[] {
         let assignment: Assignment
-        const valuesOrProperties = []
+        let isChoice = false
+        const valuesOrProperties: (Property | Property[])[] = []
         const closingTokens = this.openSegment()
 
         /**
@@ -61,7 +63,7 @@ export default class Parser {
                 return variable
             }
 
-            return this.parsePropertyType()
+            return this.parsePropertyTypes()
         }
     
         while (!closingTokens.includes(this.curToken.Type)) {
@@ -144,49 +146,107 @@ export default class Parser {
             }
 
             /**
+             * check if we have a choice instead of an assignment
+             */
+            if (this.curToken.Type === Tokens.SLASH && this.peekToken.Type === Tokens.SLASH) {
+                const prop: Property = {
+                    HasCut: hasCut,
+                    Occurrence: occurrence,
+                    Name: '',
+                    Type: {
+                        Type: "group",
+                        Value: propertyName,
+                        Unwrapped: isUnwrapped
+                    },
+                    Comment: comment
+                }
+
+                if (isChoice) {
+                    /**
+                     * if we already in a choice just push into it
+                     */
+                    (valuesOrProperties[valuesOrProperties.length - 1] as Property[]).push(prop)
+                } else {
+                    /**
+                     * otherwise create a new one
+                     */
+                    isChoice = true
+                    valuesOrProperties.push([prop])
+                }
+
+                this.nextToken() // eat /
+                this.nextToken() // eat /
+                continue
+            }
+
+            /**
              * else if no colon was found, throw
              */
             if (!this.isPropertyValueSeparator()) {
                 throw new Error('Expected ":" or "=>"')
             }
 
-            this.nextToken()
+            this.nextToken() // eat :
 
             /**
              * parse property value
              */
-            propertyType.push(this.parseAssignmentValue())
-            this.nextToken()
-
-            /**
-             * continue parse possible other types (e.g. `float / tstr / int`)
-             */
-            propertyType.push(...this.parsePropertyTypes(true))
+            const props = this.parseAssignmentValue()
+            if (Array.isArray(props)) {
+                /**
+                 * property has multiple types (e.g. `float / tstr / int`)
+                 */
+                propertyType.push(...props)
+            } else {
+                propertyType.push(props)
+            }
 
             /**
              * advance comma
              */
-            // @ts-ignore
+            let flipIsChoice = false
             if (this.curToken.Type === Tokens.COMMA) {
-                this.nextToken()
+                /**
+                 * if we are in a choice, we leave it here
+                 */
+                flipIsChoice = true
+
+                this.nextToken() // eat ,
             }
 
             comment = this.parseComment()
 
-            valuesOrProperties.push({
+            const prop = {
                 HasCut: hasCut,
                 Occurrence: occurrence,
                 Name: propertyName,
                 Type: propertyType,
                 Comment: comment
-            })
+            }
+            if (isChoice) {
+                (valuesOrProperties[valuesOrProperties.length - 1] as Property[]).push(prop)
+            } else {
+                valuesOrProperties.push(prop)
+            }
+
+            if (flipIsChoice) {
+                isChoice = false
+            }
 
             /**
              * if `}` is found we are at the end of the group
              */
-            // @ts-ignore
             if (closingTokens.includes(this.curToken.Type)) {
                 break
+            }
+
+            /**
+             * eat // if we are in a choice
+             */
+            if (isChoice) {
+                this.nextToken() // eat /
+                this.nextToken() // eat /
+                continue
             }
         }
 
@@ -379,15 +439,21 @@ export default class Parser {
         return type
     }
 
-    private parsePropertyTypes (parseFromWithin?: boolean): PropertyType[] {
+    private parsePropertyTypes (): PropertyType[] {
         const propertyTypes: PropertyType[] = []
 
+        propertyTypes.push(this.parsePropertyType())
+        this.nextToken() // eat `/`
+
         /**
-         * if the first part of the property was parsed skip this step
+         * ensure we don't go into the next choice, e.g.:
+         * ```
+         * delivery = (
+         *   city // lala: tstr / bool // per-pickup: true,
+         * )
          */
-        if (!parseFromWithin) {
-            propertyTypes.push(this.parsePropertyType())
-            this.nextToken() // eat `/`
+        if (this.curToken.Type === Tokens.SLASH && this.peekToken.Type === Tokens.SLASH) {
+            return propertyTypes
         }
 
         /**
@@ -397,6 +463,17 @@ export default class Parser {
             this.nextToken() // eat `/`
             propertyTypes.push(this.parsePropertyType())
             this.nextToken()
+
+            /**
+             * ensure we don't go into the next choice, e.g.:
+             * ```
+             * delivery = (
+             *   city // lala: tstr / bool // per-pickup: true,
+             * )
+             */
+            if (this.curToken.Type === Tokens.SLASH && this.peekToken.Type === Tokens.SLASH) {
+                break
+            }
         }
 
         return propertyTypes

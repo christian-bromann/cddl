@@ -11,7 +11,7 @@
 export type Group = {
     Type: 'group';
     Name: string;
-    Properties: Property[];
+    Properties: (Property|Property[])[];
 }
 
 /**
@@ -25,7 +25,7 @@ export type Group = {
 export type Array = {
     Type: 'array';
     Name: string;
-    Values: Property[];
+    Values: (Property|Property[])[];
 }
 
 /**
