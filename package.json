@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Concise data definition language (RFC 8610) implementation and JSON validator in Node.js",
   "main": "index.js",
+  "bin": {
+    "cddl": "./bin/cddl.js"
+  },
   "scripts": {
     "build": "run-s clean compile",
     "clean": "rm -rf ./build ./coverage",
