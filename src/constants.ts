@@ -1,4 +1,5 @@
 export const WHITESPACE_CHARACTERS = [' ', '\t', '\n', '\r']
+export const BOOLEAN_LITERALS = ['true', 'false']
 
 /**
  * as defined in Appendix D

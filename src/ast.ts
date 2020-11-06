@@ -140,7 +140,7 @@ export type Range = {
 export type PropertyReferenceType = 'literal' | 'group' | 'group_array' | 'range' | 'tag'
 export type PropertyReference = {
     Type: PropertyReferenceType;
-    Value: string | number | Group | Array | Range | Tag;
+    Value: string | number | boolean | Group | Array | Range | Tag;
     Unwrapped: boolean;
 }
 

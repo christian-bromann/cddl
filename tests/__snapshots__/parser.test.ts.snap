@@ -1215,6 +1215,38 @@ Array [
       Object {
         "Comment": "",
         "HasCut": true,
+        "Name": "someBool",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": true,
+          },
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "someOtherBool",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": false,
+          },
+        ],
+      },
+      Object {
+        "Comment": "",
+        "HasCut": true,
         "Name": "count",
         "Occurrence": Object {
           "m": 1,

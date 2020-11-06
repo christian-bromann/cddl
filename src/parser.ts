@@ -1,6 +1,6 @@
 import Lexer from './lexer'
 import { Token, Tokens } from './tokens';
-import { PREDEFINED_IDENTIFIER } from './constants'
+import { PREDEFINED_IDENTIFIER, BOOLEAN_LITERALS } from './constants'
 import { parseNumberValue } from './utils'
 import {
     Type, PropertyName, PropertyType, PropertyReferenceType,
@@ -147,7 +147,7 @@ export default class Parser {
              * else if no colon was found, throw
              */
             if (!this.isPropertyValueSeparator()) {
-                throw new Error('Expected ":" or "=>')
+                throw new Error('Expected ":" or "=>"')
             }
 
             this.nextToken()
@@ -297,7 +297,13 @@ export default class Parser {
                 type = this.curToken.Literal
                 break
             default: {
-                if (this.curToken.Type === Tokens.IDENT) {
+                if (BOOLEAN_LITERALS.includes(this.curToken.Literal)) {
+                    type = {
+                        Type: 'literal' as PropertyReferenceType,
+                        Value: this.curToken.Literal === 'true',
+                        Unwrapped: isUnwrapped
+                    }
+                } else if (this.curToken.Type === Tokens.IDENT) {
                     type = {
                         Type: 'group' as PropertyReferenceType,
                         Value: this.curToken.Literal,

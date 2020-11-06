@@ -6,6 +6,8 @@ Example = {
    ? intermediates : Intermediates,             ; Intermediate values for debugging
    output: Outputs,                             ; Outputs of the test
    attire: "bow tie",
+   someBool: true,
+   someOtherBool: false,
    count: 123,
    ?"rating": 0.5724646875815566,
    hexa: 0x123,
