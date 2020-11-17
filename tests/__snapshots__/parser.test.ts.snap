@@ -1092,6 +1092,102 @@ Array [
 ]
 `;
 
+exports[`parser can parse nested groups 1`] = `
+Array [
+  Object {
+    "IsChoiceAddition": false,
+    "Name": "f",
+    "Properties": Array [
+      Object {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "o",
+        "Occurrence": Object {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": Array [
+          Object {
+            "IsChoiceAddition": false,
+            "Name": "",
+            "Properties": Array [
+              Object {
+                "Comment": "",
+                "HasCut": true,
+                "Name": "o",
+                "Occurrence": Object {
+                  "m": 1,
+                  "n": 1,
+                },
+                "Type": Array [
+                  Object {
+                    "IsChoiceAddition": false,
+                    "Name": "",
+                    "Properties": Array [
+                      Object {
+                        "Comment": "",
+                        "HasCut": true,
+                        "Name": "b",
+                        "Occurrence": Object {
+                          "m": 1,
+                          "n": 1,
+                        },
+                        "Type": Array [
+                          Object {
+                            "IsChoiceAddition": false,
+                            "Name": "",
+                            "Properties": Array [
+                              Object {
+                                "Comment": "",
+                                "HasCut": true,
+                                "Name": "a",
+                                "Occurrence": Object {
+                                  "m": 1,
+                                  "n": 1,
+                                },
+                                "Type": Array [
+                                  Object {
+                                    "IsChoiceAddition": false,
+                                    "Name": "",
+                                    "Properties": Array [
+                                      Object {
+                                        "Comment": "",
+                                        "HasCut": true,
+                                        "Name": "r",
+                                        "Occurrence": Object {
+                                          "m": 1,
+                                          "n": 1,
+                                        },
+                                        "Type": Array [
+                                          "text",
+                                        ],
+                                      },
+                                    ],
+                                    "Type": "group",
+                                  },
+                                ],
+                              },
+                            ],
+                            "Type": "group",
+                          },
+                        ],
+                      },
+                    ],
+                    "Type": "group",
+                  },
+                ],
+              },
+            ],
+            "Type": "group",
+          },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
+
 exports[`parser can parse occurrences 1`] = `
 Array [
   Object {

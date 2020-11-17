@@ -271,7 +271,7 @@ export default class Parser {
         /**
          * close segment
          */
-        while (this.curToken.Type === [...closingTokens].shift()) {
+        if (this.curToken.Type === [...closingTokens].shift()) {
             this.nextToken()
         }
 

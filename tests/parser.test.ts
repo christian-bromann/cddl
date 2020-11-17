@@ -13,7 +13,8 @@ describe('parser', () => {
         { name: 'can parse arrays', fixture: 'arrays.cddl' },
         { name: 'can parse unwrapped arrays', fixture: 'unwrapping.cddl' },
         { name: 'can parse comments', fixture: 'comments.cddl' },
-        { name: 'can parse choices', fixture: 'choices.cddl' }
+        { name: 'can parse choices', fixture: 'choices.cddl' },
+        { name: 'can parse nested groups', fixture: 'nested.cddl' }
     ]
 
     for (const { name, fixture } of testCases) {
