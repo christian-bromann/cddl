@@ -32,7 +32,7 @@ person = {
 You can use this package to parse the file into an abstract syntax tree (AST):
 
 ```js
-const CDDL = require('cddl')
+const CDDL = require('cddl').default
 
 const ast = CDDL.parse('./spec.cddl')
 console.log(ast)
