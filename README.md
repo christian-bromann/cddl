@@ -20,7 +20,7 @@ $ npm install cddl
 
 ## Using this package
 
-Currently you can use this package to parse a CDDL file into an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST). For example, given the following CDDL file:
+Currently, you can use this package to parse a CDDL file into an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST). For example, given the following CDDL file:
 
 ```cddl
 person = {
@@ -51,4 +51,4 @@ console.log(ast)
 
 ---
 
-If you are interested in this project, please feel free to contribute ideas or code patches. Have a look into our [contributing guidelines](https://github.com/christian-bromann/cddl/blob/master/LICENSE) to get started.
+If you are interested in this project, please feel free to contribute ideas or code patches. Have a look at our [contributing](https://github.com/christian-bromann/cddl/blob/master/LICENSE) guidelines](https://github.com/christian-bromann/cddl/blob/master/LICENSE) to get started.

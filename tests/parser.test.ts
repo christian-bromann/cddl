@@ -1,8 +1,12 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs/promises'
+import url from 'node:url'
+import path from 'node:path'
+import { describe, it, expect } from 'vitest'
 
-import Lexer from '../src/lexer'
-import Parser from '../src/parser'
+import Lexer from '../src/lexer.js'
+import Parser from '../src/parser.js'
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 describe('parser', () => {
     const testCases: { name: string, fixture: string }[] = [
@@ -18,8 +22,8 @@ describe('parser', () => {
     ]
 
     for (const { name, fixture } of testCases) {
-        it(name, () => {
-            const input = fs.readFileSync(
+        it(name, async () => {
+            const input = await fs.readFile(
                 path.join(__dirname, '__fixtures__', fixture),
                 'utf-8'
             )

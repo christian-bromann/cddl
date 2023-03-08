@@ -1,7 +1,7 @@
-import fs from 'fs'
+import fs from 'node:fs'
 
-import Lexer from './lexer'
-import Parser from './parser'
+import Lexer from './lexer.js'
+import Parser from './parser.js'
 
 export default {
     parse: (filePath: string) => {

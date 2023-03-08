@@ -1,9 +1,9 @@
-import fs from 'fs'
-import path from 'path'
-import yargs from 'yargs'
+import fs from 'node:fs'
+import path from 'node:path'
+import type yargs from 'yargs'
 
-import { CLI_EPILOGUE } from '../constants'
-import CDDL from '../../'
+import { CLI_EPILOGUE } from '../constants.js'
+import CDDL from '../../index.js'
 
 interface ValidateArguments extends yargs.Arguments {
     filePath: string
@@ -36,8 +36,8 @@ export const handler = (argv: ValidateArguments) => {
          */
 
         console.log('✅ Valid CDDL file!')
-    } catch (err) {
-        console.error(`⚠️  Invalid CDDL file (${filePath})\n\t> ${err.message}`)
+    } catch (err: unknown) {
+        console.error(`⚠️  Invalid CDDL file (${filePath})\n\t> ${(err as Error).message}`)
         process.exit(1)
     }
 }

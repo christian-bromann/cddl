@@ -1,4 +1,4 @@
-import { Tokens, Token } from './tokens'
+import { Tokens, Token } from './tokens.js'
 
 export function isLetter (ch: string): boolean {
     return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z'

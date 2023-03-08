@@ -1,5 +1,7 @@
-import { Tokens } from '../src/tokens'
-import Lexer from '../src/lexer'
+import { describe, it, vi, expect } from 'vitest'
+
+import { Tokens } from '../src/tokens.js'
+import Lexer from '../src/lexer.js'
 
 describe('lexer', () => {
     it('should allow to read token', () => {

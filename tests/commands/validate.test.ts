@@ -1,14 +1,17 @@
-import path from 'path'
-import { builder, handler } from '../../src/cli/commands/validate'
+import url from 'node:url'
+import path from 'node:path'
+import { describe, it, vi, expect } from 'vitest'
+import { builder, handler } from '../../src/cli/commands/validate.js'
 
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 const validCDDL = path.join(__dirname, '..', '__fixtures__', 'arrays.cddl')
 const buggyCDDL = path.join(__dirname, '..', '__fixtures__', 'buggy.cddl')
 
 describe('validate command', () => {
     it('builder', () => {
         const yargs: any = {}
-        yargs.epilogue = jest.fn().mockReturnValue(yargs)
-        yargs.help = jest.fn().mockReturnValue(yargs)
+        yargs.epilogue = vi.fn().mockReturnValue(yargs)
+        yargs.help = vi.fn().mockReturnValue(yargs)
         builder(yargs)
 
         expect(yargs.epilogue).toBeCalledTimes(1)
@@ -22,8 +25,8 @@ describe('validate command', () => {
         
         beforeEach(() => {
             process.exit = jest.fn<never, [code?: any]>()
-            console.log = jest.fn()
-            console.error = jest.fn()
+            console.log = vi.fn()
+            console.error = vi.fn()
         })
 
         afterAll(() => {

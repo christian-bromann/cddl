@@ -1,21 +1,21 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`parser can parse arrays 1`] = `
-Array [
-  Object {
+exports[`parser > can parse arrays 1`] = `
+[
+  {
     "Name": "unlimited-people",
     "Type": "array",
-    "Values": Array [
-      Object {
+    "Values": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "person",
@@ -24,20 +24,20 @@ Array [
       },
     ],
   },
-  Object {
+  {
     "Name": "at-least-one-person",
     "Type": "array",
-    "Values": Array [
-      Object {
+    "Values": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "person",
@@ -46,24 +46,24 @@ Array [
       },
     ],
   },
-  Object {
+  {
     "Content": "some",
     "Type": "comment",
   },
-  Object {
+  {
     "Name": "zero-or-one-person",
     "Type": "array",
-    "Values": Array [
-      Object {
+    "Values": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "person",
@@ -72,24 +72,24 @@ Array [
       },
     ],
   },
-  Object {
+  {
     "Content": "comment",
     "Type": "comment",
   },
-  Object {
+  {
     "Name": "one-or-two-people",
     "Type": "array",
-    "Values": Array [
-      Object {
+    "Values": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 2,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "person",
@@ -98,20 +98,20 @@ Array [
       },
     ],
   },
-  Object {
+  {
     "Name": "zero-or-two-people",
     "Type": "array",
-    "Values": Array [
-      Object {
+    "Values": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 2,
           "n": 0,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "person",
@@ -120,20 +120,20 @@ Array [
       },
     ],
   },
-  Object {
+  {
     "Name": "two-or-infinity-people",
     "Type": "array",
-    "Values": Array [
-      Object {
+    "Values": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 2,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "person",
@@ -142,31 +142,31 @@ Array [
       },
     ],
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "person",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "name",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "age",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "uint",
         ],
       },
@@ -176,23 +176,23 @@ Array [
 ]
 `;
 
-exports[`parser can parse choices 1`] = `
-Array [
-  Object {
+exports[`parser > can parse choices 1`] = `
+[
+  {
     "IsChoiceAddition": false,
     "Name": "attire",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "literal",
         "Unwrapped": false,
         "Value": "bow tie",
       },
-      Object {
+      {
         "Type": "literal",
         "Unwrapped": false,
         "Value": "necktie",
       },
-      Object {
+      {
         "Type": "literal",
         "Unwrapped": false,
         "Value": "Internet attire",
@@ -200,16 +200,16 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "protocol",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "literal",
         "Unwrapped": false,
         "Value": 6,
       },
-      Object {
+      {
         "Type": "literal",
         "Unwrapped": false,
         "Value": 17,
@@ -217,20 +217,20 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "address",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "delivery",
@@ -240,114 +240,114 @@ Array [
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "delivery",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "street",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "number",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "uint",
         ],
       },
-      Array [
-        Object {
+      [
+        {
           "Comment": "",
           "HasCut": false,
           "Name": "",
-          "Occurrence": Object {
+          "Occurrence": {
             "m": 1,
             "n": 1,
           },
-          "Type": Object {
+          "Type": {
             "Type": "group",
             "Unwrapped": false,
             "Value": "city",
           },
         },
-        Object {
+        {
           "Comment": "",
           "HasCut": true,
           "Name": "po-box",
-          "Occurrence": Object {
+          "Occurrence": {
             "m": 1,
             "n": 1,
           },
-          "Type": Array [
+          "Type": [
             "uint",
           ],
         },
       ],
-      Array [
-        Object {
+      [
+        {
           "Comment": "",
           "HasCut": false,
           "Name": "",
-          "Occurrence": Object {
+          "Occurrence": {
             "m": 1,
             "n": 1,
           },
-          "Type": Object {
+          "Type": {
             "Type": "group",
             "Unwrapped": false,
             "Value": "city",
           },
         },
-        Object {
+        {
           "Comment": "",
           "HasCut": true,
           "Name": "foo",
-          "Occurrence": Object {
+          "Occurrence": {
             "m": 1,
             "n": 1,
           },
-          "Type": Array [
+          "Type": [
             "tstr",
             "uint",
           ],
         },
-        Object {
+        {
           "Comment": "",
           "HasCut": false,
           "Name": "",
-          "Occurrence": Object {
+          "Occurrence": {
             "m": 1,
             "n": 1,
           },
-          "Type": Object {
+          "Type": {
             "Type": "group",
             "Unwrapped": false,
             "Value": "foobar",
           },
         },
-        Object {
+        {
           "Comment": "",
           "HasCut": true,
           "Name": "per-pickup",
-          "Occurrence": Object {
+          "Occurrence": {
             "m": 1,
             "n": 1,
           },
-          "Type": Array [
-            Object {
+          "Type": [
+            {
               "Type": "literal",
               "Unwrapped": false,
               "Value": true,
@@ -358,42 +358,42 @@ Array [
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "city",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "name",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "zip-code",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "uint",
         ],
       },
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": true,
     "Name": "attire",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "literal",
         "Unwrapped": false,
         "Value": "swimwear",
@@ -401,43 +401,43 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": true,
     "Name": "delivery",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "lat",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "float",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "long",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "float",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "drone-type",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
@@ -447,57 +447,57 @@ Array [
 ]
 `;
 
-exports[`parser can parse comments 1`] = `
-Array [
-  Object {
+exports[`parser > can parse comments 1`] = `
+[
+  {
     "Content": "This is a comment",
     "Type": "comment",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "person",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "a good employer",
         "HasCut": true,
         "Name": "employer",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
     ],
     "Type": "group",
   },
-  Object {
+  {
     "Content": "foobar",
     "Type": "comment",
   },
-  Object {
+  {
     "Content": "This is another",
     "Type": "comment",
   },
-  Object {
+  {
     "Content": "very nice comment",
     "Type": "comment",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "foo",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "bar",
@@ -507,28 +507,28 @@ Array [
     ],
     "Type": "group",
   },
-  Object {
+  {
     "Content": "some comment",
     "Type": "comment",
   },
-  Object {
+  {
     "Content": "another comment",
     "Type": "comment",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "som",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "g",
@@ -538,142 +538,142 @@ Array [
     ],
     "Type": "group",
   },
-  Object {
+  {
     "Content": "some g",
     "Type": "comment",
   },
 ]
 `;
 
-exports[`parser can parse compositions 1`] = `
-Array [
-  Object {
+exports[`parser > can parse compositions 1`] = `
+[
+  {
     "IsChoiceAddition": false,
     "Name": "person",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "an identity",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "identity",
           },
         ],
       },
-      Object {
+      {
         "Comment": "some employer",
         "HasCut": true,
         "Name": "employer",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "dog",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "an identity again",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "identity",
           },
         ],
       },
-      Object {
+      {
         "Comment": "some length",
         "HasCut": true,
         "Name": "leash-length",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "float",
         ],
       },
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "identity",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "an age",
         "HasCut": true,
         "Name": "age",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "a name",
         "HasCut": true,
         "Name": "name",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
     ],
     "Type": "group",
   },
-  Object {
+  {
     "Name": "Geography",
     "Type": "array",
-    "Values": Array [
-      Object {
+    "Values": [
+      {
         "Comment": "a city",
         "HasCut": true,
         "Name": "city",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "some coordinates",
         "HasCut": true,
         "Name": "gpsCoordinates",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "GpsCoordinates",
@@ -682,71 +682,71 @@ Array [
       },
     ],
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "GpsCoordinates",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "degrees, scaled by 10^7",
         "HasCut": true,
         "Name": "longitude",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "uint",
         ],
       },
-      Object {
+      {
         "Comment": "degreed, scaled by 10^7",
         "HasCut": true,
         "Name": "latitude",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "uint",
         ],
       },
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "located-samples",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "some",
         "HasCut": false,
         "Name": "sample-point",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "comments",
         "HasCut": false,
         "Name": "samples",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Name": "",
             "Type": "array",
-            "Values": Array [
-              Object {
+            "Values": [
+              {
                 "Comment": "",
                 "HasCut": false,
                 "Name": "",
-                "Occurrence": Object {
+                "Occurrence": {
                   "m": Infinity,
                   "n": 1,
                 },
@@ -759,56 +759,56 @@ Array [
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "extensible-map-example",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "some",
         "HasCut": true,
         "Name": "optional-key",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "really",
         "HasCut": true,
         "Name": "optional-key2",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "interesting",
         "HasCut": true,
         "Name": "optional-key3",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "comments",
         "HasCut": false,
         "Name": "tstr",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "any",
@@ -818,133 +818,133 @@ Array [
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "personWithoutComment",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "identity",
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "employer",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "dogWithoutComment",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "identity",
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "leash-length",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "float",
         ],
       },
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "identityWithoutComment",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "age",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "name",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
     ],
     "Type": "group",
   },
-  Object {
+  {
     "Name": "GeographyWithoutComment",
     "Type": "array",
-    "Values": Array [
-      Object {
+    "Values": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "city",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "gpsCoordinates",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "GpsCoordinates",
@@ -953,71 +953,71 @@ Array [
       },
     ],
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "GpsCoordinatesWithoutComment",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "longitude",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "uint",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "latitude",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "uint",
         ],
       },
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "located-samples-without-comments",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "sample-point",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "samples",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Name": "",
             "Type": "array",
-            "Values": Array [
-              Object {
+            "Values": [
+              {
                 "Comment": "",
                 "HasCut": false,
                 "Name": "",
-                "Occurrence": Object {
+                "Occurrence": {
                   "m": Infinity,
                   "n": 1,
                 },
@@ -1030,56 +1030,56 @@ Array [
     ],
     "Type": "group",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "extensible-map-example-without-comments",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "optional-key",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "optional-key2",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "optional-key3",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "tstr",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "any",
@@ -1092,73 +1092,73 @@ Array [
 ]
 `;
 
-exports[`parser can parse nested groups 1`] = `
-Array [
-  Object {
+exports[`parser > can parse nested groups 1`] = `
+[
+  {
     "IsChoiceAddition": false,
     "Name": "f",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "o",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "IsChoiceAddition": false,
             "Name": "",
-            "Properties": Array [
-              Object {
+            "Properties": [
+              {
                 "Comment": "",
                 "HasCut": true,
                 "Name": "o",
-                "Occurrence": Object {
+                "Occurrence": {
                   "m": 1,
                   "n": 1,
                 },
-                "Type": Array [
-                  Object {
+                "Type": [
+                  {
                     "IsChoiceAddition": false,
                     "Name": "",
-                    "Properties": Array [
-                      Object {
+                    "Properties": [
+                      {
                         "Comment": "",
                         "HasCut": true,
                         "Name": "b",
-                        "Occurrence": Object {
+                        "Occurrence": {
                           "m": 1,
                           "n": 1,
                         },
-                        "Type": Array [
-                          Object {
+                        "Type": [
+                          {
                             "IsChoiceAddition": false,
                             "Name": "",
-                            "Properties": Array [
-                              Object {
+                            "Properties": [
+                              {
                                 "Comment": "",
                                 "HasCut": true,
                                 "Name": "a",
-                                "Occurrence": Object {
+                                "Occurrence": {
                                   "m": 1,
                                   "n": 1,
                                 },
-                                "Type": Array [
-                                  Object {
+                                "Type": [
+                                  {
                                     "IsChoiceAddition": false,
                                     "Name": "",
-                                    "Properties": Array [
-                                      Object {
+                                    "Properties": [
+                                      {
                                         "Comment": "",
                                         "HasCut": true,
                                         "Name": "r",
-                                        "Occurrence": Object {
+                                        "Occurrence": {
                                           "m": 1,
                                           "n": 1,
                                         },
-                                        "Type": Array [
+                                        "Type": [
                                           "text",
                                         ],
                                       },
@@ -1188,81 +1188,81 @@ Array [
 ]
 `;
 
-exports[`parser can parse occurrences 1`] = `
-Array [
-  Object {
+exports[`parser > can parse occurrences 1`] = `
+[
+  {
     "IsChoiceAddition": false,
     "Name": "someGroup",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "optional",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "anotherOptional",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "atLeastOne",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "numberedOccurence",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 42,
           "n": 23,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "withoutLeftSide",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 42,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "withoutRightSide",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 23,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
@@ -1272,13 +1272,13 @@ Array [
 ]
 `;
 
-exports[`parser can parse ranges 1`] = `
-Array [
-  Object {
+exports[`parser > can parse ranges 1`] = `
+[
+  {
     "IsChoiceAddition": false,
     "Name": "device-address",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "group",
         "Unwrapped": false,
         "Value": "byte",
@@ -1286,11 +1286,11 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "max-byte",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "literal",
         "Unwrapped": false,
         "Value": 255,
@@ -1300,14 +1300,14 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "my_uri",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "tag",
         "Unwrapped": false,
-        "Value": Object {
+        "Value": {
           "NumericPart": 6.32,
           "TypePart": "tstr",
         },
@@ -1316,16 +1316,16 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "byte",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "range",
         "Unwrapped": false,
-        "Value": Object {
+        "Value": {
           "Inclusive": true,
-          "Max": Object {
+          "Max": {
             "Type": "group",
             "Unwrapped": false,
             "Value": "max-byte",
@@ -1336,11 +1336,11 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "first-non-byte",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "literal",
         "Unwrapped": false,
         "Value": 256,
@@ -1348,16 +1348,16 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "byte1",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "range",
         "Unwrapped": false,
-        "Value": Object {
+        "Value": {
           "Inclusive": false,
-          "Max": Object {
+          "Max": {
             "Type": "group",
             "Unwrapped": false,
             "Value": "first-non-byte",
@@ -1368,11 +1368,11 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "min..max",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "literal",
         "Unwrapped": false,
         "Value": 0,
@@ -1380,11 +1380,11 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "byte2",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "group",
         "Unwrapped": false,
         "Value": "min..max...first-non-byte",
@@ -1392,16 +1392,16 @@ Array [
     ],
     "Type": "variable",
   },
-  Object {
+  {
     "IsChoiceAddition": false,
     "Name": "byte3",
-    "PropertyType": Array [
-      Object {
+    "PropertyType": [
+      {
         "Type": "range",
         "Unwrapped": false,
-        "Value": Object {
+        "Value": {
           "Inclusive": false,
-          "Max": Object {
+          "Max": {
             "Type": "group",
             "Unwrapped": false,
             "Value": "first-non-byte",
@@ -1415,80 +1415,80 @@ Array [
 ]
 `;
 
-exports[`parser can parse unwrapped arrays 1`] = `
-Array [
-  Object {
+exports[`parser > can parse unwrapped arrays 1`] = `
+[
+  {
     "Name": "basic-header",
     "Type": "array",
-    "Values": Array [
-      Object {
+    "Values": [
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "field1",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "int",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "field2",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "text",
         ],
       },
     ],
   },
-  Object {
+  {
     "Name": "advanced-header",
     "Type": "array",
-    "Values": Array [
-      Object {
+    "Values": [
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": true,
             "Value": "basic-header",
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "field3",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "bytes",
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "field4",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": true,
             "Value": "time",
@@ -1500,242 +1500,242 @@ Array [
 ]
 `;
 
-exports[`parser should correctly parse CDDL file 1`] = `
-Array [
-  Object {
+exports[`parser > should correctly parse CDDL file 1`] = `
+[
+  {
     "IsChoiceAddition": false,
     "Name": "Example",
-    "Properties": Array [
-      Object {
+    "Properties": [
+      {
         "Comment": "summary of test",
         "HasCut": true,
         "Name": "title",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "longer description of test",
         "HasCut": true,
         "Name": "description",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "tstr",
         ],
       },
-      Object {
+      {
         "Comment": "Is this a success or failure test",
         "HasCut": true,
         "Name": "fail",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
+        "Type": [
           "bool",
         ],
       },
-      Object {
+      {
         "Comment": "Inputs to create the test",
         "HasCut": true,
         "Name": "input",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "Inputs",
           },
         ],
       },
-      Object {
+      {
         "Comment": "Intermediate values for debugging",
         "HasCut": true,
         "Name": "intermediates",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "Intermediates",
           },
         ],
       },
-      Object {
+      {
         "Comment": "Outputs of the test",
         "HasCut": true,
         "Name": "output",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "Outputs",
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "attire",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "literal",
             "Unwrapped": false,
             "Value": "bow tie",
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "someBool",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "literal",
             "Unwrapped": false,
             "Value": true,
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "someOtherBool",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "literal",
             "Unwrapped": false,
             "Value": false,
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "count",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "literal",
             "Unwrapped": false,
             "Value": 123,
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "rating",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": Infinity,
           "n": 0,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "literal",
             "Unwrapped": false,
             "Value": 0.5724646875815566,
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "hexa",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "literal",
             "Unwrapped": false,
             "Value": "0x123",
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "bin",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "literal",
             "Unwrapped": false,
             "Value": "0b123",
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": false,
         "Name": "",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "group",
             "Unwrapped": false,
             "Value": "foobar",
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "samples",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Name": "",
             "Type": "array",
-            "Values": Array [
-              Object {
+            "Values": [
+              {
                 "Comment": "",
                 "HasCut": false,
                 "Name": "",
-                "Occurrence": Object {
+                "Occurrence": {
                   "m": Infinity,
                   "n": 1,
                 },
@@ -1745,37 +1745,37 @@ Array [
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "multitype",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
+        "Type": [
           "float",
           "tstr",
-          Object {
+          {
             "Type": "literal",
             "Unwrapped": false,
             "Value": "foobar",
           },
         ],
       },
-      Object {
+      {
         "Comment": "",
         "HasCut": true,
         "Name": "my_uri",
-        "Occurrence": Object {
+        "Occurrence": {
           "m": 1,
           "n": 1,
         },
-        "Type": Array [
-          Object {
+        "Type": [
+          {
             "Type": "tag",
             "Unwrapped": false,
-            "Value": Object {
+            "Value": {
               "NumericPart": 6.32,
               "TypePart": "tstr",
             },

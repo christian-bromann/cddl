@@ -1,6 +1,6 @@
 import yargs from 'yargs'
 
-import { CLI_EPILOGUE } from './constants'
+import { CLI_EPILOGUE } from './constants.js'
 
 export default function () {
     const argv: yargs.Argv<{}> = yargs

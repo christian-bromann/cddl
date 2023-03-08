@@ -1,9 +1,9 @@
-import repl from 'repl'
+import repl from 'node:repl'
 import yargs from 'yargs'
 
-import { CLI_EPILOGUE } from '../constants'
-import Lexer from '../../lexer'
-import { Tokens } from '../../tokens'
+import { CLI_EPILOGUE } from '../constants.js'
+import Lexer from '../../lexer.js'
+import { Tokens } from '../../tokens.js'
 
 export const command = 'repl'
 export const desc = 'Run CDDL repl'

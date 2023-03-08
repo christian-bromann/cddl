@@ -1,13 +1,13 @@
-import Lexer from './lexer'
-import { Property } from './ast'
-import { Token, Tokens } from './tokens';
-import { PREDEFINED_IDENTIFIER, BOOLEAN_LITERALS } from './constants'
-import { parseNumberValue } from './utils'
+import Lexer from './lexer.js'
+import { Property } from './ast.js'
+import { Token, Tokens } from './tokens.js';
+import { PREDEFINED_IDENTIFIER, BOOLEAN_LITERALS } from './constants.js'
+import { parseNumberValue } from './utils.js'
 import {
     Type, PropertyName, PropertyType, PropertyReferenceType,
     Variable, RangePropertyReference, Occurrence, Assignment,
     Comment
-} from './ast'
+} from './ast.js'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
 const DEFAULT_OCCURRENCE: Occurrence = { n: 1, m: 1 } // exactly one time

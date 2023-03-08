@@ -1,6 +1,6 @@
-import { Token, Tokens } from './tokens';
-import { isLetter, isAlphabeticCharacter, isDigit, hasSpecialNumberCharacter } from './utils'
-import { WHITESPACE_CHARACTERS } from './constants';
+import { Token, Tokens } from './tokens.js';
+import { isLetter, isAlphabeticCharacter, isDigit, hasSpecialNumberCharacter } from './utils.js'
+import { WHITESPACE_CHARACTERS } from './constants.js';
 
 export default class Lexer {
     input: string
