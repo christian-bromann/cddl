@@ -224,6 +224,23 @@ exports[`parser > can parse choices 1`] = `
   },
   {
     "IsChoiceAddition": false,
+    "Name": "attireGroup",
+    "PropertyType": [
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "attire",
+      },
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "attireBlock",
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "IsChoiceAddition": false,
     "Name": "protocol",
     "PropertyType": [
       {

@@ -4,6 +4,10 @@ attireBlock = (
     "necktie" /
     "Internet attire"
 )
+attireGroup = (
+    attire //
+    attireBlock
+)
 protocol = 6 / 17
 
 address = { delivery }

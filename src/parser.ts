@@ -68,10 +68,12 @@ export default class Parser {
 
         /**
          * if no group segment was opened we have a variable assignment
-         * and can return immediatelly
+         * and can return immediatelly, e.g.
+         *
+         *   attire = "bow tie" / "necktie" / "Internet attire"
+         *
          */
-        const isTypeChoice = this.peekToken.Type === Tokens.SLASH
-        if (closingTokens.length === 0 || isTypeChoice) {
+        if (closingTokens.length === 0) {
             if (groupName) {
                 const variable: Variable = {
                     Type: 'variable',
@@ -80,14 +82,53 @@ export default class Parser {
                     PropertyType: this.parsePropertyTypes()
                 }
 
-                if (isTypeChoice && closingTokens.includes(this.curToken.Type)) {
-                    this.nextToken() // eat )
+                return variable
+            }
+
+            return this.parsePropertyTypes()
+        }
+
+        /**
+         * type or group choices can be wrapped within `(` and `)`, e.g.
+         *
+         *   attireBlock = (
+         *       "bow tie" /
+         *       "necktie" /
+         *       "Internet attire"
+         *   )
+         *   attireGroup = (
+         *       attire //
+         *       attireBlock
+         *   )
+         */
+        if (closingTokens.length && this.peekToken.Type === Tokens.SLASH) {
+            const propertyType: PropertyType[] = []
+            while (!closingTokens.includes(this.curToken.Type)) {
+                propertyType.push(...this.parsePropertyTypes())
+                if (this.curToken.Type === Tokens.RPAREN) {
+                    this.nextToken()
+                    break
+                }
+
+                this.nextToken()
+
+                if (this.curToken.Type === Tokens.SLASH) {
+                    this.nextToken()
+                }
+            }
+
+            if (groupName) {
+                const variable: Variable = {
+                    Type: 'variable',
+                    Name: groupName,
+                    IsChoiceAddition: isChoiceAddition,
+                    PropertyType: propertyType
                 }
 
                 return variable
             }
 
-            return this.parsePropertyTypes()
+            return propertyType
         }
     
         while (!closingTokens.includes(this.curToken.Type)) {
