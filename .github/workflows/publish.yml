@@ -19,10 +19,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 18.x
       - name: Install Dependencies
         run: npm ci
       - name: Unit Tests
@@ -32,16 +32,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Node version
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 18.x
           registry-url: https://registry.npmjs.org/
       - name: Setup Git
         run: |
           git config --global user.name "christian-bromann"
-          git config --global user.email "mail@christian-bromann.com"
+          git config --global user.email "git@bromann.dev"
       - name: Install dependencies
         run: npm ci
       - name: Build package
