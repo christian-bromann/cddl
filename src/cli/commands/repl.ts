@@ -1,5 +1,5 @@
 import repl from 'node:repl'
-import yargs from 'yargs'
+import type { Argv } from 'yargs'
 
 import { CLI_EPILOGUE } from '../constants.js'
 import Lexer from '../../lexer.js'
@@ -7,13 +7,13 @@ import { Tokens } from '../../tokens.js'
 
 export const command = 'repl'
 export const desc = 'Run CDDL repl'
-export const builder = (yargs: yargs.Argv<{}>) => {
+export const builder = (yargs: Argv<{}>) => {
     return yargs
         .epilogue(CLI_EPILOGUE)
         .help()
 }
 
-export const handler = (argv: yargs.Arguments) => {
+export const handler = () => {
     const r = repl.start({
         prompt: '> ',
         eval: evaluate

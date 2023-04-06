@@ -5,7 +5,7 @@ CDDL ![Test](https://github.com/christian-bromann/cddl/workflows/Test/badge.svg?
 
 CDDL expresses Concise Binary Object Representation (CBOR) data structures ([RFC 7049](https://tools.ietf.org/html/rfc7049)). Its main goal is to provide an easy and unambiguous way to express structures for protocol messages and data formats that use CBOR or JSON.
 
-There are also CDDL parser for other languages:
+There are also CDDL parsers for other languages:
 - Rust: [anweiss/cddl](https://github.com/anweiss/cddl)
 
 __Note:__ this is __work in progress__, feel free to have a look at the code or contribute but don't use this for anything yet!
@@ -32,9 +32,9 @@ person = {
 You can use this package to parse the file into an abstract syntax tree (AST):
 
 ```js
-const CDDL = require('cddl').default
+import { parse } from 'cddl'
 
-const ast = CDDL.parse('./spec.cddl')
+const ast = parse('./spec.cddl')
 console.log(ast)
 /**
  * outputs:

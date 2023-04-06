@@ -1,23 +1,23 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import type yargs from 'yargs'
+import type { Argv, ArgumentsCamelCase } from 'yargs'
 
 import { CLI_EPILOGUE } from '../constants.js'
 import CDDL from '../../index.js'
 
-interface ValidateArguments extends yargs.Arguments {
+interface ValidateArguments {
     filePath: string
 }
 
 export const command = 'validate <filePath>'
 export const desc = 'Validate a *.cddl file'
-export const builder = (yargs: yargs.Argv<{}>) => {
+export const builder = (yargs: Argv<{}>) => {
     return yargs
         .epilogue(CLI_EPILOGUE)
         .help()
 }
 
-export const handler = (argv: ValidateArguments) => {
+export const handler = (argv: ArgumentsCamelCase<ValidateArguments>) => {
     const filePath = argv.filePath.startsWith('/')
         ? argv.filePath
         : path.resolve(process.cwd(), argv.filePath)

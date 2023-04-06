@@ -2,22 +2,9 @@
   "name": "cddl",
   "version": "0.2.2",
   "description": "Concise data definition language (RFC 8610) implementation and JSON validator in Node.js",
-  "export": "build/index.js",
-  "bin": {
-    "cddl": "./bin/cddl.js"
-  },
-  "scripts": {
-    "build": "run-s clean compile",
-    "clean": "rm -rf ./build ./coverage",
-    "compile": "tsc -p ./tsconfig.json",
-    "test": "vitest",
-    "watch": "tsc --watch",
-    "release": "release-it --github.release",
-    "release:ci": "npm run release -- --ci --npm.skipChecks --no-git.requireCleanWorkingDir",
-    "release:patch": "npm run release -- patch",
-    "release:minor": "npm run release -- minor",
-    "release:major": "npm run release -- major"
-  },
+  "author": "Christian Bromann <christian@saucelabs.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/christian-bromann/cddl#readme",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/christian-bromann/cddl.git"
@@ -25,12 +12,26 @@
   "keywords": [
     "cddl"
   ],
-  "author": "Christian Bromann <christian@saucelabs.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/christian-bromann/cddl/issues"
   },
-  "homepage": "https://github.com/christian-bromann/cddl#readme",
+  "type": "module",
+  "exports": "./build/index.js",
+  "bin": {
+    "cddl": "./bin/cddl.js"
+  },
+  "scripts": {
+    "build": "run-s clean compile",
+    "clean": "rm -rf ./build ./coverage",
+    "compile": "tsc -p ./tsconfig.json",
+    "release": "release-it --github.release",
+    "release:ci": "npm run release -- --ci --npm.skipChecks --no-git.requireCleanWorkingDir",
+    "release:patch": "npm run release -- patch",
+    "release:minor": "npm run release -- minor",
+    "release:major": "npm run release -- major",
+    "test": "vitest",
+    "watch": "tsc --watch"
+  },
   "devDependencies": {
     "@types/jest": "^29.4.0",
     "@types/node": "^18.14.6",
