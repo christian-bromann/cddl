@@ -1,6 +1,6 @@
 import url from 'node:url'
 import path from 'node:path'
-import { describe, it, vi, expect } from 'vitest'
+import { describe, it, vi, expect, beforeEach, afterAll } from 'vitest'
 import { builder, handler } from '../../src/cli/commands/validate.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
@@ -24,7 +24,7 @@ describe('validate command', () => {
         const processExitOrig = process.exit.bind(process)
         
         beforeEach(() => {
-            process.exit = jest.fn<never, [code?: any]>()
+            process.exit = vi.fn()
             console.log = vi.fn()
             console.error = vi.fn()
         })
