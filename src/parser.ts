@@ -70,7 +70,8 @@ export default class Parser {
          * if no group segment was opened we have a variable assignment
          * and can return immediatelly
          */
-        if (closingTokens.length === 0) {
+        const isTypeChoice = this.peekToken.Type === Tokens.SLASH
+        if (closingTokens.length === 0 || isTypeChoice) {
             if (groupName) {
                 const variable: Variable = {
                     Type: 'variable',
@@ -78,6 +79,11 @@ export default class Parser {
                     IsChoiceAddition: isChoiceAddition,
                     PropertyType: this.parsePropertyTypes()
                 }
+
+                if (isTypeChoice && closingTokens.includes(this.curToken.Type)) {
+                    this.nextToken() // eat )
+                }
+
                 return variable
             }
 
@@ -164,7 +170,7 @@ export default class Parser {
             }
 
             /**
-             * check if we have a choice instead of an assignment
+             * check if we have a group choice instead of an assignment
              */
             if (this.curToken.Type === Tokens.SLASH && this.peekToken.Type === Tokens.SLASH) {
                 const prop: Property = {

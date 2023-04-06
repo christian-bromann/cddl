@@ -202,6 +202,28 @@ exports[`parser > can parse choices 1`] = `
   },
   {
     "IsChoiceAddition": false,
+    "Name": "attireBlock",
+    "PropertyType": [
+      {
+        "Type": "literal",
+        "Unwrapped": false,
+        "Value": "bow tie",
+      },
+      {
+        "Type": "literal",
+        "Unwrapped": false,
+        "Value": "necktie",
+      },
+      {
+        "Type": "literal",
+        "Unwrapped": false,
+        "Value": "Internet attire",
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "IsChoiceAddition": false,
     "Name": "protocol",
     "PropertyType": [
       {

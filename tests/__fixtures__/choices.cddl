@@ -1,4 +1,9 @@
 attire = "bow tie" / "necktie" / "Internet attire"
+attireBlock = (
+    "bow tie" /
+    "necktie" /
+    "Internet attire"
+)
 protocol = 6 / 17
 
 address = { delivery }
