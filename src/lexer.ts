@@ -99,7 +99,12 @@ export default class Lexer {
             default: {
                 if (isAlphabeticCharacter(Literal)) {
                     return { Type: Tokens.IDENT, Literal: this.readIdentifier() }
-                } else if (isDigit(Literal)) {
+                } else if (
+                    // positive number
+                    isDigit(Literal) ||
+                    // negative number
+                    (this.ch === Tokens.MINUS.charCodeAt(0) && isDigit(this.input[this.readPosition]))
+                ) {
                     const numberOrFloat = this.readNumberOrFloat()
                     return {
                         Type: numberOrFloat.includes(Tokens.DOT) ? Tokens.FLOAT : Tokens.NUMBER,

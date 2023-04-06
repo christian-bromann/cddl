@@ -7,3 +7,4 @@ byte1 = 0...first-non-byte
 min..max = 0
 byte2 = min..max...first-non-byte
 byte3 = min..max ... first-non-byte
+js-int = -9007199254740991..9007199254740991

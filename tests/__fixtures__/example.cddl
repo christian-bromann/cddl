@@ -9,6 +9,7 @@ Example = {
    someBool: true,
    someOtherBool: false,
    count: 123,
+   negative-count: -123,
    ?"rating": 0.5724646875815566,
    hexa: 0x123,
    bin: 0b123, 

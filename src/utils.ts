@@ -14,6 +14,7 @@ export function isDigit (ch: string): boolean {
 
 export function hasSpecialNumberCharacter (ch: number) {
     return (
+        ch === Tokens.MINUS.charCodeAt(0) ||
         ch === Tokens.DOT.charCodeAt(0) ||
         ch === 'x'.charCodeAt(0) ||
         ch === 'b'.charCodeAt(0)

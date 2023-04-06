@@ -1330,7 +1330,11 @@ exports[`parser > can parse ranges 1`] = `
             "Unwrapped": false,
             "Value": "max-byte",
           },
-          "Min": 0,
+          "Min": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 0,
+          },
         },
       },
     ],
@@ -1362,7 +1366,11 @@ exports[`parser > can parse ranges 1`] = `
             "Unwrapped": false,
             "Value": "first-non-byte",
           },
-          "Min": 0,
+          "Min": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 0,
+          },
         },
       },
     ],
@@ -1407,6 +1415,30 @@ exports[`parser > can parse ranges 1`] = `
             "Value": "first-non-byte",
           },
           "Min": "min..max",
+        },
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "IsChoiceAddition": false,
+    "Name": "js-int",
+    "PropertyType": [
+      {
+        "Type": "range",
+        "Unwrapped": false,
+        "Value": {
+          "Inclusive": false,
+          "Max": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 9007199254740991,
+          },
+          "Min": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": -900719925474099,
+          },
         },
       },
     ],
@@ -1651,6 +1683,22 @@ exports[`parser > should correctly parse CDDL file 1`] = `
             "Type": "literal",
             "Unwrapped": false,
             "Value": 123,
+          },
+        ],
+      },
+      {
+        "Comment": "",
+        "HasCut": true,
+        "Name": "negative-count",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": -123,
           },
         ],
       },

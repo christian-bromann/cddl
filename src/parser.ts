@@ -441,7 +441,7 @@ export default class Parser {
             }
 
             this.nextToken()
-            const Min: RangePropertyReference = typeof type === 'string'
+            const Min: RangePropertyReference = typeof type === 'string' || typeof type.Value === 'number'
                 ? type as string
                 : type.Value as (number | string)
             type = {
