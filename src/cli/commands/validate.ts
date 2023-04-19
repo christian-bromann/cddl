@@ -3,6 +3,7 @@ import path from 'node:path'
 import type { Argv, ArgumentsCamelCase } from 'yargs'
 
 import { CLI_EPILOGUE } from '../constants.js'
+import { ParseTargets } from '../../constants.js'
 import CDDL from '../../index.js'
 
 interface ValidateArguments {
@@ -28,7 +29,7 @@ export const handler = (argv: ArgumentsCamelCase<ValidateArguments>) => {
     }
 
     try {
-        CDDL.parse(filePath)
+        CDDL.parse(filePath, { target: ParseTargets.AST })
 
         /**
          * ToDo check for

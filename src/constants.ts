@@ -14,3 +14,8 @@ export const PREDEFINED_IDENTIFIER = [
     'float32', 'float64', 'float16-32', 'float32-64', 'float', 
     'false', 'true', 'bool', 'nil', 'null', 'undefined'
 ]
+
+export enum ParseTargets {
+    AST = 'ast',
+    TS = 'ts'
+}
