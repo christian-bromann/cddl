@@ -2,5 +2,33 @@
 
 exports[`transform TS > should return valid TS types 1`] = `
 "type Message = CommandResponse | ErrorResponse | Event;
-type ErrorCode = \\"invalid argument\\" | \\"invalid session id\\" | \\"no such alert\\" | \\"no such frame\\" | \\"no such handle\\" | \\"no such node\\" | \\"no such script\\" | \\"session not created\\" | \\"unknown command\\" | \\"unknown error\\" | \\"unsupported operation\\";"
+
+interface ErrorResponse {
+  id?: JsUint | null,
+  error: ErrorCode,
+  message: string,
+  //Missing: {\\"HasCut\\":false,\\"Occurrence\\":{\\"n\\":1,\\"m\\":1},\\"Name\\":\\"\\",\\"Type\\":[{\\"Type\\":\\"group\\",\\"Value\\":\\"Extensible\\",\\"Unwrapped\\":false}],\\"Comment\\":\\"\\"}
+  stacktrace?: string,
+}
+
+type ResultData = BrowsingContextResult | EmptyResult | NetworkResult | ScriptResult | SessionResult;
+type ErrorCode = \\"invalid argument\\" | \\"invalid session id\\" | \\"no such alert\\" | \\"no such frame\\" | \\"no such handle\\" | \\"no such node\\" | \\"no such script\\" | \\"session not created\\" | \\"unknown command\\" | \\"unknown error\\" | \\"unsupported operation\\";
+type JsInt = number;
+type JsUint = number;
+type Handle = string;
+type SharedId = string;
+interface UndefinedValue { type: \\"undefined\\" }
+interface NullValue { type: null }
+
+interface StringValue {
+  type: \\"string\\",
+  value: string,
+}
+
+type SpecialNumber = \\"NaN\\" | \\"-0\\" | \\"Infinity\\" | \\"-Infinity\\";
+
+interface NumberValue {
+  type: \\"number\\",
+  value: number | SpecialNumber,
+}"
 `;

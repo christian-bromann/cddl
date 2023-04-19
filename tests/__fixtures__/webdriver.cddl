@@ -4,6 +4,22 @@ Message = (
   Event
 )
 
+ErrorResponse = {
+  ? id: js-uint / null,
+  error: ErrorCode,
+  message: text,
+  ?stacktrace: text,
+  Extensible
+}
+
+ResultData = (
+  BrowsingContextResult //
+  EmptyResult //
+  NetworkResult //
+  ScriptResult //
+  SessionResult
+)
+
 ErrorCode = ("invalid argument" /
              "invalid session id" /
              "no such alert" /
@@ -15,3 +31,27 @@ ErrorCode = ("invalid argument" /
              "unknown command" /
              "unknown error" /
              "unsupported operation")
+
+js-int = -9007199254740991..9007199254740991
+js-uint = 0..9007199254740991
+Handle = text
+SharedId = text
+
+UndefinedValue = {
+  type: "undefined",
+}
+NullValue = {
+  type: "null",
+}
+
+StringValue = {
+  type: "string",
+  value: text,
+}
+
+SpecialNumber = "NaN" / "-0" / "Infinity" / "-Infinity"
+
+NumberValue = {
+  type: "number",
+  value: number / SpecialNumber,
+}

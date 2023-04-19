@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@babel/parser": "^7.21.4",
+    "camelcase": "^7.0.1",
     "recast": "^0.22.0",
     "yargs": "^17.7.1"
   }
