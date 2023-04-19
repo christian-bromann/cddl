@@ -31,6 +31,8 @@ export function transform (assignments: Assignment[]) {
 }
 
 function parseAssignment (ast: types.namedTypes.File, assignment: Assignment) {
+    console.log(JSON.stringify(assignment, null, 4));
+    
     if (assignment.Type === 'comment') {
         comments.push(assignment.Content)
         return
@@ -42,8 +44,8 @@ function parseAssignment (ast: types.namedTypes.File, assignment: Assignment) {
             : [assignment.PropertyType]
 
         const id = b.identifier(assignment.Name)
-        const typeParameters = b.unionTypeAnnotation(propType.map(parsePropertyType))
-        const expr = b.typeAlias(id, null, typeParameters)
+        const typeParameters = b.tsUnionType(propType.map(parsePropertyType))
+        const expr = b.tsTypeAliasDeclaration(id, typeParameters)
         expr.comments = comments.map((c) => b.commentLine(c, true))
         comments = [] as string[]
         return expr
@@ -52,7 +54,10 @@ function parseAssignment (ast: types.namedTypes.File, assignment: Assignment) {
 
 function parsePropertyType (propType: PropertyType) {
     if ((propType as PropertyReference).Type === 'group') {
-        return b.typeParameter((propType as PropertyReference).Value.toString())
+        return b.tsTypeReference(b.identifier((propType as PropertyReference).Value.toString()))
+    }
+    if ((propType as PropertyReference).Type === 'literal') {
+        return b.tsLiteralType(b.stringLiteral((propType as PropertyReference).Value.toString()))
     }
 
     throw new Error(`Couldn't parse property type ${JSON.stringify(propType, null, 4)}`)
