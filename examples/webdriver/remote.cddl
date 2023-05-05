@@ -1,0 +1,830 @@
+Command = {
+  id: js-uint,
+  CommandData,
+  Extensible,
+}
+
+CommandData = (
+  BrowserCommand //
+  BrowsingContextCommand //
+  InputCommand //
+  NetworkCommand //
+  ScriptCommand //
+  SessionCommand
+)
+
+EmptyParams = {
+   Extensible
+}
+
+Extensible = (*text => any)
+
+js-int = -9007199254740991..9007199254740991
+js-uint = 0..9007199254740991
+
+SessionCommand = (
+  session.End //
+  session.New //
+  session.Status //
+  session.Subscribe //
+  session.Unsubscribe
+)
+
+session.CapabilitiesRequest = {
+  ?alwaysMatch: session.CapabilityRequest,
+  ?firstMatch: [*session.CapabilityRequest]
+}
+
+session.CapabilityRequest = {
+  ?acceptInsecureCerts: bool,
+  ?browserName: text,
+  ?browserVersion: text,
+  ?platformName: text,
+  ?proxy: {
+    ?proxyType: "pac" / "direct" / "autodetect" / "system" / "manual",
+    ?proxyAutoconfigUrl: text,
+    ?ftpProxy: text,
+    ?httpProxy: text,
+    ?noProxy: [*text],
+    ?sslProxy: text,
+    ?socksProxy: text,
+    ?socksVersion: 0..255,
+  },
+  Extensible
+};
+
+session.SubscriptionRequest = {
+  events: [*text],
+  ?contexts: [*browsingContext.BrowsingContext],
+}
+
+session.Status = {
+  method: "session.status",
+  params: EmptyParams,
+}
+
+session.New = {
+  method: "session.new",
+  params: session.NewParameters
+}
+
+session.NewParameters = {
+  capabilities: session.CapabilitiesRequest
+}
+
+session.End = {
+  method: "session.end",
+  params: EmptyParams
+}
+
+
+session.Subscribe = {
+  method: "session.subscribe",
+  params: session.SubscriptionRequest
+}
+
+session.Unsubscribe = {
+  method: "session.unsubscribe",
+  params: session.SubscriptionRequest
+}
+
+BrowserCommand = (
+  browser.Close
+)
+
+browser.Close = {
+  method: "browser.close",
+  params: EmptyParams,
+}
+
+BrowsingContextCommand = (
+  browsingContext.CaptureScreenshot //
+  browsingContext.Close //
+  browsingContext.Create //
+  browsingContext.GetTree //
+  browsingContext.HandleUserPrompt //
+  browsingContext.Navigate //
+  browsingContext.Print //
+  browsingContext.Reload
+)
+
+browsingContext.BrowsingContext = text;
+
+browsingContext.Navigation = text;
+
+browsingContext.ReadinessState = "none" / "interactive" / "complete"
+
+browsingContext.CaptureScreenshot = {
+  method: "browsingContext.captureScreenshot",
+  params: browsingContext.CaptureScreenshotParameters
+}
+
+browsingContext.CaptureScreenshotParameters = {
+  context: browsingContext.BrowsingContext
+}
+
+browsingContext.Close = {
+  method: "browsingContext.close",
+  params: browsingContext.CloseParameters
+}
+
+browsingContext.CloseParameters = {
+  context: browsingContext.BrowsingContext
+}
+
+browsingContext.Create = {
+  method: "browsingContext.create",
+  params: browsingContext.CreateParameters
+}
+
+browsingContext.CreateType = "tab" / "window"
+
+browsingContext.CreateParameters = {
+  type: browsingContext.CreateType,
+  ?referenceContext: browsingContext.BrowsingContext
+}
+
+browsingContext.GetTree = {
+  method: "browsingContext.getTree",
+  params: browsingContext.GetTreeParameters
+}
+
+browsingContext.GetTreeParameters = {
+  ?maxDepth: js-uint,
+  ?root: browsingContext.BrowsingContext,
+}
+
+browsingContext.HandleUserPrompt = {
+  method: "browsingContext.handleUserPrompt",
+  params: browsingContext.HandleUserPromptParameters
+}
+
+browsingContext.HandleUserPromptParameters = {
+  context: browsingContext.BrowsingContext,
+  ? accept: bool,
+  ? userText: text,
+}
+
+browsingContext.Navigate = {
+  method: "browsingContext.navigate",
+  params: browsingContext.NavigateParameters
+}
+
+browsingContext.NavigateParameters = {
+  context: browsingContext.BrowsingContext,
+  url: text,
+  ?wait: browsingContext.ReadinessState,
+}
+
+browsingContext.Print = {
+  method: "browsingContext.print",
+  params: browsingContext.PrintParameters
+}
+
+browsingContext.PrintParameters = {
+  context: browsingContext.BrowsingContext,
+  ?background: bool .default false,
+  ?margin: browsingContext.PrintMarginParameters,
+  ?orientation: ("portrait" / "landscape") .default "portrait",
+  ?page: browsingContext.PrintPageParameters,
+  ?pageRanges: [*(js-uint / text)],
+  ?scale: 0.1..2.0 .default 1.0,
+  ?shrinkToFit: bool .default true,
+}
+
+browsingContext.PrintMarginParameters = {
+  ?bottom: (float .ge 0.0) .default 1.0,
+  ?left: (float .ge 0.0) .default 1.0,
+  ?right: (float .ge 0.0) .default 1.0,
+  ?top: (float .ge 0.0) .default 1.0,
+}
+
+browsingContext.PrintPageParameters = {
+  ?height: (float .ge 0.0) .default 27.94,
+  ?width: (float .ge 0.0) .default 21.59,
+}
+
+browsingContext.Reload = {
+  method: "browsingContext.reload",
+  params: browsingContext.ReloadParameters
+}
+
+browsingContext.ReloadParameters = {
+  context: browsingContext.BrowsingContext,
+  ?ignoreCache: bool,
+  ?wait: browsingContext.ReadinessState,
+}
+
+
+NetworkCommand = (
+)
+
+
+network.Request = text;
+
+ScriptCommand = (
+  script.AddPreloadScriptCommand //
+  script.CallFunction //
+  script.Disown //
+  script.Evaluate //
+  script.GetRealms
+  script.RemovePreloadScriptCommand
+)
+
+script.Channel = text;
+
+script.ChannelValue = {
+  type: "channel",
+  value: script.ChannelProperties,
+};
+
+script.ChannelProperties = {
+  channel: script.Channel,
+  ?serializationOptions: script.SerializationOptions,
+  ?ownership: script.ResultOwnership,
+}
+
+script.EvaluateResult = (
+  script.EvaluateResultSuccess //
+  script.EvaluateResultException
+)
+
+script.EvaluateResultSuccess = {
+  type: "success",
+  result: script.RemoteValue,
+  realm: script.Realm
+}
+
+script.EvaluateResultException = {
+  type: "exception",
+  exceptionDetails: script.ExceptionDetails
+  realm: script.Realm
+}
+
+script.ExceptionDetails = {
+  columnNumber: js-uint,
+  exception: script.RemoteValue,
+  lineNumber: js-uint,
+  stackTrace: script.StackTrace,
+  text: text,
+};
+
+script.Handle = text;
+
+script.LocalValue = (
+  script.PrimitiveProtocolValue //
+  script.ArrayLocalValue //
+  script.DateLocalValue //
+  script.MapLocalValue //
+  script.ObjectLocalValue //
+  script.RegExpLocalValue //
+  script.SetLocalValue
+)
+
+script.ListLocalValue = [*script.LocalValue];
+
+script.ArrayLocalValue = {
+  type: "array",
+  value: script.ListLocalValue,
+}
+
+script.DateLocalValue = {
+  type: "date",
+  value: text
+}
+
+script.MappingLocalValue = [*[(script.LocalValue / text), script.LocalValue]];
+
+script.MapLocalValue = {
+  type: "map",
+  value: script.MappingLocalValue,
+}
+
+script.ObjectLocalValue = {
+  type: "object",
+  value: script.MappingLocalValue,
+}
+
+script.RegExpValue = {
+  pattern: text,
+  ?flags: text,
+}
+
+script.RegExpLocalValue = {
+  type: "regexp",
+  value: script.RegExpValue,
+}
+
+script.SetLocalValue = {
+  type: "set",
+  value: script.ListLocalValue,
+}
+
+script.PreloadScript = text;
+
+script.Realm = text;
+
+script.PrimitiveProtocolValue = (
+  script.UndefinedValue //
+  script.NullValue //
+  script.StringValue //
+  script.NumberValue //
+  script.BooleanValue //
+  script.BigIntValue
+)
+
+script.UndefinedValue = {
+  type: "undefined",
+}
+
+script.NullValue = {
+  type: "null",
+}
+
+script.StringValue = {
+  type: "string",
+  value: text,
+}
+
+script.SpecialNumber = "NaN" / "-0" / "Infinity" / "-Infinity";
+
+script.NumberValue = {
+  type: "number",
+  value: number / script.SpecialNumber,
+}
+
+script.BooleanValue = {
+  type: "boolean",
+  value: bool,
+}
+
+script.BigIntValue = {
+  type: "bigint",
+  value: text,
+}
+
+script.RealmType = "window" / "dedicated-worker" / "shared-worker" / "service-worker" /
+                   "worker" / "paint-worklet" / "audio-worklet" / "worklet"
+
+
+
+script.RemoteReference = (
+  script.SharedReference //
+  script.RemoteObjectReference
+)
+
+script.SharedReference = {
+   sharedId: script.SharedId
+   
+   ?handle: script.Handle,
+   Extensible
+}
+
+script.RemoteObjectReference = {
+   handle: script.Handle,
+   
+   ?sharedId: script.SharedId
+   Extensible
+}
+
+script.RemoteValue = (
+  script.PrimitiveProtocolValue //
+  script.SymbolRemoteValue //
+  script.ArrayRemoteValue //
+  script.ObjectRemoteValue //
+  script.FunctionRemoteValue //
+  script.RegExpRemoteValue //
+  script.DateRemoteValue //
+  script.MapRemoteValue //
+  script.SetRemoteValue //
+  script.WeakMapRemoteValue //
+  script.WeakSetRemoteValue //
+  script.IteratorRemoteValue //
+  script.GeneratorRemoteValue //
+  script.ErrorRemoteValue //
+  script.ProxyRemoteValue //
+  script.PromiseRemoteValue //
+  script.TypedArrayRemoteValue //
+  script.ArrayBufferRemoteValue //
+  script.NodeListRemoteValue //
+  script.HTMLCollectionRemoteValue //
+  script.NodeRemoteValue //
+  script.WindowProxyRemoteValue
+)
+
+script.InternalId = js-uint;
+
+script.ListRemoteValue = [*script.RemoteValue];
+
+script.MappingRemoteValue = [*[(script.RemoteValue / text), script.RemoteValue]];
+
+script.SymbolRemoteValue = {
+  type: "symbol",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.ArrayRemoteValue = {
+  type: "array",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+  ?value: script.ListRemoteValue,
+}
+
+script.ObjectRemoteValue = {
+  type: "object",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+  ?value: script.MappingRemoteValue,
+}
+
+script.FunctionRemoteValue = {
+  type: "function",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.RegExpRemoteValue = {
+  script.RegExpLocalValue,
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.DateRemoteValue = {
+  script.DateLocalValue,
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.MapRemoteValue = {
+  type: "map",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+  ?value: script.MappingRemoteValue,
+}
+
+script.SetRemoteValue = {
+  type: "set",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+  ?value: script.ListRemoteValue
+}
+
+script.WeakMapRemoteValue = {
+  type: "weakmap",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.WeakSetRemoteValue = {
+  type: "weakset",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.IteratorRemoteValue = {
+  type: "iterator",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.GeneratorRemoteValue = {
+  type: "generator",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.ErrorRemoteValue = {
+  type: "error",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.ProxyRemoteValue = {
+  type: "proxy",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.PromiseRemoteValue = {
+  type: "promise",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.TypedArrayRemoteValue = {
+  type: "typedarray",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.ArrayBufferRemoteValue = {
+  type: "arraybuffer",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.NodeListRemoteValue = {
+  type: "nodelist",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+  ?value: script.ListRemoteValue,
+}
+
+script.HTMLCollectionRemoteValue = {
+  type: "htmlcollection",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+  ?value: script.ListRemoteValue,
+}
+
+script.NodeRemoteValue = {
+  type: "node",
+  ?sharedId: script.SharedId,
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+  ?value: script.NodeProperties,
+}
+
+script.NodeProperties = {
+  nodeType: js-uint,
+  childNodeCount: js-uint,
+  ?attributes: {*text => text},
+  ?children: [*script.NodeRemoteValue],
+  ?localName: text,
+  ?mode: "open" / "closed",
+  ?namespaceURI: text,
+  ?nodeValue: text,
+  ?shadowRoot: script.NodeRemoteValue / null,
+}
+
+script.WindowProxyRemoteValue = {
+  type: "window",
+  ?handle: script.Handle,
+  ?internalId: script.InternalId,
+}
+
+script.ResultOwnership = "root" / "none"
+
+script.SerializationOptions = {
+  ?maxDomDepth: (js-uint / null) .default 0,
+  ?maxObjectDepth: (js-uint / null) .default null,
+  ?includeShadowTree: ("none" / "open" / "all") .default "none",
+}
+
+script.SharedId = text;
+
+script.StackFrame = {
+  columnNumber: js-uint,
+  functionName: text,
+  lineNumber: js-uint,
+  url: text,
+}
+
+script.StackTrace = {
+  callFrames: [*script.StackFrame],
+}
+
+script.RealmTarget = {
+  realm: script.Realm
+};
+
+script.ContextTarget = {
+  context: browsingContext.BrowsingContext,
+  ?sandbox: text
+}
+
+script.Target = (
+  script.RealmTarget //
+  script.ContextTarget
+);
+
+script.AddPreloadScriptCommand = {
+  method: "script.addPreloadScript",
+  params: script.AddPreloadScriptParameters
+}
+
+script.AddPreloadScriptParameters = {
+  functionDeclaration: text,
+  ?arguments: [*script.ChannelValue],
+  ?sandbox: text
+}
+
+script.Disown = {
+  method: "script.disown",
+  params: script.DisownParameters
+}
+
+script.DisownParameters = {
+  handles: [script.Handle]
+  target: script.Target;
+}
+
+script.CallFunction = {
+  method: "script.callFunction",
+  params: script.CallFunctionParameters
+}
+
+script.CallFunctionParameters = {
+  functionDeclaration: text,
+  awaitPromise: bool,
+  target: script.Target,
+  ?arguments: [*script.ArgumentValue],
+  ?resultOwnership: script.ResultOwnership,
+  ?serializationOptions: script.SerializationOptions,
+  ?this: script.ArgumentValue,
+}
+
+script.ArgumentValue = (
+  script.RemoteReference //
+  script.LocalValue //
+  script.ChannelValue
+);
+
+
+script.Evaluate = {
+  method: "script.evaluate",
+  params: script.EvaluateParameters
+}
+
+script.EvaluateParameters = {
+  expression: text,
+  target: script.Target,
+  awaitPromise: bool,
+  ?resultOwnership: script.ResultOwnership,
+  ?serializationOptions: script.SerializationOptions,
+}
+
+script.GetRealms = {
+  method: "script.getRealms",
+  params: script.GetRealmsParameters
+}
+
+script.GetRealmsParameters = {
+  ?context: browsingContext.BrowsingContext,
+  ?type: script.RealmType,
+}
+
+script.RemovePreloadScriptCommand = {
+  method: "script.removePreloadScript",
+  params: script.RemovePreloadScriptParameters
+}
+
+script.RemovePreloadScriptParameters = {
+  script: script.PreloadScript
+}
+
+
+InputCommand = (
+  input.PerformActions //
+  input.ReleaseActions
+)
+
+input.ElementOrigin = {
+  type: "element",
+  element: script.SharedReference
+}
+
+input.PerformActions = {
+  method: "input.performActions",
+  params: input.PerformActionsParameters
+};
+
+input.PerformActionsParameters = {
+  context: browsingContext.BrowsingContext,
+  actions: [*input.SourceActions]
+}
+
+input.SourceActions = (
+  input.NoneSourceActions //
+  input.KeySourceActions //
+  input.PointerSourceActions //
+  input.WheelSourceActions
+)
+
+input.NoneSourceActions = {
+  type: "none",
+  id: text,
+  actions: [*input.NoneSourceAction]
+}
+
+input.NoneSourceAction = input.PauseAction
+
+input.KeySourceActions = {
+  type: "key",
+  id: text,
+  actions: [*input.KeySourceAction]
+}
+
+input.KeySourceAction = (
+  input.PauseAction //
+  input.KeyDownAction //
+  input.KeyUpAction
+)
+
+input.PointerSourceActions = {
+  type: "pointer",
+  id: text,
+  ? parameters: input.PointerParameters,
+  actions: [*input.PointerSourceAction]
+}
+
+input.PointerType = "mouse" / "pen" / "touch"
+
+input.PointerParameters = {
+  ?pointerType: input.PointerType .default "mouse"
+}
+
+input.PointerSourceAction = (
+  input.PauseAction //
+  input.PointerDownAction //
+  input.PointerUpAction //
+  input.PointerMoveAction
+)
+
+input.WheelSourceActions = {
+  type: "wheel",
+  id: text,
+  actions: [*input.WheelSourceAction]
+}
+
+input.WheelSourceAction = (
+  input.PauseAction //
+  input.WheelScrollAction
+)
+
+input.PauseAction = {
+  type: "pause",
+  ? duration: js-uint
+}
+
+input.KeyDownAction = {
+  type: "keyDown",
+  value: text
+}
+
+input.KeyUpAction = {
+  type: "keyUp",
+  value: text
+}
+
+input.PointerUpAction = {
+  type: "pointerUp",
+  button: js-uint,
+  input.PointerCommonProperties
+}
+
+input.PointerDownAction = {
+  type: "pointerDown",
+  button: js-uint,
+  input.PointerCommonProperties
+}
+
+input.PointerMoveAction = {
+  type: "pointerMove",
+  x: js-int,
+  y: js-int,
+  ? duration: js-uint,
+  ? origin: input.Origin,
+  input.PointerCommonProperties
+}
+
+input.WheelScrollAction = {
+  type: "scroll",
+  x: js-int,
+  y: js-int,
+  deltaX: js-int,
+  deltaY: js-int,
+  ? duration: js-uint,
+  ? origin: input.Origin .default "viewport",
+}
+
+input.PointerCommonProperties = (
+  ? width: js-uint .default 1,
+  ? height: js-uint .default 1,
+  ? pressure: float .default 0.0,
+  ? tangentialPressure: float .default 0.0,
+  ? twist: 0..359 .default 0,
+  (input.TiltProperties // input.AngleProperties)
+)
+
+input.AngleProperties = (
+  ? altitudeAngle: float .default 0.0,
+  ? azimuthAngle: float .default 0.0,
+)
+
+input.TiltProperties = (
+  ? tiltX: -90..90 .default 0,
+  ? tiltY: -90..90 .default 0,
+)
+
+input.Origin = "viewport" / "pointer" / input.ElementOrigin
+
+input.ReleaseActions = {
+  method: "input.releaseActions",
+  params: input.ReleaseActionsParameters
+};
+
+input.ReleaseActionsParameters = {
+  context: browsingContext.BrowsingContext,
+}
