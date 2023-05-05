@@ -24,6 +24,40 @@ export default class Lexer {
         this.readPosition++
     }
 
+    getLocation () {
+        const position = this.position - 2
+        const sourceLines = this.input.split('\n')
+        const sourceLineLength = sourceLines.map((l) => l.length)
+        let i = 0
+
+        for (const [line, lineLength] of Object.entries(sourceLineLength)) {
+            i += lineLength + 1
+            const lineBegin = i - lineLength
+            if (i > position) {
+                const lineBegin = i - lineLength
+                return {
+                    line: parseInt(line, 10),
+                    position: position - lineBegin + 1
+                }
+            }
+        }
+
+        return { line: 0, position: 0 }
+    }
+
+    getLine (lineNumber: number) {
+        return this.input.split('\n')[lineNumber]
+    }
+
+    getLocationInfo () {
+        const loc = this.getLocation()
+        const line = loc ? this.getLine(loc.line) : ''
+        let locationInfo = line + '\n'
+        locationInfo += ' '.repeat(loc?.position || 0) + '^\n'
+        locationInfo += ' '.repeat(loc?.position || 0) + '|\n'
+        return locationInfo
+    }
+
     nextToken (): Token {
         let token: Token
         this.skipWhitespace()

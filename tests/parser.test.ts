@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises'
 import url from 'node:url'
 import path from 'node:path'
 import { describe, it, expect } from 'vitest'
@@ -23,13 +22,7 @@ describe('parser', () => {
 
     for (const { name, fixture } of testCases) {
         it(name, async () => {
-            const input = await fs.readFile(
-                path.join(__dirname, '__fixtures__', fixture),
-                'utf-8'
-            )
-
-            const l = new Lexer(input)
-            const p = new Parser(l)
+            const p = new Parser(path.join(__dirname, '__fixtures__', fixture))
             expect(p.parse()).toMatchSnapshot()
         })
     }

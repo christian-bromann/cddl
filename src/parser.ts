@@ -1,3 +1,5 @@
+import fs from 'node:fs'
+
 import Lexer from './lexer.js'
 import { Property } from './ast.js'
 import { Token, Tokens } from './tokens.js';
@@ -13,14 +15,16 @@ const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
 const DEFAULT_OCCURRENCE: Occurrence = { n: 1, m: 1 } // exactly one time
 
 export default class Parser {
+    #filePath: string
     l: Lexer;
 
     curToken: Token = NIL_TOKEN;
     peekToken: Token = NIL_TOKEN;
 
-    constructor (l: Lexer) {
-        this.l = l
-        
+    constructor (filePath: string) {
+        this.#filePath = filePath
+        this.l = new Lexer(fs.readFileSync(filePath, 'utf-8'))
+
         this.nextToken()
         this.nextToken()
     }
@@ -39,7 +43,7 @@ export default class Parser {
          * groupName //=
          */
         if (this.curToken.Type !== Tokens.IDENT || !(this.peekToken.Type === Tokens.ASSIGN || this.peekToken.Type === Tokens.SLASH)) {
-            throw new Error(`group identifier expected, received "${JSON.stringify(this.curToken)}"`)
+            throw this.parserError(`group identifier expected, received "${JSON.stringify(this.curToken)}"`)
         }
 
         let isChoiceAddition = false
@@ -248,7 +252,7 @@ export default class Parser {
              * else if no colon was found, throw
              */
             if (!this.isPropertyValueSeparator()) {
-                throw new Error('Expected ":" or "=>"')
+                throw this.parserError('Expected ":" or "=>"')
             }
 
             this.nextToken() // eat :
@@ -392,7 +396,7 @@ export default class Parser {
             return name
         }
 
-        throw new Error(`Expected property name, received ${this.curToken.Type}(${this.curToken.Literal}), ${this.peekToken.Type}(${this.peekToken.Literal})`)
+        throw this.parserError(`Expected property name, received ${this.curToken.Type}(${this.curToken.Literal}), ${this.peekToken.Type}(${this.peekToken.Literal})`)
     }
 
     private parsePropertyType (): PropertyType {
@@ -463,7 +467,7 @@ export default class Parser {
                         Unwrapped: isUnwrapped
                     }
                 } else {
-                    throw new Error(`Invalid property type "${this.curToken.Literal}"`)
+                    throw this.parserError(`Invalid property type "${this.curToken.Literal}"`)
                 }
             }
         }
@@ -639,5 +643,11 @@ export default class Parser {
         }
 
         return definition
+    }
+
+    private parserError (message: string) {
+        const location = this.l.getLocation()
+        const locInfo = this.l.getLocationInfo()
+        return new Error(`${this.#filePath.replace(process.cwd(), '')}:${location.line + 1}:${location.position} - error: ${message}\n\n${locInfo}`)
     }
 }

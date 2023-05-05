@@ -38,7 +38,7 @@ export const handler = (argv: ArgumentsCamelCase<ValidateArguments>) => {
 
         console.log('✅ Valid CDDL file!')
     } catch (err: unknown) {
-        console.error(`⚠️  Invalid CDDL file (${filePath})\n\t> ${(err as Error).message}`)
+        console.error(`⚠️  Invalid CDDL file (${filePath})\n\n${(err as Error).message}`)
         process.exit(1)
     }
 }

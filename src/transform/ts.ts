@@ -7,7 +7,7 @@ import pkg from '../../package.json' assert { type: 'json' }
 import type { Assignment, PropertyType, PropertyReference, Property } from '../ast'
 
 const b = types.builders
-let comments: string[] = []
+const comments: string[] = []
 const NATIVE_TYPES: Record<string, string> = {
     number: 'number',
     uint: 'Uint32Array',
