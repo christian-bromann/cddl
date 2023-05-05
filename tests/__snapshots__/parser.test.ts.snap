@@ -255,6 +255,64 @@ exports[`parser > can parse arrays 1`] = `
       },
     ],
   },
+  {
+    "Name": "script.MappingRemoteValue",
+    "Type": "array",
+    "Values": [
+      {
+        "Comment": "",
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": {
+          "Name": "",
+          "Type": "array",
+          "Values": [
+            {
+              "Comment": "",
+              "HasCut": false,
+              "Name": "",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "script.RemoteValue",
+                },
+                "text",
+              ],
+            },
+            {
+              "Comment": "",
+              "HasCut": false,
+              "Name": "",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "script.RemoteValue",
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    "Content": "",
+    "Type": "comment",
+  },
 ]
 `;
 

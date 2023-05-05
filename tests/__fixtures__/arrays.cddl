@@ -15,3 +15,5 @@ ActionsPerformActionsParameters = [1*4 {
     actions: ActionItems,
     *text => any
 }]
+
+script.MappingRemoteValue = [*[(script.RemoteValue / text), script.RemoteValue]];

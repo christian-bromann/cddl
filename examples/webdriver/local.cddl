@@ -441,7 +441,7 @@ script.DateLocalValue = {
   value: text
 }
 
-; script.MappingLocalValue = [*[(script.LocalValue / text), script.LocalValue]];
+script.MappingLocalValue = [*[(script.LocalValue / text), script.LocalValue]];
 
 script.MapLocalValue = {
   type: "map",
@@ -601,7 +601,7 @@ script.InternalId = js-uint;
 
 script.ListRemoteValue = [*script.RemoteValue];
 
-; script.MappingRemoteValue = [*[(script.RemoteValue / text), script.RemoteValue]];
+script.MappingRemoteValue = [*[(script.RemoteValue / text), script.RemoteValue]];
 
 script.SymbolRemoteValue = {
   type: "symbol",

@@ -153,7 +153,7 @@ export default class Parser {
             }
 
             /**
-             * parse group within arrays, e.g.
+             * parse assignment within array, e.g.
              * ```
              * ActionsPerformActionsParameters = [1* {
              *   type: "key",
@@ -162,8 +162,16 @@ export default class Parser {
              *   *text => any
              * }]
              * ```
+             * or
+             * ```
+             * script.MappingRemoteValue = [*[(script.RemoteValue / text), script.RemoteValue]];
+             * ```
              */
-            if (this.curToken.Literal === Tokens.LBRACE) {
+            if (
+                this.curToken.Literal === Tokens.LBRACE ||
+                this.curToken.Literal === Tokens.LBRACK ||
+                this.curToken.Literal === Tokens.LPAREN
+            ) {
                 const innerGroup = this.parseAssignmentValue() as Group
                 valuesOrProperties.push({
                     HasCut: false,
@@ -172,6 +180,14 @@ export default class Parser {
                     Type: innerGroup,
                     Comment: ''
                 })
+                continue
+            }
+
+            /**
+             * check if we are in an array and a new item is indicated
+             */
+            if (this.curToken.Literal === Tokens.COMMA && closingTokens[0] === Tokens.RBRACK) {
+                this.nextToken()
                 continue
             }
 
@@ -206,6 +222,13 @@ export default class Parser {
                         }],
                     Comment: comment
                 })
+
+                if (this.curToken.Literal === Tokens.COMMA || this.curToken.Literal === closingTokens[0]) {
+                    if (this.curToken.Literal === Tokens.COMMA) {
+                        this.nextToken()
+                    }
+                    continue
+                }
 
                 if (!parsedComments) {
                     this.nextToken()
