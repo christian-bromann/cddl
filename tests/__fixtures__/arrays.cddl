@@ -8,3 +8,10 @@ person = (
     name: tstr,
     age: uint,
 )
+
+ActionsPerformActionsParameters = [1*4 {
+    type: "key",
+    id: text,
+    actions: ActionItems,
+    *text => any
+}]

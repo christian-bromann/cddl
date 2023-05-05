@@ -8,7 +8,7 @@ import { parseNumberValue } from './utils.js'
 import {
     Type, PropertyName, PropertyType, PropertyReferenceType,
     Variable, RangePropertyReference, Occurrence, Assignment,
-    Comment
+    Comment, Group
 } from './ast.js'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
@@ -150,6 +150,29 @@ export default class Parser {
             if (this.curToken.Literal === Tokens.TILDE) {
                 isUnwrapped = true
                 this.nextToken() // eat ~
+            }
+
+            /**
+             * parse group within arrays, e.g.
+             * ```
+             * ActionsPerformActionsParameters = [1* {
+             *   type: "key",
+             *   id: text,
+             *   actions: ActionItems,
+             *   *text => any
+             * }]
+             * ```
+             */
+            if (this.curToken.Literal === Tokens.LBRACE) {
+                const innerGroup = this.parseAssignmentValue() as Group
+                valuesOrProperties.push({
+                    HasCut: false,
+                    Occurrence: occurrence,
+                    Name: '',
+                    Type: innerGroup,
+                    Comment: ''
+                })
+                continue
             }
 
             propertyName = this.parsePropertyName()

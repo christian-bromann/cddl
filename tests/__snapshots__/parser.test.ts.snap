@@ -173,6 +173,88 @@ exports[`parser > can parse arrays 1`] = `
     ],
     "Type": "group",
   },
+  {
+    "Name": "ActionsPerformActionsParameters",
+    "Type": "array",
+    "Values": [
+      {
+        "Comment": "",
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 4,
+          "n": 1,
+        },
+        "Type": {
+          "IsChoiceAddition": false,
+          "Name": "",
+          "Properties": [
+            {
+              "Comment": "",
+              "HasCut": true,
+              "Name": "type",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                {
+                  "Type": "literal",
+                  "Unwrapped": false,
+                  "Value": "key",
+                },
+              ],
+            },
+            {
+              "Comment": "",
+              "HasCut": true,
+              "Name": "id",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                "text",
+              ],
+            },
+            {
+              "Comment": "",
+              "HasCut": true,
+              "Name": "actions",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "ActionItems",
+                },
+              ],
+            },
+            {
+              "Comment": "",
+              "HasCut": false,
+              "Name": "text",
+              "Occurrence": {
+                "m": Infinity,
+                "n": 0,
+              },
+              "Type": [
+                {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "any",
+                },
+              ],
+            },
+          ],
+          "Type": "group",
+        },
+      },
+    ],
+  },
 ]
 `;
 
