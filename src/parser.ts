@@ -8,7 +8,7 @@ import { parseNumberValue } from './utils.js'
 import {
     Type, PropertyName, PropertyType, PropertyReferenceType,
     Variable, RangePropertyReference, Occurrence, Assignment,
-    Comment, Group
+    Comment, Group, PropertyReference, NativeTypeWithOperator
 } from './ast.js'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
@@ -558,7 +558,20 @@ export default class Parser {
     private parsePropertyTypes (): PropertyType[] {
         const propertyTypes: PropertyType[] = []
 
-        propertyTypes.push(this.parsePropertyType())
+        let prop: PropertyType = this.parsePropertyType()
+        if (this.curToken.Literal === Tokens.DOT && this.peekToken.Literal === 'size') {
+            this.nextToken() // eat `.`
+            this.nextToken() // eat `size`
+            prop = {
+                Type: prop,
+                Operator: {
+                    Type: 'size' as const,
+                    Value: this.parsePropertyType()
+                }
+            } as NativeTypeWithOperator
+        }
+
+        propertyTypes.push(prop)
         this.nextToken() // eat `/`
 
         /**

@@ -51,6 +51,7 @@ export type Variable = {
     Name: string;
     IsChoiceAddition: boolean;
     PropertyType: PropertyType | PropertyType[];
+    Operator?: OperatorType;
 }
 
 /**
@@ -139,13 +140,24 @@ export type Range = {
     Inclusive: boolean
 }
 
+interface OperatorType {
+    Type: 'size',
+    Value: PropertyType
+}
+
 export type PropertyReferenceType = 'literal' | 'group' | 'group_array' | 'range' | 'tag'
 export type PropertyReference = {
     Type: PropertyReferenceType;
     Value: string | number | boolean | Group | Array | Range | Tag;
     Unwrapped: boolean;
+    Operator?: OperatorType;
+}
+
+export interface NativeTypeWithOperator {
+    Type: Type
+    Operator?: OperatorType
 }
 
 export type Assignment = Group | Array | Variable | Comment;
-export type PropertyType = Assignment | Array | PropertyReference | string
+export type PropertyType = Assignment | Array | PropertyReference | string | NativeTypeWithOperator
 export type PropertyName = string

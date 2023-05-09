@@ -1451,6 +1451,29 @@ exports[`parser > can parse occurrences 1`] = `
 ]
 `;
 
+exports[`parser > can parse operators 1`] = `
+[
+  {
+    "IsChoiceAddition": false,
+    "Name": "ip4",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "size",
+          "Value": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 4,
+          },
+        },
+        "Type": "bstr",
+      },
+    ],
+    "Type": "variable",
+  },
+]
+`;
+
 exports[`parser > can parse ranges 1`] = `
 [
   {
