@@ -13,3 +13,6 @@ speed3 = number .gt 0  ; unit: m/s
 speed4 = number .lt 10  ; unit: m/s
 
 displayed-step = number .default 1
+someGroup = {
+    ? optional: tstr .default "foobar"
+}
