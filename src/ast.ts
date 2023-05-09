@@ -140,7 +140,7 @@ export type Range = {
     Inclusive: boolean
 }
 
-export type OperatorType = 'size' | 'regexp' | 'bits' | 'and' | 'within' | 'eq' | 'ne' | 'lt' | 'le' | 'gt' | 'ge'
+export type OperatorType = 'default' | 'size' | 'regexp' | 'bits' | 'and' | 'within' | 'eq' | 'ne' | 'lt' | 'le' | 'gt' | 'ge'
 export interface Operator {
     Type: OperatorType,
     Value: PropertyType

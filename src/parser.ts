@@ -13,8 +13,9 @@ import {
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
 const DEFAULT_OCCURRENCE: Occurrence = { n: 1, m: 1 } // exactly one time
-const OPERATORS: OperatorType[] = ['size', 'regexp', 'bits', 'and', 'within', 'eq', 'ne', 'lt', 'le', 'gt', 'ge']
-const OPERATORS_EXPECTING_VALUES: Record<OperatorType, PropertyReferenceType[]> = {
+const OPERATORS: OperatorType[] = ['default', 'size', 'regexp', 'bits', 'and', 'within', 'eq', 'ne', 'lt', 'le', 'gt', 'ge']
+const OPERATORS_EXPECTING_VALUES: Record<OperatorType, PropertyReferenceType[] | undefined> = {
+    default: undefined,
     size: ['literal', 'range'],
     regexp: ['literal'],
     bits: ['group'],
@@ -591,8 +592,8 @@ export default class Parser {
             this.nextToken() // eat "."
             this.nextToken() // eat operator type
             const value = this.parsePropertyType() as PropertyReferenceType
-            if (OPERATORS_EXPECTING_VALUES[type].includes(value)) {
-                throw new Error(`Operator ".${type}", expects a ${OPERATORS_EXPECTING_VALUES[type].join(' or ')} property, but found ${value}!`)
+            if (OPERATORS_EXPECTING_VALUES[type] && OPERATORS_EXPECTING_VALUES[type]!.includes(value)) {
+                throw new Error(`Operator ".${type}", expects a ${OPERATORS_EXPECTING_VALUES[type]!.join(' or ')} property, but found ${value}!`)
             }
 
             prop = {

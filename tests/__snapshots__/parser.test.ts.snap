@@ -1603,6 +1603,132 @@ exports[`parser > can parse operators 1`] = `
     ],
     "Type": "variable",
   },
+  {
+    "IsChoiceAddition": false,
+    "Name": "speed",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "ge",
+          "Value": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 0,
+          },
+        },
+        "Type": {
+          "Type": "group",
+          "Unwrapped": false,
+          "Value": "number",
+        },
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "Content": "unit: m/s",
+    "Type": "comment",
+  },
+  {
+    "IsChoiceAddition": false,
+    "Name": "speed2",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "le",
+          "Value": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 10,
+          },
+        },
+        "Type": {
+          "Type": "group",
+          "Unwrapped": false,
+          "Value": "number",
+        },
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "Content": "unit: m/s",
+    "Type": "comment",
+  },
+  {
+    "IsChoiceAddition": false,
+    "Name": "speed3",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "gt",
+          "Value": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 0,
+          },
+        },
+        "Type": {
+          "Type": "group",
+          "Unwrapped": false,
+          "Value": "number",
+        },
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "Content": "unit: m/s",
+    "Type": "comment",
+  },
+  {
+    "IsChoiceAddition": false,
+    "Name": "speed4",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "lt",
+          "Value": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 10,
+          },
+        },
+        "Type": {
+          "Type": "group",
+          "Unwrapped": false,
+          "Value": "number",
+        },
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "Content": "unit: m/s",
+    "Type": "comment",
+  },
+  {
+    "IsChoiceAddition": false,
+    "Name": "displayed-step",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "default",
+          "Value": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 1,
+          },
+        },
+        "Type": {
+          "Type": "group",
+          "Unwrapped": false,
+          "Value": "number",
+        },
+      },
+    ],
+    "Type": "variable",
+  },
 ]
 `;
 

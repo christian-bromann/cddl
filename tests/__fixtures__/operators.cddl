@@ -6,3 +6,10 @@ rwxbits = uint .bits rwx
 foo = ip4 .and nai
 fooWithin = ip4 .within nai
 bar = foo .ne fooWithin
+
+speed = number .ge 0  ; unit: m/s
+speed2 = number .le 10  ; unit: m/s
+speed3 = number .gt 0  ; unit: m/s
+speed4 = number .lt 10  ; unit: m/s
+
+displayed-step = number .default 1
