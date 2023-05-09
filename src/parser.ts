@@ -582,6 +582,7 @@ export default class Parser {
                     Value: this.parsePropertyType()
                 }
             } as NativeTypeWithOperator
+            this.nextToken() // eat size value
         } else if (this.curToken.Literal === Tokens.DOT && this.peekToken.Literal === 'regexp') {
             this.nextToken() // eat `.`
             this.nextToken() // eat `regexp`
@@ -593,10 +594,22 @@ export default class Parser {
                 }
             } as NativeTypeWithOperator
             this.nextToken() // eat regexp string
+        } else if (this.curToken.Literal === Tokens.DOT && this.peekToken.Literal === 'bits') {
+            this.nextToken() // eat `.`
+            this.nextToken() // eat `bits`
+            prop = {
+                Type: prop,
+                Operator: {
+                    Type: 'bits' as const,
+                    Value: this.parsePropertyType()
+                }
+            } as NativeTypeWithOperator
+            this.nextToken() // eat operator group
+        } else {
+            this.nextToken() // eat `/`
         }
 
         propertyTypes.push(prop)
-        this.nextToken() // eat `/`
 
         /**
          * ensure we don't go into the next choice, e.g.:

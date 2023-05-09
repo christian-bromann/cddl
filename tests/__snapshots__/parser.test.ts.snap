@@ -1519,6 +1519,24 @@ exports[`parser > can parse operators 1`] = `
     ],
     "Type": "variable",
   },
+  {
+    "IsChoiceAddition": false,
+    "Name": "rwxbits",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "bits",
+          "Value": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "rwx",
+          },
+        },
+        "Type": "uint",
+      },
+    ],
+    "Type": "variable",
+  },
 ]
 `;
 
