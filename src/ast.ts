@@ -141,7 +141,7 @@ export type Range = {
 }
 
 interface OperatorType {
-    Type: 'size',
+    Type: 'size' | 'regexp',
     Value: PropertyType
 }
 

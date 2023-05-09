@@ -582,6 +582,17 @@ export default class Parser {
                     Value: this.parsePropertyType()
                 }
             } as NativeTypeWithOperator
+        } else if (this.curToken.Literal === Tokens.DOT && this.peekToken.Literal === 'regexp') {
+            this.nextToken() // eat `.`
+            this.nextToken() // eat `regexp`
+            prop = {
+                Type: prop,
+                Operator: {
+                    Type: 'regexp' as const,
+                    Value: this.parsePropertyType()
+                }
+            } as NativeTypeWithOperator
+            this.nextToken() // eat regexp string
         }
 
         propertyTypes.push(prop)

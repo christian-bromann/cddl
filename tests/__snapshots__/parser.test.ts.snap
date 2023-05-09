@@ -1501,6 +1501,24 @@ exports[`parser > can parse operators 1`] = `
     ],
     "Type": "variable",
   },
+  {
+    "IsChoiceAddition": false,
+    "Name": "nai",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "regexp",
+          "Value": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": "[A-Za-z0-9]+@[A-Za-z0-9]+(\\\\\\\\.[A-Za-z0-9]+)+",
+          },
+        },
+        "Type": "tstr",
+      },
+    ],
+    "Type": "variable",
+  },
 ]
 `;
 
