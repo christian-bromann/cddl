@@ -1,1 +1,2 @@
 ip4 = bstr .size 4
+label = bstr .size (1..63)

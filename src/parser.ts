@@ -446,8 +446,9 @@ export default class Parser {
     }
 
     private parsePropertyType (): PropertyType {
-        let type: PropertyType
+        let type: PropertyType | undefined = undefined
         let isUnwrapped = false
+        let isGroupedRange = false
 
         /**
          * check if variable name is unwrapped
@@ -512,6 +513,14 @@ export default class Parser {
                         },
                         Unwrapped: isUnwrapped
                     }
+                } else if (this.curToken.Literal === Tokens.LPAREN && this.peekToken.Type === Tokens.NUMBER) {
+                    this.nextToken()
+                    type = {
+                        Type: 'literal' as PropertyReferenceType,
+                        Value: parseNumberValue(this.curToken),
+                        Unwrapped: isUnwrapped
+                    }
+                    isGroupedRange = true
                 } else {
                     throw this.parserError(`Invalid property type "${this.curToken.Literal}"`)
                 }
@@ -549,6 +558,10 @@ export default class Parser {
                     Max: this.parsePropertyType() as RangePropertyReference
                 },
                 Unwrapped: isUnwrapped
+            }
+
+            if (isGroupedRange) {
+                this.nextToken() // eat ")"
             }
         }
 
