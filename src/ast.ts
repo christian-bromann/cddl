@@ -140,8 +140,9 @@ export type Range = {
     Inclusive: boolean
 }
 
-interface OperatorType {
-    Type: 'size' | 'regexp' | 'bits',
+export type OperatorType = 'size' | 'regexp' | 'bits' | 'and' | 'within' | 'eq' | 'ne' | 'lt' | 'le' | 'gt' | 'ge'
+export interface Operator {
+    Type: OperatorType,
     Value: PropertyType
 }
 
@@ -150,12 +151,12 @@ export type PropertyReference = {
     Type: PropertyReferenceType;
     Value: string | number | boolean | Group | Array | Range | Tag;
     Unwrapped: boolean;
-    Operator?: OperatorType;
+    Operator?: Operator;
 }
 
 export interface NativeTypeWithOperator {
     Type: Type
-    Operator?: OperatorType
+    Operator?: Operator
 }
 
 export type Assignment = Group | Array | Variable | Comment;

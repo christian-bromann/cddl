@@ -8,11 +8,25 @@ import { parseNumberValue } from './utils.js'
 import {
     Type, PropertyName, PropertyType, PropertyReferenceType,
     Variable, RangePropertyReference, Occurrence, Assignment,
-    Comment, Group, PropertyReference, NativeTypeWithOperator
+    Comment, Group, OperatorType, NativeTypeWithOperator
 } from './ast.js'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
 const DEFAULT_OCCURRENCE: Occurrence = { n: 1, m: 1 } // exactly one time
+const OPERATORS: OperatorType[] = ['size', 'regexp', 'bits', 'and', 'within', 'eq', 'ne', 'lt', 'le', 'gt', 'ge']
+const OPERATORS_EXPECTING_VALUES: Record<OperatorType, PropertyReferenceType[]> = {
+    size: ['literal', 'range'],
+    regexp: ['literal'],
+    bits: ['group'],
+    and: ['group'],
+    within: ['group'],
+    eq: ['group'],
+    ne: ['group'],
+    lt: ['group'],
+    le: ['group'],
+    gt: ['group'],
+    ge: ['group'],
+}
 
 export default class Parser {
     #filePath: string
@@ -572,39 +586,23 @@ export default class Parser {
         const propertyTypes: PropertyType[] = []
 
         let prop: PropertyType = this.parsePropertyType()
-        if (this.curToken.Literal === Tokens.DOT && this.peekToken.Literal === 'size') {
-            this.nextToken() // eat `.`
-            this.nextToken() // eat `size`
+        if (this.curToken.Literal === Tokens.DOT && OPERATORS.includes(this.peekToken.Literal as OperatorType)) {
+            const type = this.peekToken.Literal as OperatorType
+            this.nextToken() // eat "."
+            this.nextToken() // eat operator type
+            const value = this.parsePropertyType() as PropertyReferenceType
+            if (OPERATORS_EXPECTING_VALUES[type].includes(value)) {
+                throw new Error(`Operator ".${type}", expects a ${OPERATORS_EXPECTING_VALUES[type].join(' or ')} property, but found ${value}!`)
+            }
+
             prop = {
                 Type: prop,
                 Operator: {
-                    Type: 'size' as const,
-                    Value: this.parsePropertyType()
+                    Type: type,
+                    Value: value
                 }
             } as NativeTypeWithOperator
-            this.nextToken() // eat size value
-        } else if (this.curToken.Literal === Tokens.DOT && this.peekToken.Literal === 'regexp') {
-            this.nextToken() // eat `.`
-            this.nextToken() // eat `regexp`
-            prop = {
-                Type: prop,
-                Operator: {
-                    Type: 'regexp' as const,
-                    Value: this.parsePropertyType()
-                }
-            } as NativeTypeWithOperator
-            this.nextToken() // eat regexp string
-        } else if (this.curToken.Literal === Tokens.DOT && this.peekToken.Literal === 'bits') {
-            this.nextToken() // eat `.`
-            this.nextToken() // eat `bits`
-            prop = {
-                Type: prop,
-                Operator: {
-                    Type: 'bits' as const,
-                    Value: this.parsePropertyType()
-                }
-            } as NativeTypeWithOperator
-            this.nextToken() // eat operator group
+            this.nextToken() // eat operator value
         } else {
             this.nextToken() // eat `/`
         }

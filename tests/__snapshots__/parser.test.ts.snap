@@ -1537,6 +1537,72 @@ exports[`parser > can parse operators 1`] = `
     ],
     "Type": "variable",
   },
+  {
+    "IsChoiceAddition": false,
+    "Name": "foo",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "and",
+          "Value": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "nai",
+          },
+        },
+        "Type": {
+          "Type": "group",
+          "Unwrapped": false,
+          "Value": "ip4",
+        },
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "IsChoiceAddition": false,
+    "Name": "fooWithin",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "within",
+          "Value": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "nai",
+          },
+        },
+        "Type": {
+          "Type": "group",
+          "Unwrapped": false,
+          "Value": "ip4",
+        },
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "IsChoiceAddition": false,
+    "Name": "bar",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "ne",
+          "Value": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "fooWithin",
+          },
+        },
+        "Type": {
+          "Type": "group",
+          "Unwrapped": false,
+          "Value": "foo",
+        },
+      },
+    ],
+    "Type": "variable",
+  },
 ]
 `;
 
