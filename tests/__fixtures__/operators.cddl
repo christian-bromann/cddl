@@ -15,4 +15,8 @@ speed4 = number .lt 10  ; unit: m/s
 displayed-step = number .default 1
 someGroup = {
     ? optional: tstr .default "foobar"
+    ? orientation: ("portrait" / "landscape") .default "portrait"
 }
+
+optional = tstr .default "foobar"
+orientation = ("portrait" / "landscape") .default "portrait"

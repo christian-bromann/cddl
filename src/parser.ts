@@ -8,7 +8,7 @@ import { parseNumberValue } from './utils.js'
 import {
     Type, PropertyName, PropertyType, PropertyReferenceType,
     Variable, RangePropertyReference, Occurrence, Assignment,
-    Comment, Group, OperatorType, NativeTypeWithOperator
+    Comment, Group, OperatorType, NativeTypeWithOperator, Operator
 } from './ast.js'
 
 const NIL_TOKEN: Token = { Type: Tokens.ILLEGAL, Literal: '' }
@@ -144,12 +144,41 @@ export default class Parser {
                     PropertyType: propertyType
                 }
 
+                if (this.isOperator()) {
+                    variable.Operator = this.parseOperator()
+                }
+
                 return variable
             }
 
             return propertyType
         }
-    
+
+        /**
+         * parse operator assignments, e.g. `ip4 = (float .ge 0.0) .default 1.0`
+         */
+        if (closingTokens.length === 1 && this.peekToken.Type === Tokens.DOT) {
+            const prop: PropertyType = {
+                Type: this.parsePropertyType(),
+                Operator: this.parseOperator()
+            } as NativeTypeWithOperator
+
+            this.nextToken() // eat closing token
+            if (groupName) {
+                const variable: Variable = {
+                    Type: 'variable',
+                    Name: groupName,
+                    IsChoiceAddition: isChoiceAddition,
+                    PropertyType: prop,
+                    Operator: this.parseOperator()
+                }
+
+                return variable
+            }
+
+            return [prop]
+        }
+
         while (!closingTokens.includes(this.curToken.Type)) {
             const propertyType: PropertyType[] = []
             let isUnwrapped = false
@@ -322,6 +351,7 @@ export default class Parser {
              * parse property value
              */
             const props = this.parseAssignmentValue()
+            const operator = this.isOperator() ? this.parseOperator() : undefined
             if (Array.isArray(props)) {
                 /**
                  * property has multiple types (e.g. `float / tstr / int`)
@@ -351,8 +381,10 @@ export default class Parser {
                 Occurrence: occurrence,
                 Name: propertyName,
                 Type: propertyType,
-                Comment: comment
+                Comment: comment,
+                ...(operator ? operator : {})
             }
+
             if (isChoice) {
                 (valuesOrProperties[valuesOrProperties.length - 1] as Property[]).push(prop)
             } else {
@@ -583,27 +615,35 @@ export default class Parser {
         return type
     }
 
+    private parseOperator (): Operator {
+        const type = this.peekToken.Literal as OperatorType
+        if (this.curToken.Literal !== Tokens.DOT || !OPERATORS.includes(this.peekToken.Literal as OperatorType)) {
+            throw new Error(`Operator ".${type}", expects a ${OPERATORS_EXPECTING_VALUES[type]!.join(' or ')} property, but found ${this.peekToken.Literal}!`)
+        }
+
+        this.nextToken() // eat "."
+        this.nextToken() // eat operator type
+        const value = this.parsePropertyType() as PropertyReferenceType
+        this.nextToken() // eat operator value
+        return {
+            Type: type,
+            Value: value
+        }
+    }
+
+    private isOperator () {
+        return this.curToken.Literal === Tokens.DOT && OPERATORS.includes(this.peekToken.Literal as OperatorType)
+    }
+
     private parsePropertyTypes (): PropertyType[] {
         const propertyTypes: PropertyType[] = []
 
         let prop: PropertyType = this.parsePropertyType()
-        if (this.curToken.Literal === Tokens.DOT && OPERATORS.includes(this.peekToken.Literal as OperatorType)) {
-            const type = this.peekToken.Literal as OperatorType
-            this.nextToken() // eat "."
-            this.nextToken() // eat operator type
-            const value = this.parsePropertyType() as PropertyReferenceType
-            if (OPERATORS_EXPECTING_VALUES[type] && OPERATORS_EXPECTING_VALUES[type]!.includes(value)) {
-                throw new Error(`Operator ".${type}", expects a ${OPERATORS_EXPECTING_VALUES[type]!.join(' or ')} property, but found ${value}!`)
-            }
-
+        if (this.isOperator()) {
             prop = {
                 Type: prop,
-                Operator: {
-                    Type: type,
-                    Value: value
-                }
+                Operator: this.parseOperator()
             } as NativeTypeWithOperator
-            this.nextToken() // eat operator value
         } else {
             this.nextToken() // eat `/`
         }

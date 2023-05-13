@@ -227,7 +227,7 @@ ScriptCommand = (
   script.CallFunction //
   script.Disown //
   script.Evaluate //
-  script.GetRealms
+  script.GetRealms //
   script.RemovePreloadScriptCommand
 )
 

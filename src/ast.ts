@@ -51,7 +51,7 @@ export type Variable = {
     Name: string;
     IsChoiceAddition: boolean;
     PropertyType: PropertyType | PropertyType[];
-    Operator?: OperatorType;
+    Operator?: Operator;
 }
 
 /**
@@ -76,6 +76,7 @@ export type Property = {
     Name: PropertyName;
     Type: PropertyType | PropertyType[];
     Comment: string;
+    Operator?: Operator
 }
 
 export enum Type {
