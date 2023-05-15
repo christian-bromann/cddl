@@ -55,3 +55,8 @@ NumberValue = {
   type: "number",
   value: number / SpecialNumber,
 }
+
+session.CapabilitiesRequest = {
+  ?alwaysMatch: session.CapabilityRequest,
+  ?firstMatch: [*session.CapabilityRequest]
+}

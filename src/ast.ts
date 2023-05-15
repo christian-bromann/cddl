@@ -147,7 +147,7 @@ export interface Operator {
     Value: PropertyType
 }
 
-export type PropertyReferenceType = 'literal' | 'group' | 'group_array' | 'range' | 'tag'
+export type PropertyReferenceType = 'literal' | 'group' | 'group_array' | 'array' | 'range' | 'tag'
 export type PropertyReference = {
     Type: PropertyReferenceType;
     Value: string | number | boolean | Group | Array | Range | Tag;

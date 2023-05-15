@@ -4,7 +4,7 @@ import typescriptParser from 'recast/parsers/typescript.js'
 
 // @ts-ignore
 import pkg from '../../package.json' assert { type: 'json' }
-import type { Assignment, PropertyType, PropertyReference, Property } from '../ast'
+import type { Assignment, PropertyType, PropertyReference, Property, Array, Group } from '../ast'
 
 const b = types.builders
 const comments: string[] = []
@@ -133,6 +133,9 @@ function parseObjectType (props: Property[]): types.namedTypes.ObjectTypeAnnotat
                 )
             } else if (t.Type === 'literal' && typeof t.Value === 'string') {
                 return b.stringLiteralTypeAnnotation(t.Value, t.Value)
+            } else if (t.Type === 'array') {
+                const arrayType = (((t as Array).Values[0] as Property).Type as PropertyType[])[0] as PropertyReference
+                return b.arrayTypeAnnotation(b.typeParameter(camelcase(arrayType.Value as string, { pascalCase: true })))
             }
 
             throw new Error(`Couldn't parse property ${JSON.stringify(t)}`)

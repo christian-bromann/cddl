@@ -29,5 +29,10 @@ type SpecialNumber = \\"NaN\\" | \\"-0\\" | \\"Infinity\\" | \\"-Infinity\\";
 interface NumberValue {
   type: \\"number\\",
   value: number | SpecialNumber,
+}
+
+interface SessionCapabilitiesRequest {
+  alwaysMatch?: SessionCapabilityRequest,
+  firstMatch?: SessionCapabilityRequest[],
 }"
 `;
