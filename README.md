@@ -20,7 +20,20 @@ $ npm install cddl
 
 ## Using this package
 
-Currently, you can use this package to parse a CDDL file into an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST). For example, given the following CDDL file:
+This package exposes a CLI as well as a programmatic interface for parsing and transforming CDDL.
+
+### CLI
+
+The `cddl` CLI offers a `validate` command that helps identify invalid CDDL formats, e.g.:
+
+```sh
+npx cddl validate ./path/to/interface.cddl
+✅ Valid CDDL file!
+```
+
+### Programmatic Interface 
+
+You can also use this package to parse a CDDL file into an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST). For example, given the following CDDL file:
 
 ```cddl
 person = {
@@ -46,6 +59,35 @@ console.log(ast)
  *     IsChoiceAddition: false
  *   }
  * ]
+ */
+```
+
+You can apply a target specifier to transform the AST into a different language or format (currently supported: `ts` for TypeScript). Note that this is highly experimental and work in progress.
+
+```js
+import { parse } from 'cddl'
+
+/**
+ * spec.cddl:
+ *
+ * session.CapabilityRequest = {
+ *   ?acceptInsecureCerts: bool,
+ *   ?browserName: text,
+ *   ?browserVersion: text,
+ *   ?platformName: text,
+ * };
+ */
+const ts = parse('./spec.cddl', { target: 'ts' })
+console.log(ts)
+/**
+ * outputs:
+ *
+ * interface SessionCapabilityRequest {
+ *   acceptInsecureCerts?: boolean,
+ *   browserName?: string,
+ *   browserVersion?: string,
+ *   platformName?: string,
+ * }
  */
 ```
 
