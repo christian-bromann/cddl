@@ -3,11 +3,10 @@
 exports[`transform TS > should return valid TS types 1`] = `
 "type Message = CommandResponse | ErrorResponse | Event;
 
-interface ErrorResponse {
+interface ErrorResponse extends Extensible {
   id?: JsUint | null,
   error: ErrorCode,
   message: string,
-  //Missing: {\\"HasCut\\":false,\\"Occurrence\\":{\\"n\\":1,\\"m\\":1},\\"Name\\":\\"\\",\\"Type\\":[{\\"Type\\":\\"group\\",\\"Value\\":\\"Extensible\\",\\"Unwrapped\\":false}],\\"Comment\\":\\"\\"}
   stacktrace?: string,
 }
 

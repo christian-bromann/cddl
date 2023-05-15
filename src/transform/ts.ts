@@ -68,7 +68,14 @@ function parseAssignment (ast: types.namedTypes.File, assignment: Assignment) {
     if (assignment.Type === 'group') {
         const id = b.identifier(camelcase(assignment.Name, { pascalCase: true }))
         const objectType = parseObjectType(assignment.Properties as any)
-        const expr = b.interfaceDeclaration(id, objectType, [])
+        const extendInterfaces = (assignment.Properties as Property[])
+            .filter((prop: Property) => prop.Name === '')
+            .map((prop: Property) => b.interfaceExtends(
+                b.identifier(
+                    ((prop.Type as PropertyType[])[0] as PropertyReference).Value as string)
+                )
+            )
+        const expr = b.interfaceDeclaration(id, objectType, extendInterfaces)
 
         return expr
     }
@@ -92,10 +99,17 @@ function parseObjectType (props: Property[]): types.namedTypes.ObjectTypeAnnotat
     const propItems: (types.namedTypes.ObjectTypeProperty | types.namedTypes.ObjectTypeSpreadProperty)[] = []
     for (const prop of props) {
         /**
-         * ToDo(Christian): support Extensible
+         * Empty groups like
+         * {
+         *   HasCut: false,
+         *   Occurrence: { n: 1, m: 1 },
+         *   Name: '',
+         *   Type: [ { Type: 'group', Value: 'Extensible', Unwrapped: false } ],
+         *   Comment: ''
+         * }
+         * are ignored and later added as interface extensions
          */
         if (prop.Name === '') {
-            propItems[propItems.length - 1].comments = [b.commentLine(`Missing: ${JSON.stringify(prop)}`)]
             continue
         }
 
