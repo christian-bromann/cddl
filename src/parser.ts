@@ -382,7 +382,7 @@ export default class Parser {
                 Name: propertyName,
                 Type: propertyType,
                 Comment: comment,
-                ...(operator ? operator : {})
+                ...(operator ? { Operator: operator } : {})
             }
 
             if (isChoice) {
@@ -428,6 +428,32 @@ export default class Parser {
                 Name: groupName || '',
                 Values: valuesOrProperties
             }
+        }
+
+        /**
+         * simplify wrapped types, e.g. from
+         * {
+         *     "Type": "group",
+         *     "Name": "",
+         *     "Properties": [
+         *         {
+         *             "HasCut": false,
+         *             "Occurrence": {
+         *                 "n": 1,
+         *                 "m": 1
+         *             },
+         *             "Name": "",
+         *             "Type": "bool",
+         *             "Comment": ""
+         *         }
+         *     ],
+         *     "IsChoiceAddition": false
+         * }
+         * back to:
+         * bool
+         */
+        if (!groupName && valuesOrProperties.length === 1 && PREDEFINED_IDENTIFIER.includes((valuesOrProperties[0] as Property).Type as string)) {
+            return (valuesOrProperties[0] as Property).Type as Assignment
         }
 
         /**
@@ -504,7 +530,7 @@ export default class Parser {
             isUnwrapped = true
             this.nextToken() // eat ~
         }
-        
+
         switch (this.curToken.Literal) {
             case Type.BOOL:
             case Type.INT:
