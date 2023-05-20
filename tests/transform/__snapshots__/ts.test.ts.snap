@@ -40,5 +40,49 @@ interface NumberValue {
 interface SessionCapabilitiesRequest {
   alwaysMatch?: SessionCapabilityRequest
   firstMatch?: SessionCapabilityRequest[]
+  nested: {
+    obj: 123
+    moreNesting: {
+      id: JsUint | null
+      like: boolean
+    }
+  }
+}
+
+interface SomeGroup {
+  /**
+   * this is the optional leading param
+   * this is not leading
+   *
+   * @default 'foobar'
+   */
+  optional?: string
+  /**
+   * @default 'portrait'
+   */
+  orientation?: \\"portrait\\" | \\"landscape\\"
+  /**
+   * @default 1
+   */
+  scale?: number
+  /**
+   * @default true
+   */
+  shrinkToFit?: boolean
+  /**
+   * @default true
+   */
+  shrinkToFitP?: boolean
+  /**
+   * this is the pageRanges param
+   *
+   * @default 1
+   */
+  bottom?: number
+  pageRanges?: (JsUint | string)[]
+  /**
+   * @default 'mouse'
+   */
+  pointerType?: InputPointerType
 }"
 `;

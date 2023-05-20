@@ -58,5 +58,25 @@ NumberValue = {
 
 session.CapabilitiesRequest = {
   ?alwaysMatch: session.CapabilityRequest,
-  ?firstMatch: [*session.CapabilityRequest]
+  ?firstMatch: [*session.CapabilityRequest],
+  nested: {
+    obj: 123,
+    moreNesting: {
+        id: js-uint / null,
+        like: bool
+    }
+  }
+}
+
+someGroup = {
+    ; this is the optional leading param
+    ?optional: tstr .default "foobar", ; this is not leading
+    ?orientation: ("portrait" / "landscape") .default "portrait",
+    ?scale: 0.1..2.0 .default 1.0,
+    ?shrinkToFit: bool .default true,
+    ?shrinkToFitP: (bool) .default true,
+    ?bottom: (float .ge 0.0) .default 1.0,
+    ; this is the pageRanges param
+    ?pageRanges: [*(js-uint / text)],
+    ?pointerType: input.PointerType .default "mouse"
 }

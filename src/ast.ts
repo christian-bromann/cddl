@@ -9,10 +9,11 @@
  * ```
  */
 export type Group = {
-    Type: 'group';
+    Type: 'group'
     Name: string
-    IsChoiceAddition: boolean;
-    Properties: (Property|Property[])[];
+    IsChoiceAddition: boolean
+    Properties: (Property|Property[])[]
+    Comments: Comment[]
 }
 
 /**
@@ -24,9 +25,10 @@ export type Group = {
  * ```
  */
 export type Array = {
-    Type: 'array';
-    Name: string;
-    Values: (Property|Property[])[];
+    Type: 'array'
+    Name: string
+    Values: (Property|Property[])[]
+    Comments: Comment[]
 }
 
 /**
@@ -36,8 +38,8 @@ export type Array = {
  * ```
  */
 export type Tag = {
-    NumericPart: number;
-    TypePart: string;
+    NumericPart: number
+    TypePart: string
 }
 
 /**
@@ -47,11 +49,12 @@ export type Tag = {
  * ```
  */
 export type Variable = {
-    Type: 'variable';
-    Name: string;
-    IsChoiceAddition: boolean;
-    PropertyType: PropertyType | PropertyType[];
-    Operator?: Operator;
+    Type: 'variable'
+    Name: string
+    IsChoiceAddition: boolean
+    PropertyType: PropertyType | PropertyType[]
+    Operator?: Operator
+    Comments: Comment[]
 }
 
 /**
@@ -61,21 +64,22 @@ export type Variable = {
  * ```
  */
 export type Comment = {
-    Type: 'comment';
-    Content: string;
+    Type: 'comment'
+    Content: string
+    Leading: boolean
 }
 
 export type Occurrence = {
-    n: number;
-    m: number;
+    n: number
+    m: number
 }
 
 export type Property = {
-    HasCut: boolean;
-    Occurrence: Occurrence;
-    Name: PropertyName;
-    Type: PropertyType | PropertyType[];
-    Comment: string;
+    HasCut: boolean
+    Occurrence: Occurrence
+    Name: PropertyName
+    Type: PropertyType | PropertyType[]
+    Comments: Comment[]
     Operator?: Operator
 }
 
@@ -136,23 +140,23 @@ export enum Type {
 export type RangePropertyReference = number | string
 
 export type Range = {
-    Min: RangePropertyReference,
-    Max: RangePropertyReference,
+    Min: RangePropertyReference
+    Max: RangePropertyReference
     Inclusive: boolean
 }
 
 export type OperatorType = 'default' | 'size' | 'regexp' | 'bits' | 'and' | 'within' | 'eq' | 'ne' | 'lt' | 'le' | 'gt' | 'ge'
 export interface Operator {
-    Type: OperatorType,
+    Type: OperatorType
     Value: PropertyType
 }
 
 export type PropertyReferenceType = 'literal' | 'group' | 'group_array' | 'array' | 'range' | 'tag'
 export type PropertyReference = {
-    Type: PropertyReferenceType;
-    Value: string | number | boolean | Group | Array | Range | Tag;
-    Unwrapped: boolean;
-    Operator?: Operator;
+    Type: PropertyReferenceType
+    Value: string | number | boolean | Group | Array | Range | Tag
+    Unwrapped: boolean
+    Operator?: Operator
 }
 
 export interface NativeTypeWithOperator {
@@ -160,6 +164,6 @@ export interface NativeTypeWithOperator {
     Operator?: Operator
 }
 
-export type Assignment = Group | Array | Variable | Comment;
+export type Assignment = Group | Array | Variable
 export type PropertyType = Assignment | Array | PropertyReference | string | NativeTypeWithOperator
 export type PropertyName = string

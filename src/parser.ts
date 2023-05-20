@@ -51,6 +51,11 @@ export default class Parser {
     }
 
     private parseAssignments (): Assignment {
+        const comments: Comment[] = []
+        while (this.curToken.Type === Tokens.COMMENT) {
+            comments.push(this.parseComment()!)
+        }
+
         /**
          * expect group identifier, e.g.
          * groupName =
@@ -77,7 +82,15 @@ export default class Parser {
         }
 
         this.nextToken() // eat `=`
-        return this.parseAssignmentValue(groupName, isChoiceAddition) as Assignment
+        const assignmentValue = this.parseAssignmentValue(groupName, isChoiceAddition) as Assignment
+
+        // @ts-expect-error curToken can be changed by now but TS doesn't understand this
+        while (this.curToken.Type === Tokens.COMMENT) {
+            const comment = this.parseComment()
+            comment && comments.push(comment)
+        }
+        assignmentValue.Comments = comments
+        return assignmentValue
     }
 
     private parseAssignmentValue (groupName?: string, isChoiceAddition = false): Assignment | PropertyType[] {
@@ -98,7 +111,8 @@ export default class Parser {
                     Type: 'variable',
                     Name: groupName,
                     IsChoiceAddition: isChoiceAddition,
-                    PropertyType: this.parsePropertyTypes()
+                    PropertyType: this.parsePropertyTypes(),
+                    Comments: []
                 }
 
                 return variable
@@ -141,7 +155,8 @@ export default class Parser {
                     Type: 'variable',
                     Name: groupName,
                     IsChoiceAddition: isChoiceAddition,
-                    PropertyType: propertyType
+                    PropertyType: propertyType,
+                    Comments: []
                 }
 
                 if (this.isOperator()) {
@@ -170,7 +185,8 @@ export default class Parser {
                     Name: groupName,
                     IsChoiceAddition: isChoiceAddition,
                     PropertyType: prop,
-                    Operator: this.parseOperator()
+                    Operator: this.parseOperator(),
+                    Comments: []
                 }
 
                 return variable
@@ -181,10 +197,13 @@ export default class Parser {
 
         while (!closingTokens.includes(this.curToken.Type)) {
             const propertyType: PropertyType[] = []
+            const comments: Comment[] = []
             let isUnwrapped = false
             let hasCut = false
             let propertyName = ''
-            let comment = ''
+
+            const leadingComment = this.parseComment(true)
+            leadingComment && comments.push(leadingComment)
 
             const occurrence = this.parseOccurrences()
 
@@ -222,7 +241,7 @@ export default class Parser {
                     Occurrence: occurrence,
                     Name: '',
                     Type: innerGroup,
-                    Comment: ''
+                    Comments: []
                 })
                 continue
             }
@@ -243,6 +262,7 @@ export default class Parser {
             if (this.curToken.Type === Tokens.COMMA || closingTokens.includes(this.curToken.Type)) {
                 const tokenType = this.curToken.Type
                 let parsedComments = false
+                let comment: Comment | undefined
 
                 /**
                  * check if line has a comment
@@ -264,7 +284,7 @@ export default class Parser {
                             Value: propertyName,
                             Unwrapped: isUnwrapped
                         }],
-                    Comment: comment
+                    Comments: comment ? [comment] : []
                 })
 
                 if (this.curToken.Literal === Tokens.COMMA || this.curToken.Literal === closingTokens[0]) {
@@ -317,7 +337,7 @@ export default class Parser {
                         Value: propertyName,
                         Unwrapped: isUnwrapped
                     },
-                    Comment: comment
+                    Comments: comments
                 }
 
                 if (isChoice) {
@@ -374,14 +394,15 @@ export default class Parser {
                 this.nextToken() // eat ,
             }
 
-            comment = this.parseComment()
+            const trailingComment = this.parseComment()
+            trailingComment && comments.push(trailingComment)
 
             const prop = {
                 HasCut: hasCut,
                 Occurrence: occurrence,
                 Name: propertyName,
                 Type: propertyType,
-                Comment: comment,
+                Comments: comments,
                 ...(operator ? { Operator: operator } : {})
             }
 
@@ -426,7 +447,8 @@ export default class Parser {
             return {
                 Type: 'array',
                 Name: groupName || '',
-                Values: valuesOrProperties
+                Values: valuesOrProperties,
+                Comments: []
             }
         }
 
@@ -463,7 +485,8 @@ export default class Parser {
             Type: 'group',
             Name: groupName || '',
             Properties: valuesOrProperties,
-            IsChoiceAddition: isChoiceAddition
+            IsChoiceAddition: isChoiceAddition,
+            Comments: []
         }
     }
 
@@ -773,30 +796,24 @@ export default class Parser {
     /**
      * check if line has a comment
      */
-    private parseComment () {
-        let comment = ''
-        if (this.curToken.Type === Tokens.COMMENT) {
-            comment = this.curToken.Literal.slice(2)
-            this.nextToken()
+    private parseComment (isLeading?: boolean): Comment | undefined {
+        if (this.curToken.Type !== Tokens.COMMENT) {
+            return
+        }
+        const comment = this.curToken.Literal.replace(/^;(\s*)/, '')
+        this.nextToken()
+
+        if (comment.trim().length === 0) {
+            return
         }
 
-        return comment
+        return { Type: 'comment', Content: comment, Leading: Boolean(isLeading) }
     }
 
     parse () {
         const definition: Assignment[] = []
 
         while (this.curToken.Type !== Tokens.EOF) {
-            if (this.curToken.Type === Tokens.COMMENT) {
-                const comment: Comment = {
-                    Type: 'comment',
-                    Content: this.curToken.Literal.slice(1).trim()
-                }
-                definition.push(comment)
-                this.nextToken()
-                continue
-            }
-
             const group = this.parseAssignments()
             if (group) {
                 definition.push(group)
