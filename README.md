@@ -31,9 +31,14 @@ npx cddl validate ./path/to/interface.cddl
 ✅ Valid CDDL file!
 ```
 
-### Programmatic Interface 
+### Programmatic Interface
 
-You can also use this package to parse a CDDL file into an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST). For example, given the following CDDL file:
+You can also use this package to parse a CDDL file into:
+
+- an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST).
+- or a [TypeScript](https://www.typescriptlang.org/) definition
+
+For example, given the following CDDL file:
 
 ```cddl
 person = {
@@ -42,7 +47,7 @@ person = {
 }
 ```
 
-You can use this package to parse the file into an abstract syntax tree (AST):
+By default the package parses the content into an AST:
 
 ```js
 import { parse } from 'cddl'
