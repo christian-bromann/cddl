@@ -4,7 +4,7 @@ import typescriptParser from 'recast/parsers/typescript.js'
 
 // @ts-ignore
 import pkg from '../../package.json' assert { type: 'json' }
-import type { Assignment, PropertyType, PropertyReference, Property, Array, Group } from '../ast'
+import type { Assignment, PropertyType, PropertyReference, Property, Array, NativeTypeWithOperator } from '../ast'
 
 const b = types.builders
 const comments: string[] = []
@@ -35,7 +35,7 @@ export function transform (assignments: Assignment[]) {
         ast.program.body.push(statement)
     }
     ast.program.comments = comments.map((c) => b.commentLine(c, false, false))
-    
+
     return print(ast).code
 }
 
@@ -44,7 +44,7 @@ function parseAssignment (ast: types.namedTypes.File, assignment: Assignment) {
         comments.push(assignment.Content)
         return
     }
-    
+
     if (assignment.Type === 'variable') {
         const propType = Array.isArray(assignment.PropertyType)
             ? assignment.PropertyType
@@ -72,7 +72,7 @@ function parseAssignment (ast: types.namedTypes.File, assignment: Assignment) {
             .filter((prop: Property) => prop.Name === '')
             .map((prop: Property) => b.interfaceExtends(
                 b.identifier(
-                    ((prop.Type as PropertyType[])[0] as PropertyReference).Value as string)
+                    camelcase(((prop.Type as PropertyType[])[0] as PropertyReference).Value as string, { pascalCase: true }))
                 )
             )
         const expr = b.interfaceDeclaration(id, objectType, extendInterfaces)
@@ -86,10 +86,16 @@ function parsePropertyType (propType: PropertyType) {
         return b.tsStringKeyword()
     }
     if ((propType as PropertyReference).Type === 'group') {
-        return b.tsTypeReference(b.identifier((propType as PropertyReference).Value.toString()))
+        return b.tsTypeReference(
+            b.identifier(
+                camelcase((propType as PropertyReference).Value.toString(), { pascalCase: true })
+            )
+        )
     }
     if ((propType as PropertyReference).Type === 'literal') {
-        return b.tsLiteralType(b.stringLiteral((propType as PropertyReference).Value.toString()))
+        return b.tsLiteralType(
+            b.stringLiteral((propType as PropertyReference).Value.toString())
+        )
     }
 
     throw new Error(`Couldn't parse property type ${JSON.stringify(propType, null, 4)}`)
@@ -134,8 +140,18 @@ function parseObjectType (props: Property[]): types.namedTypes.ObjectTypeAnnotat
             } else if (t.Type === 'literal' && typeof t.Value === 'string') {
                 return b.stringLiteralTypeAnnotation(t.Value, t.Value)
             } else if (t.Type === 'array') {
-                const arrayType = (((t as Array).Values[0] as Property).Type as PropertyType[])[0] as PropertyReference
-                return b.arrayTypeAnnotation(b.typeParameter(camelcase(arrayType.Value as string, { pascalCase: true })))
+                const arrayType = (((t as Array).Values[0] as Property).Type as PropertyType[])
+                const typedArrayType = typeof arrayType === 'string' && NATIVE_TYPES[arrayType]
+                    ? NATIVE_TYPES[arrayType]
+                    : camelcase((arrayType[0] as PropertyReference).Value as string, { pascalCase: true })
+
+                if (!typedArrayType) {
+                    throw new Error(`Couldn't determine type from ${arrayType}`)
+                }
+
+                return b.arrayTypeAnnotation(b.typeParameter(typedArrayType as string))
+            } else if (t.Type === 'bool') {
+                return b.typeParameter(NATIVE_TYPES[t.Type])
             }
 
             throw new Error(`Couldn't parse property ${JSON.stringify(t)}`)
