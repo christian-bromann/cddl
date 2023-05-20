@@ -4,10 +4,10 @@ exports[`transform TS > should return valid TS types 1`] = `
 "type Message = CommandResponse | ErrorResponse | Event;
 
 interface ErrorResponse extends Extensible {
-  id?: JsUint | null,
-  error: ErrorCode,
-  message: string,
-  stacktrace?: string,
+  id?: JsUint | null
+  error: ErrorCode
+  message: string
+  stacktrace?: string
 }
 
 type ResultData = BrowsingContextResult | EmptyResult | NetworkResult | ScriptResult | SessionResult;
@@ -16,23 +16,29 @@ type JsInt = number;
 type JsUint = number;
 type Handle = string;
 type SharedId = string;
-interface UndefinedValue { type: \\"undefined\\" }
-interface NullValue { type: null }
+
+interface UndefinedValue {
+  type: \\"undefined\\"
+}
+
+interface NullValue {
+  type: null
+}
 
 interface StringValue {
-  type: \\"string\\",
-  value: string,
+  type: \\"string\\"
+  value: string
 }
 
 type SpecialNumber = \\"NaN\\" | \\"-0\\" | \\"Infinity\\" | \\"-Infinity\\";
 
 interface NumberValue {
-  type: \\"number\\",
-  value: number | SpecialNumber,
+  type: \\"number\\"
+  value: Number | SpecialNumber
 }
 
 interface SessionCapabilitiesRequest {
-  alwaysMatch?: SessionCapabilityRequest,
-  firstMatch?: SessionCapabilityRequest[],
+  alwaysMatch?: SessionCapabilityRequest
+  firstMatch?: SessionCapabilityRequest[]
 }"
 `;
