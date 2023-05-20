@@ -6,7 +6,7 @@ import { ParseTargets } from './constants.js'
 import type { ParseOptions } from './types.js'
 
 export default {
-    parse: (filePath: string, opts: ParseOptions) => {
+    parse: (filePath: string, opts: ParseOptions = { target: ParseTargets.AST }) => {
         const parser = new Parser(filePath)
         const ast = parser.parse()
 

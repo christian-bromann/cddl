@@ -4,18 +4,21 @@ import typescriptParser from 'recast/parsers/typescript.js'
 
 // @ts-ignore
 import pkg from '../../package.json' assert { type: 'json' }
-import type { Assignment, PropertyType, PropertyReference, Property, Array, NativeTypeWithOperator } from '../ast'
+import type { Assignment, PropertyType, PropertyReference, Property, Array, NativeTypeWithOperator, Type, Group } from '../ast'
 
 const b = types.builders
 const comments: string[] = []
-const NATIVE_TYPES: Record<string, string> = {
-    number: 'number',
-    uint: 'Uint32Array',
-    bool: 'boolean',
-    str: 'string',
-    text: 'string',
-    tstr: 'string'
+const NATIVE_TYPES: Record<string, any> = {
+    number: b.tsNumberKeyword(),
+    float: b.tsNumberKeyword(),
+    uint: b.tsNumberKeyword(),
+    bool: b.tsBooleanKeyword(),
+    str: b.tsStringKeyword(),
+    text: b.tsStringKeyword(),
+    tstr: b.tsStringKeyword(),
+    range: b.tsNumberKeyword()
 }
+type ObjectBody = (types.namedTypes.TSCallSignatureDeclaration | types.namedTypes.TSConstructSignatureDeclaration | types.namedTypes.TSIndexSignature | types.namedTypes.TSMethodSignature | types.namedTypes.TSPropertySignature)[]
 
 export function transform (assignments: Assignment[]) {
     let ast = parse(
@@ -70,13 +73,13 @@ function parseAssignment (ast: types.namedTypes.File, assignment: Assignment) {
         const objectType = parseObjectType(assignment.Properties as any)
         const extendInterfaces = (assignment.Properties as Property[])
             .filter((prop: Property) => prop.Name === '')
-            .map((prop: Property) => b.interfaceExtends(
+            .map((prop: Property) => b.tsExpressionWithTypeArguments(
                 b.identifier(
                     camelcase(((prop.Type as PropertyType[])[0] as PropertyReference).Value as string, { pascalCase: true }))
                 )
             )
-        const expr = b.interfaceDeclaration(id, objectType, extendInterfaces)
-
+        const expr = b.tsInterfaceDeclaration(id, b.tsInterfaceBody(objectType))
+        expr.extends = extendInterfaces
         return expr
     }
 }
@@ -101,8 +104,8 @@ function parsePropertyType (propType: PropertyType) {
     throw new Error(`Couldn't parse property type ${JSON.stringify(propType, null, 4)}`)
 }
 
-function parseObjectType (props: Property[]): types.namedTypes.ObjectTypeAnnotation {
-    const propItems: (types.namedTypes.ObjectTypeProperty | types.namedTypes.ObjectTypeSpreadProperty)[] = []
+function parseObjectType (props: Property[]): ObjectBody {
+    const propItems: ObjectBody = []
     for (const prop of props) {
         /**
          * Empty groups like
@@ -121,45 +124,59 @@ function parseObjectType (props: Property[]): types.namedTypes.ObjectTypeAnnotat
 
         const id = b.identifier(camelcase(prop.Name))
         const cddlType: PropertyType[] = Array.isArray(prop.Type) ? prop.Type : [prop.Type]
-        const typeParameters = b.unionTypeAnnotation(cddlType.map((t) => {
+        const typeParameters = b.tsTypeAnnotation(b.tsUnionType(cddlType.map((t) => {
             if (typeof t === 'string') {
                 if (!NATIVE_TYPES[t]) {
                     throw new Error(`Unknown native type: "${t}`)
                 }
-                return b.typeParameter(NATIVE_TYPES[t])
+                return NATIVE_TYPES[t]
+            } else if (NATIVE_TYPES[(t as NativeTypeWithOperator).Type as Type]) {
+                return NATIVE_TYPES[(t as NativeTypeWithOperator).Type as Type]
             } else if ((t as PropertyReference).Value === 'null') {
-                return b.nullTypeAnnotation()
+                return b.tsNullKeyword()
             } else if (t.Type === 'group') {
                 const value = (t as PropertyReference).Value as string
-                return b.typeParameter(
-                    /**
-                     * transform native CDDL types into TypeScript types
-                     */
-                    NATIVE_TYPES[value] ? value : camelcase(value.toString(), { pascalCase: true })
-                )
-            } else if (t.Type === 'literal' && typeof t.Value === 'string') {
-                return b.stringLiteralTypeAnnotation(t.Value, t.Value)
-            } else if (t.Type === 'array') {
-                const arrayType = (((t as Array).Values[0] as Property).Type as PropertyType[])
-                const typedArrayType = typeof arrayType === 'string' && NATIVE_TYPES[arrayType]
-                    ? NATIVE_TYPES[arrayType]
-                    : camelcase((arrayType[0] as PropertyReference).Value as string, { pascalCase: true })
-
-                if (!typedArrayType) {
-                    throw new Error(`Couldn't determine type from ${arrayType}`)
+                /**
+                 * check if we have
+                 * ?attributes: {*text => text},
+                 */
+                if (!value && (t as Group).Properties) {
+                    return b.tsTypeLiteral(parseObjectType((t as Group).Properties as Property[]))
                 }
 
-                return b.arrayTypeAnnotation(b.typeParameter(typedArrayType as string))
-            } else if (t.Type === 'bool') {
-                return b.typeParameter(NATIVE_TYPES[t.Type])
+                return b.tsTypeReference(
+                    b.identifier(camelcase(value.toString(), { pascalCase: true }))
+                )
+            } else if (t.Type === 'literal' && typeof t.Value === 'string') {
+                return b.tsLiteralType(b.stringLiteral(t.Value))
+            } else if (t.Type === 'array') {
+                const types = ((t as Array).Values[0] as Property).Type as PropertyType[]
+                const typedTypes = (Array.isArray(types) ? types : [types]).map((val) => {
+                    return typeof val === 'string' && NATIVE_TYPES[val]
+                        ? NATIVE_TYPES[val]
+                        : b.tsTypeReference(
+                            b.identifier(camelcase((val as any).Value as string, { pascalCase: true }))
+                        )
+                })
+
+                return b.tsArrayType(typedTypes.length > 1
+                    ? b.tsParenthesizedType(b.tsUnionType(typedTypes))
+                    : b.tsUnionType(typedTypes))
+            } else if (typeof t.Type === 'object' && ((t as NativeTypeWithOperator).Type as PropertyReference).Type === 'range') {
+                return b.tsNumberKeyword()
+            } else if (typeof t.Type === 'object' && ((t as NativeTypeWithOperator).Type as PropertyReference).Type === 'group') {
+                /**
+                 * e.g. ?pointerType: input.PointerType .default "mouse"
+                 */
+                const referenceValue = camelcase(((t as NativeTypeWithOperator).Type as PropertyReference).Value as string, { pascalCase: true })
+                return b.tsTypeReference(b.identifier(referenceValue))
             }
 
             throw new Error(`Couldn't parse property ${JSON.stringify(t)}`)
-        }))
+        })))
         const isOptional = prop.Occurrence.n === 0
-        propItems.push(b.objectTypeProperty(id, typeParameters, isOptional))
+        propItems.push(b.tsPropertySignature(id, typeParameters, isOptional))
     }
 
-    const obj = b.objectTypeAnnotation(propItems)
-    return obj
+    return propItems
 }

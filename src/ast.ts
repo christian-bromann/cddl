@@ -88,7 +88,7 @@ export enum Type {
 
     /**
      * numeric types
-     */ 
+     */
     // An unsigned integer or a negative integer.
     INT = 'int',
     // An unsigned integer (major type 0).
@@ -156,7 +156,7 @@ export type PropertyReference = {
 }
 
 export interface NativeTypeWithOperator {
-    Type: Type
+    Type: Type | PropertyReference
     Operator?: Operator
 }
 
