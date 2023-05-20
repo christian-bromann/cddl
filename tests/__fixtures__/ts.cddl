@@ -78,5 +78,6 @@ someGroup = {
     ?bottom: (float .ge 0.0) .default 1.0,
     ; this is the pageRanges param
     ?pageRanges: [*(js-uint / text)],
+    ?foo: tstr .default null,
     ?pointerType: input.PointerType .default "mouse"
 }

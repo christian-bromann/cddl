@@ -333,7 +333,7 @@ export default class Parser {
                     Occurrence: occurrence,
                     Name: '',
                     Type: {
-                        Type: "group",
+                        Type: 'group',
                         Value: propertyName,
                         Unwrapped: isUnwrapped
                     },
@@ -567,6 +567,8 @@ export default class Parser {
             case Type.BYTES:
             case Type.TSTR:
             case Type.TEXT:
+            case Type.NIL:
+            case Type.NULL:
                 type = this.curToken.Literal
                 break
             default: {

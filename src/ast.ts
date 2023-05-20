@@ -118,7 +118,13 @@ export enum Type {
     // Text string (major type 3)
     TSTR = 'tstr',
     // Text string (major type 3)
-    TEXT = 'text'
+    TEXT = 'text',
+
+    /**
+     * null types
+     */
+    NIL = 'nil',
+    NULL = 'null'
 }
 
 /**

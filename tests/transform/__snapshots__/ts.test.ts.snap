@@ -81,6 +81,10 @@ interface SomeGroup {
   bottom?: number
   pageRanges?: (JsUint | string)[]
   /**
+   * @default null
+   */
+  foo?: string
+  /**
    * @default 'mouse'
    */
   pointerType?: InputPointerType

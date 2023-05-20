@@ -15,7 +15,9 @@ const NATIVE_TYPES: Record<string, any> = {
     str: b.tsStringKeyword(),
     text: b.tsStringKeyword(),
     tstr: b.tsStringKeyword(),
-    range: b.tsNumberKeyword()
+    range: b.tsNumberKeyword(),
+    nil: b.tsNullKeyword(),
+    null: b.tsNullKeyword()
 }
 type ObjectEntry = types.namedTypes.TSCallSignatureDeclaration | types.namedTypes.TSConstructSignatureDeclaration | types.namedTypes.TSIndexSignature | types.namedTypes.TSMethodSignature | types.namedTypes.TSPropertySignature
 type ObjectBody = ObjectEntry[]
@@ -207,6 +209,10 @@ function parseDefaultValue (operator?: Operator) {
     }
 
     const operatorValue = operator.Value as PropertyReference
+    if (operator.Value === 'null') {
+        return operator.Value
+    }
+
     if (operatorValue.Type !== 'literal') {
         throw new Error(`Can't parse operator default value of ${JSON.stringify(operator)}`)
     }
