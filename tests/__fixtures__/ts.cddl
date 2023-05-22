@@ -81,3 +81,6 @@ someGroup = {
     ?foo: tstr .default null,
     ?pointerType: input.PointerType .default "mouse"
 }
+
+script.ListLocalValue = [*script.LocalValue];
+script.MappingLocalValue = [*[(script.LocalValue / text), script.LocalValue]];

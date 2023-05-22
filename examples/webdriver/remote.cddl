@@ -375,14 +375,14 @@ script.RemoteReference = (
 
 script.SharedReference = {
    sharedId: script.SharedId
-   
+
    ?handle: script.Handle,
    Extensible
 }
 
 script.RemoteObjectReference = {
    handle: script.Handle,
-   
+
    ?sharedId: script.SharedId
    Extensible
 }

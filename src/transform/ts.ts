@@ -1,5 +1,5 @@
 import camelcase from 'camelcase'
-import { parse, print, visit, types } from 'recast'
+import { parse, print, types } from 'recast'
 import typescriptParser from 'recast/parsers/typescript.js'
 
 // @ts-ignore
@@ -79,6 +79,23 @@ function parseAssignment (ast: types.namedTypes.File, assignment: Assignment) {
         expr.comments = assignment.Comments.map((c) => b.commentLine(` ${c.Content}`, true))
         return expr
     }
+
+    if (assignment.Type === 'array') {
+        const id = b.identifier(camelcase(assignment.Name, { pascalCase: true }))
+        const firstType = ((assignment.Values[0] as Property).Type as PropertyType[])
+        const obj = Array.isArray(firstType)
+            ? firstType.map(parseUnionType)
+            : (firstType as any).Values
+                ? (firstType as any).Values.map((val: any) => parseUnionType(val.Type[0]))
+                // ToDo(Christian): transpile this case correctly
+                : []
+        const value = b.tsArrayType(b.tsParenthesizedType(b.tsUnionType(obj)))
+        const expr = b.tsTypeAliasDeclaration(id, value)
+        expr.comments = assignment.Comments.map((c) => b.commentLine(` ${c.Content}`, true))
+        return expr
+    }
+
+    throw new Error(`Unknown assignment type "${(assignment as any).Type}"`)
 }
 
 function parsePropertyType (propType: PropertyType) {
@@ -152,7 +169,7 @@ function parseObjectType (props: Property[]): ObjectBody {
     return propItems
 }
 
-function parseUnionType (t: PropertyType | Assignment): TSTypeKind | undefined {
+function parseUnionType (t: PropertyType | Assignment): TSTypeKind {
     if (typeof t === 'string') {
         if (!NATIVE_TYPES[t]) {
             throw new Error(`Unknown native type: "${t}`)
@@ -201,6 +218,8 @@ function parseUnionType (t: PropertyType | Assignment): TSTypeKind | undefined {
         const referenceValue = camelcase(((t as NativeTypeWithOperator).Type as PropertyReference).Value as string, { pascalCase: true })
         return b.tsTypeReference(b.identifier(referenceValue))
     }
+
+    throw new Error(`Unknown union type: ${JSON.stringify(t)}`)
 }
 
 function parseDefaultValue (operator?: Operator) {

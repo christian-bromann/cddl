@@ -88,5 +88,8 @@ interface SomeGroup {
    * @default 'mouse'
    */
   pointerType?: InputPointerType
-}"
+}
+
+type ScriptListLocalValue = (ScriptLocalValue)[];
+type ScriptMappingLocalValue = (ScriptLocalValue | ScriptLocalValue)[];"
 `;
