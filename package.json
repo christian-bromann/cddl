@@ -17,6 +17,7 @@
   },
   "type": "module",
   "exports": "./build/index.js",
+  "types": "./build/index.d.ts",
   "bin": {
     "cddl": "./bin/cddl.js"
   },
