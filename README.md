@@ -62,6 +62,8 @@ console.log(ast)
  */
 ```
 
+The CDDL AST is defined in [source files](./src/ast.ts). The `parse` method returns `Assignment[]`.
+
 ---
 
 If you are interested in this project, please feel free to contribute ideas or code patches. Have a look at our [contributing](https://github.com/christian-bromann/cddl/blob/master/LICENSE) guidelines](https://github.com/christian-bromann/cddl/blob/master/LICENSE) to get started.
