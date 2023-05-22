@@ -2,7 +2,7 @@
   "name": "cddl",
   "version": "0.8.0",
   "description": "Concise data definition language (RFC 8610) implementation and JSON validator in Node.js",
-  "author": "Christian Bromann <christian@saucelabs.com>",
+  "author": "Christian Bromann <mail@bromann.dev>",
   "license": "MIT",
   "homepage": "https://github.com/christian-bromann/cddl#readme",
   "repository": {
