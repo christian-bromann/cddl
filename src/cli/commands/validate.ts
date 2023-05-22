@@ -3,8 +3,7 @@ import path from 'node:path'
 import type { Argv, ArgumentsCamelCase } from 'yargs'
 
 import { CLI_EPILOGUE } from '../constants.js'
-import { ParseTargets } from '../../constants.js'
-import CDDL from '../../index.js'
+import { parse } from '../../index.js'
 
 interface ValidateArguments {
     filePath: string
@@ -22,14 +21,14 @@ export const handler = (argv: ArgumentsCamelCase<ValidateArguments>) => {
     const filePath = argv.filePath.startsWith('/')
         ? argv.filePath
         : path.resolve(process.cwd(), argv.filePath)
-    
+
     if (!fs.existsSync(filePath)) {
         console.error(`Couldn't find CDDL file at ${filePath}`)
         return process.exit(1)
     }
 
     try {
-        CDDL.parse(filePath, { target: ParseTargets.AST })
+        parse(filePath)
 
         /**
          * ToDo check for

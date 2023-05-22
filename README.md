@@ -33,12 +33,7 @@ npx cddl validate ./path/to/interface.cddl
 
 ### Programmatic Interface
 
-You can also use this package to parse a CDDL file into:
-
-- an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST).
-- or a [TypeScript](https://www.typescriptlang.org/) definition
-
-For example, given the following CDDL file:
+You can also use this package to parse a CDDL file into an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST). For example, given the following CDDL file:
 
 ```cddl
 person = {
@@ -47,7 +42,7 @@ person = {
 }
 ```
 
-By default the package parses the content into an AST:
+It parses the content into an AST:
 
 ```js
 import { parse } from 'cddl'
@@ -64,35 +59,6 @@ console.log(ast)
  *     IsChoiceAddition: false
  *   }
  * ]
- */
-```
-
-You can apply a target specifier to transform the AST into a different language or format (currently supported: `ts` for TypeScript). Note that this is highly experimental and work in progress.
-
-```js
-import { parse } from 'cddl'
-
-/**
- * spec.cddl:
- *
- * session.CapabilityRequest = {
- *   ?acceptInsecureCerts: bool,
- *   ?browserName: text,
- *   ?browserVersion: text,
- *   ?platformName: text,
- * };
- */
-const ts = parse('./spec.cddl', { target: 'ts' })
-console.log(ts)
-/**
- * outputs:
- *
- * interface SessionCapabilityRequest {
- *   acceptInsecureCerts?: boolean,
- *   browserName?: string,
- *   browserVersion?: string,
- *   platformName?: string,
- * }
  */
 ```
 
