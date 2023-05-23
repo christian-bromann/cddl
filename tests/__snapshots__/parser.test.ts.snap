@@ -255,11 +255,7 @@ exports[`parser > can parse arrays 1`] = `
                 "n": 0,
               },
               "Type": [
-                {
-                  "Type": "group",
-                  "Unwrapped": false,
-                  "Value": "any",
-                },
+                "any",
               ],
             },
           ],
@@ -1130,11 +1126,7 @@ exports[`parser > can parse compositions 1`] = `
           "n": 0,
         },
         "Type": [
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "any",
-          },
+          "any",
         ],
       },
     ],
@@ -1409,11 +1401,7 @@ exports[`parser > can parse compositions 1`] = `
           "n": 0,
         },
         "Type": [
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "any",
-          },
+          "any",
         ],
       },
     ],

@@ -555,6 +555,7 @@ export default class Parser {
         }
 
         switch (this.curToken.Literal) {
+            case Type.ANY:
             case Type.BOOL:
             case Type.INT:
             case Type.UINT:
