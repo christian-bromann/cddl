@@ -268,7 +268,7 @@ browsingContext.PrintParameters = {
   ? orientation: ("portrait" / "landscape") .default "portrait",
   ? page: browsingContext.PrintPageParameters,
   ? pageRanges: [*(js-uint / text)],
-  ? scale: (0.1..2.0) .default 1.0,
+  ? scale: 0.1..2.0 .default 1.0,
   ? shrinkToFit: bool .default true,
 }
 
@@ -305,7 +305,7 @@ browsingContext.SetViewport = (
 browsingContext.SetViewportParameters = {
   context: browsingContext.BrowsingContext,
   ? viewport: browsingContext.Viewport / null,
-  ? devicePixelRatio: (float .gt 0.0) / null,
+  ? devicePixelRatio: float .gt 0.0 / null,
 }
 
 browsingContext.Viewport = {
@@ -464,7 +464,7 @@ network.ContinueWithAuthParameters = {
 }
 
 network.ContinueWithAuthCredentials = (
-  action: "provideCredentials", 
+  action: "provideCredentials",
   credentials: network.AuthCredentials
 )
 
@@ -661,14 +661,14 @@ script.RemoteReference = (
 
 script.SharedReference = {
    sharedId: script.SharedId
-   
+
    ? handle: script.Handle,
    Extensible
 }
 
 script.RemoteObjectReference = {
    handle: script.Handle,
-   
+
    ? sharedId: script.SharedId
    Extensible
 }
@@ -729,14 +729,16 @@ script.FunctionRemoteValue = {
 }
 
 script.RegExpRemoteValue = {
+  script.RegExpLocalValue,
   ? handle: script.Handle,
   ? internalId: script.InternalId,
-} .and script.RegExpLocalValue
+}
 
 script.DateRemoteValue = {
+  script.DateLocalValue,
   ? handle: script.Handle,
   ? internalId: script.InternalId,
-} .and script.DateLocalValue
+}
 
 script.MapRemoteValue = {
   type: "map",
@@ -1087,11 +1089,11 @@ input.PointerCommonProperties = (
   ? height: js-uint .default 1,
   ? pressure: float .default 0.0,
   ? tangentialPressure: float .default 0.0,
-  ? twist: (0..359) .default 0,
+  ? twist: 0..359 .default 0,
   ; 0 .. Math.PI / 2
-  ? altitudeAngle: (0.0..1.5707963267948966) .default 0.0,
+  ? altitudeAngle: 0.0..1.5707963267948966 .default 0.0,
   ; 0 .. 2 * Math.PI
-  ? azimuthAngle: (0.0..6.283185307179586) .default 0.0,
+  ? azimuthAngle: 0.0..6.283185307179586 .default 0.0,
 )
 
 input.Origin = "viewport" / "pointer" / input.ElementOrigin

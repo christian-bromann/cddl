@@ -30,6 +30,7 @@ export const handler = (argv: ArgumentsCamelCase<ValidateArguments>) => {
     try {
         parse(filePath)
 
+
         /**
          * ToDo check for
          *  - missing group declarations

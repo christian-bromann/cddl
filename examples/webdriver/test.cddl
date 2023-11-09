@@ -1,3 +1,0 @@
-browsingContext.PrintParameters = {
-    ? scale: (0.1..2.0) .default 1.0,
-}
