@@ -66,4 +66,4 @@ The CDDL AST is defined in [source files](./src/ast.ts). The `parse` method retu
 
 ---
 
-If you are interested in this project, please feel free to contribute ideas or code patches. Have a look at our [contributing](https://github.com/christian-bromann/cddl/blob/master/LICENSE) guidelines](https://github.com/christian-bromann/cddl/blob/master/LICENSE) to get started.
+If you are interested in this project, please feel free to contribute ideas or code patches. Have a look at our [contributing guidelines](https://github.com/christian-bromann/cddl/blob/master/CONTRIBUTING.md) to get started.
