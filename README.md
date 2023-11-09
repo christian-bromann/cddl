@@ -1,4 +1,4 @@
-CDDL ![Test](https://github.com/christian-bromann/cddl/workflows/Test/badge.svg?branch=master)
+CDDL [![Test](https://github.com/christian-bromann/cddl/actions/workflows/test.yml/badge.svg)](https://github.com/christian-bromann/cddl/actions/workflows/test.yml)
 ====
 
 > Concise data definition language ([RFC 8610](https://tools.ietf.org/html/rfc8610)) implementation and JSON validator in Node.js.
