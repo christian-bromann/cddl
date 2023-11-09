@@ -224,10 +224,7 @@ export default class Lexer {
                 break
             }
 
-            if (hasSpecialNumberCharacter(this.ch)) {
-                foundSpecialCharacter = true
-            }
-
+            foundSpecialCharacter = hasSpecialNumberCharacter(this.ch)
             this.readChar() // eat any character until a non digit or a 2nd dot
         }
 

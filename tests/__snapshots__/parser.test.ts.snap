@@ -1972,7 +1972,7 @@ exports[`parser > can parse operators 1`] = `
               "Type": "range",
               "Unwrapped": false,
               "Value": {
-                "Inclusive": false,
+                "Inclusive": true,
                 "Max": {
                   "Type": "literal",
                   "Unwrapped": false,
@@ -1981,7 +1981,7 @@ exports[`parser > can parse operators 1`] = `
                 "Min": {
                   "Type": "literal",
                   "Unwrapped": false,
-                  "Value": 0,
+                  "Value": 0.1,
                 },
               },
             },
@@ -2277,7 +2277,7 @@ exports[`parser > can parse ranges 1`] = `
         "Type": "range",
         "Unwrapped": false,
         "Value": {
-          "Inclusive": false,
+          "Inclusive": true,
           "Max": {
             "Type": "literal",
             "Unwrapped": false,
@@ -2286,7 +2286,42 @@ exports[`parser > can parse ranges 1`] = `
           "Min": {
             "Type": "literal",
             "Unwrapped": false,
-            "Value": -900719925474099,
+            "Value": -9007199254740991,
+          },
+        },
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "scale",
+    "PropertyType": [
+      {
+        "Operator": {
+          "Type": "default",
+          "Value": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 1,
+          },
+        },
+        "Type": {
+          "Type": "range",
+          "Unwrapped": false,
+          "Value": {
+            "Inclusive": true,
+            "Max": {
+              "Type": "literal",
+              "Unwrapped": false,
+              "Value": 2,
+            },
+            "Min": {
+              "Type": "literal",
+              "Unwrapped": false,
+              "Value": 0.1,
+            },
           },
         },
       },

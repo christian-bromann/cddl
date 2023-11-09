@@ -8,3 +8,4 @@ min..max = 0
 byte2 = min..max...first-non-byte
 byte3 = min..max ... first-non-byte
 js-int = -9007199254740991..9007199254740991
+scale = 0.1..2.0 .default 1.0
