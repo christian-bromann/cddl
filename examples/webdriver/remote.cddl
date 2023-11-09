@@ -31,133 +31,198 @@ SessionCommand = (
 )
 
 session.CapabilitiesRequest = {
-  ?alwaysMatch: session.CapabilityRequest,
-  ?firstMatch: [*session.CapabilityRequest]
+  ? alwaysMatch: session.CapabilityRequest,
+  ? firstMatch: [*session.CapabilityRequest]
 }
 
 session.CapabilityRequest = {
-  ?acceptInsecureCerts: bool,
-  ?browserName: text,
-  ?browserVersion: text,
-  ?platformName: text,
-  ?proxy: {
-    ?proxyType: "pac" / "direct" / "autodetect" / "system" / "manual",
-    ?proxyAutoconfigUrl: text,
-    ?ftpProxy: text,
-    ?httpProxy: text,
-    ?noProxy: [*text],
-    ?sslProxy: text,
-    ?socksProxy: text,
-    ?socksVersion: 0..255,
+  ? acceptInsecureCerts: bool,
+  ? browserName: text,
+  ? browserVersion: text,
+  ? platformName: text,
+  ? proxy: {
+    ? proxyType: "pac" / "direct" / "autodetect" / "system" / "manual",
+    ? proxyAutoconfigUrl: text,
+    ? ftpProxy: text,
+    ? httpProxy: text,
+    ? noProxy: [*text],
+    ? sslProxy: text,
+    ? socksProxy: text,
+    ? socksVersion: 0..255,
   },
   Extensible
 };
 
 session.SubscriptionRequest = {
   events: [*text],
-  ?contexts: [*browsingContext.BrowsingContext],
+  ? contexts: [*browsingContext.BrowsingContext],
 }
 
-session.Status = {
+session.Status = (
   method: "session.status",
   params: EmptyParams,
-}
+)
 
-session.New = {
+session.New = (
   method: "session.new",
   params: session.NewParameters
-}
+)
 
 session.NewParameters = {
   capabilities: session.CapabilitiesRequest
 }
 
-session.End = {
+session.End = (
   method: "session.end",
   params: EmptyParams
-}
+)
 
 
-session.Subscribe = {
+session.Subscribe = (
   method: "session.subscribe",
   params: session.SubscriptionRequest
-}
+)
 
-session.Unsubscribe = {
+session.Unsubscribe = (
   method: "session.unsubscribe",
   params: session.SubscriptionRequest
-}
+)
 
 BrowserCommand = (
   browser.Close
 )
 
-browser.Close = {
+browser.Close = (
   method: "browser.close",
   params: EmptyParams,
-}
+)
 
 BrowsingContextCommand = (
+  browsingContext.Activate //
   browsingContext.CaptureScreenshot //
   browsingContext.Close //
   browsingContext.Create //
   browsingContext.GetTree //
   browsingContext.HandleUserPrompt //
+  browsingContext.LocateNodes //
   browsingContext.Navigate //
   browsingContext.Print //
-  browsingContext.Reload
+  browsingContext.Reload //
+  browsingContext.SetViewport //
+  browsingContext.TraverseHistory
 )
 
 browsingContext.BrowsingContext = text;
+
+browsingContext.Locator = (
+   browsingContext.CssLocator /
+   browsingContext.InnerTextLocator /
+   browsingContext.XPathLocator
+)
+
+browsingContext.CssLocator = {
+   type: "css",
+   value: text
+}
+
+browsingContext.InnerTextLocator = {
+   type: "innerText",
+   value: text,
+   ? ignoreCase: bool
+   ? matchType: "full" / "partial",
+   ? maxDepth: js-uint,
+}
+
+browsingContext.XPathLocator = {
+   type: "xpath",
+   value: text
+}
 
 browsingContext.Navigation = text;
 
 browsingContext.ReadinessState = "none" / "interactive" / "complete"
 
-browsingContext.CaptureScreenshot = {
+browsingContext.Activate = (
+  method: "browsingContext.activate",
+  params: browsingContext.ActivateParameters
+)
+
+browsingContext.ActivateParameters = {
+  context: browsingContext.BrowsingContext
+}
+
+browsingContext.CaptureScreenshot = (
   method: "browsingContext.captureScreenshot",
   params: browsingContext.CaptureScreenshotParameters
-}
+)
 
 browsingContext.CaptureScreenshotParameters = {
-  context: browsingContext.BrowsingContext
+  context: browsingContext.BrowsingContext,
+  ? origin: ("viewport" / "document") .default "viewport",
+  ? format: browsingContext.ImageFormat,
+  ? clip: browsingContext.ClipRectangle,
 }
 
-browsingContext.Close = {
+browsingContext.ImageFormat = {
+   type: text,
+   ? quality: 0.0..1.0,
+}
+
+browsingContext.ClipRectangle = (
+  browsingContext.BoxClipRectangle /
+  browsingContext.ElementClipRectangle
+)
+
+browsingContext.ElementClipRectangle = {
+  type: "element",
+  element: script.SharedReference
+}
+
+browsingContext.BoxClipRectangle = {
+   type: "box",
+   x: float,
+   y: float,
+   width: float,
+   height: float
+}
+
+browsingContext.Close = (
   method: "browsingContext.close",
   params: browsingContext.CloseParameters
-}
+)
 
 browsingContext.CloseParameters = {
-  context: browsingContext.BrowsingContext
+  context: browsingContext.BrowsingContext,
+  ? promptUnload: bool .default false
 }
 
-browsingContext.Create = {
+browsingContext.Create = (
   method: "browsingContext.create",
   params: browsingContext.CreateParameters
-}
+)
 
 browsingContext.CreateType = "tab" / "window"
 
 browsingContext.CreateParameters = {
   type: browsingContext.CreateType,
-  ?referenceContext: browsingContext.BrowsingContext
+  ? referenceContext: browsingContext.BrowsingContext,
+  ? background: bool .default false
 }
 
-browsingContext.GetTree = {
+browsingContext.GetTree = (
   method: "browsingContext.getTree",
   params: browsingContext.GetTreeParameters
-}
+)
 
 browsingContext.GetTreeParameters = {
-  ?maxDepth: js-uint,
-  ?root: browsingContext.BrowsingContext,
+  ? maxDepth: js-uint,
+  ? root: browsingContext.BrowsingContext,
 }
 
-browsingContext.HandleUserPrompt = {
+browsingContext.HandleUserPrompt = (
   method: "browsingContext.handleUserPrompt",
   params: browsingContext.HandleUserPromptParameters
-}
+)
 
 browsingContext.HandleUserPromptParameters = {
   context: browsingContext.BrowsingContext,
@@ -165,70 +230,287 @@ browsingContext.HandleUserPromptParameters = {
   ? userText: text,
 }
 
-browsingContext.Navigate = {
+browsingContext.LocateNodes = (
+  method: "browsingContext.locateNodes",
+  params: browsingContext.LocateNodesParameters
+)
+
+browsingContext.LocateNodesParameters = {
+   context: browsingContext.BrowsingContext,
+   locator: browsingContext.Locator,
+   ? maxNodeCount: (js-uint .ge 1),
+   ? ownership: script.ResultOwnership,
+   ? sandbox: text,
+   ? serializationOptions: script.SerializationOptions,
+   ? startNodes: [ + script.SharedReference ]
+}
+
+browsingContext.Navigate = (
   method: "browsingContext.navigate",
   params: browsingContext.NavigateParameters
-}
+)
 
 browsingContext.NavigateParameters = {
   context: browsingContext.BrowsingContext,
   url: text,
-  ?wait: browsingContext.ReadinessState,
+  ? wait: browsingContext.ReadinessState,
 }
 
-browsingContext.Print = {
+browsingContext.Print = (
   method: "browsingContext.print",
   params: browsingContext.PrintParameters
-}
+)
 
 browsingContext.PrintParameters = {
   context: browsingContext.BrowsingContext,
-  ?background: bool .default false,
-  ?margin: browsingContext.PrintMarginParameters,
-  ?orientation: ("portrait" / "landscape") .default "portrait",
-  ?page: browsingContext.PrintPageParameters,
-  ?pageRanges: [*(js-uint / text)],
-  ?scale: 0.1..2.0 .default 1.0,
-  ?shrinkToFit: bool .default true,
+  ? background: bool .default false,
+  ? margin: browsingContext.PrintMarginParameters,
+  ? orientation: ("portrait" / "landscape") .default "portrait",
+  ? page: browsingContext.PrintPageParameters,
+  ? pageRanges: [*(js-uint / text)],
+  ? scale: (0.1..2.0) .default 1.0,
+  ? shrinkToFit: bool .default true,
 }
 
 browsingContext.PrintMarginParameters = {
-  ?bottom: (float .ge 0.0) .default 1.0,
-  ?left: (float .ge 0.0) .default 1.0,
-  ?right: (float .ge 0.0) .default 1.0,
-  ?top: (float .ge 0.0) .default 1.0,
+  ? bottom: (float .ge 0.0) .default 1.0,
+  ? left: (float .ge 0.0) .default 1.0,
+  ? right: (float .ge 0.0) .default 1.0,
+  ? top: (float .ge 0.0) .default 1.0,
 }
 
+; Minimum size is 1pt x 1pt. Conversion follows from
+; https://www.w3.org/TR/css3-values/#absolute-lengths
 browsingContext.PrintPageParameters = {
-  ?height: (float .ge 0.0) .default 27.94,
-  ?width: (float .ge 0.0) .default 21.59,
+  ? height: (float .ge 0.0352) .default 27.94,
+  ? width: (float .ge 0.0352) .default 21.59,
 }
 
-browsingContext.Reload = {
+browsingContext.Reload = (
   method: "browsingContext.reload",
   params: browsingContext.ReloadParameters
-}
+)
 
 browsingContext.ReloadParameters = {
   context: browsingContext.BrowsingContext,
-  ?ignoreCache: bool,
-  ?wait: browsingContext.ReadinessState,
+  ? ignoreCache: bool,
+  ? wait: browsingContext.ReadinessState,
+}
+
+browsingContext.SetViewport = (
+  method: "browsingContext.setViewport",
+  params: browsingContext.SetViewportParameters
+)
+
+browsingContext.SetViewportParameters = {
+  context: browsingContext.BrowsingContext,
+  ? viewport: browsingContext.Viewport / null,
+  ? devicePixelRatio: (float .gt 0.0) / null,
+}
+
+browsingContext.Viewport = {
+  width: js-uint,
+  height: js-uint,
+}
+
+BrowsingContext.TraverseHistory = {
+  method: "browsingContext.traverseHistory",
+  params: browsingContext.TraverseHistoryParameters
+}
+
+browsingContext.TraverseHistoryParameters = {
+  context: browsingContext.BrowsingContext,
+  delta: js-int,
 }
 
 
 NetworkCommand = (
+  network.AddIntercept //
+  network.ContinueRequest //
+  network.ContinueResponse //
+  network.ContinueWithAuth //
+  network.FailRequest //
+  network.ProvideResponse //
+  network.RemoveIntercept
 )
 
 
+network.AuthCredentials = {
+  type: "password",
+  username: text,
+  password: text,
+}
+
+network.BytesValue = network.StringValue / network.Base64Value;
+
+network.StringValue = {
+  type: "string",
+  value: text,
+}
+
+network.Base64Value = {
+  type: "base64",
+  value: text,
+}
+
+network.Cookie = {
+    name: text,
+    value: network.BytesValue,
+    domain: text,
+    path: text,
+    size: js-uint,
+    httpOnly: bool,
+    secure: bool,
+    sameSite: "strict" / "lax" / "none",
+    ? expiry: js-uint,
+};
+
+network.CookieHeader = {
+    name: text,
+    value: network.BytesValue,
+};
+
+network.Header = {
+  name: text,
+  value: network.BytesValue,
+}
+
+network.Intercept = text
+
 network.Request = text;
 
+network.SetCookieHeader = {
+    name: text,
+    value: network.BytesValue,
+    ? domain: text,
+    ? httpOnly: bool,
+    ? expiry: text,
+    ? maxAge: js-int,
+    ? path: text,
+    ? sameSite: "strict" / "lax" / "none",
+    ? secure: bool,
+}
+
+network.UrlPattern = (
+  network.UrlPatternPattern /
+  network.UrlPatternString
+)
+
+network.UrlPatternPattern = {
+    type: "pattern",
+    ?protocol: text,
+    ?hostname: text,
+    ?port: text,
+    ?pathname: text,
+    ?search: text,
+}
+
+
+network.UrlPatternString = {
+    type: "string",
+    pattern: text,
+}
+
+
+network.AddIntercept = (
+  method: "network.addIntercept",
+  params: network.AddInterceptParameters
+)
+
+network.AddInterceptParameters = {
+  phases: [+network.InterceptPhase],
+  ? urlPatterns: [*network.UrlPattern],
+}
+
+network.InterceptPhase = "beforeRequestSent" / "responseStarted" /
+                         "authRequired"
+
+network.ContinueRequest = (
+  method: "network.continueRequest",
+  params: network.ContinueRequestParameters
+)
+
+network.ContinueRequestParameters = {
+  request: network.Request,
+  ?body: network.BytesValue,
+  ?cookies: [*network.CookieHeader],
+  ?headers: [*network.Header],
+  ?method: text,
+  ?url: text,
+}
+
+network.ContinueResponse = (
+  method: "network.continueResponse",
+  params: network.ContinueResponseParameters
+)
+
+network.ContinueResponseParameters = {
+  request: network.Request,
+  ?cookies: [*network.SetCookieHeader]
+  ?credentials: network.AuthCredentials,
+  ?headers: [*network.Header],
+  ?reasonPhrase: text,
+  ?statusCode: js-uint,
+}
+
+network.ContinueWithAuth = (
+  method: "network.continueWithAuth",
+  params: network.ContinueWithAuthParameters
+)
+
+network.ContinueWithAuthParameters = {
+  request: network.Request,
+  (network.ContinueWithAuthCredentials // network.ContinueWithAuthNoCredentials)
+}
+
+network.ContinueWithAuthCredentials = (
+  action: "provideCredentials", 
+  credentials: network.AuthCredentials
+)
+
+network.ContinueWithAuthNoCredentials = (
+  action: "default" / "cancel"
+)
+
+network.FailRequest = (
+  method: "network.failRequest",
+  params: network.FailRequestParameters
+)
+
+network.FailRequestParameters = {
+  request: network.Request,
+}
+
+network.ProvideResponse = (
+  method: "network.provideResponse",
+  params: network.ProvideResponseParameters
+)
+
+network.ProvideResponseParameters = {
+  request: network.Request,
+  ?body: network.BytesValue,
+  ?cookies: [*network.SetCookieHeader],
+  ?headers: [*network.Header],
+  ?reasonPhrase: text,
+  ?statusCode: js-uint,
+}
+
+network.RemoveIntercept = (
+  method: "network.removeIntercept",
+  params: network.RemoveInterceptParameters
+)
+
+network.RemoveInterceptParameters = {
+  intercept: network.Intercept
+}
+
 ScriptCommand = (
-  script.AddPreloadScriptCommand //
+  script.AddPreloadScript //
   script.CallFunction //
   script.Disown //
   script.Evaluate //
   script.GetRealms //
-  script.RemovePreloadScriptCommand
+  script.RemovePreloadScript
 )
 
 script.Channel = text;
@@ -240,12 +522,12 @@ script.ChannelValue = {
 
 script.ChannelProperties = {
   channel: script.Channel,
-  ?serializationOptions: script.SerializationOptions,
-  ?ownership: script.ResultOwnership,
+  ? serializationOptions: script.SerializationOptions,
+  ? ownership: script.ResultOwnership,
 }
 
 script.EvaluateResult = (
-  script.EvaluateResultSuccess //
+  script.EvaluateResultSuccess /
   script.EvaluateResultException
 )
 
@@ -271,13 +553,17 @@ script.ExceptionDetails = {
 
 script.Handle = text;
 
+script.InternalId = text;
+
 script.LocalValue = (
-  script.PrimitiveProtocolValue //
-  script.ArrayLocalValue //
-  script.DateLocalValue //
-  script.MapLocalValue //
-  script.ObjectLocalValue //
-  script.RegExpLocalValue //
+  script.RemoteReference /
+  script.PrimitiveProtocolValue /
+  script.ChannelValue /
+  script.ArrayLocalValue /
+  script.DateLocalValue /
+  script.MapLocalValue /
+  script.ObjectLocalValue /
+  script.RegExpLocalValue /
   script.SetLocalValue
 )
 
@@ -307,7 +593,7 @@ script.ObjectLocalValue = {
 
 script.RegExpValue = {
   pattern: text,
-  ?flags: text,
+  ? flags: text,
 }
 
 script.RegExpLocalValue = {
@@ -325,11 +611,11 @@ script.PreloadScript = text;
 script.Realm = text;
 
 script.PrimitiveProtocolValue = (
-  script.UndefinedValue //
-  script.NullValue //
-  script.StringValue //
-  script.NumberValue //
-  script.BooleanValue //
+  script.UndefinedValue /
+  script.NullValue /
+  script.StringValue /
+  script.NumberValue /
+  script.BooleanValue /
   script.BigIntValue
 )
 
@@ -369,50 +655,48 @@ script.RealmType = "window" / "dedicated-worker" / "shared-worker" / "service-wo
 
 
 script.RemoteReference = (
-  script.SharedReference //
+  script.SharedReference /
   script.RemoteObjectReference
 )
 
 script.SharedReference = {
    sharedId: script.SharedId
-
-   ?handle: script.Handle,
+   
+   ? handle: script.Handle,
    Extensible
 }
 
 script.RemoteObjectReference = {
    handle: script.Handle,
-
-   ?sharedId: script.SharedId
+   
+   ? sharedId: script.SharedId
    Extensible
 }
 
 script.RemoteValue = (
-  script.PrimitiveProtocolValue //
-  script.SymbolRemoteValue //
-  script.ArrayRemoteValue //
-  script.ObjectRemoteValue //
-  script.FunctionRemoteValue //
-  script.RegExpRemoteValue //
-  script.DateRemoteValue //
-  script.MapRemoteValue //
-  script.SetRemoteValue //
-  script.WeakMapRemoteValue //
-  script.WeakSetRemoteValue //
-  script.IteratorRemoteValue //
-  script.GeneratorRemoteValue //
-  script.ErrorRemoteValue //
-  script.ProxyRemoteValue //
-  script.PromiseRemoteValue //
-  script.TypedArrayRemoteValue //
-  script.ArrayBufferRemoteValue //
-  script.NodeListRemoteValue //
-  script.HTMLCollectionRemoteValue //
-  script.NodeRemoteValue //
+  script.PrimitiveProtocolValue /
+  script.SymbolRemoteValue /
+  script.ArrayRemoteValue /
+  script.ObjectRemoteValue /
+  script.FunctionRemoteValue /
+  script.RegExpRemoteValue /
+  script.DateRemoteValue /
+  script.MapRemoteValue /
+  script.SetRemoteValue /
+  script.WeakMapRemoteValue /
+  script.WeakSetRemoteValue /
+  script.IteratorRemoteValue /
+  script.GeneratorRemoteValue /
+  script.ErrorRemoteValue /
+  script.ProxyRemoteValue /
+  script.PromiseRemoteValue /
+  script.TypedArrayRemoteValue /
+  script.ArrayBufferRemoteValue /
+  script.NodeListRemoteValue /
+  script.HTMLCollectionRemoteValue /
+  script.NodeRemoteValue /
   script.WindowProxyRemoteValue
 )
-
-script.InternalId = js-uint;
 
 script.ListRemoteValue = [*script.RemoteValue];
 
@@ -420,156 +704,159 @@ script.MappingRemoteValue = [*[(script.RemoteValue / text), script.RemoteValue]]
 
 script.SymbolRemoteValue = {
   type: "symbol",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.ArrayRemoteValue = {
   type: "array",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
-  ?value: script.ListRemoteValue,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
+  ? value: script.ListRemoteValue,
 }
 
 script.ObjectRemoteValue = {
   type: "object",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
-  ?value: script.MappingRemoteValue,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
+  ? value: script.MappingRemoteValue,
 }
 
 script.FunctionRemoteValue = {
   type: "function",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.RegExpRemoteValue = {
-  script.RegExpLocalValue,
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
-}
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
+} .and script.RegExpLocalValue
 
 script.DateRemoteValue = {
-  script.DateLocalValue,
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
-}
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
+} .and script.DateLocalValue
 
 script.MapRemoteValue = {
   type: "map",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
-  ?value: script.MappingRemoteValue,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
+  ? value: script.MappingRemoteValue,
 }
 
 script.SetRemoteValue = {
   type: "set",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
-  ?value: script.ListRemoteValue
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
+  ? value: script.ListRemoteValue
 }
 
 script.WeakMapRemoteValue = {
   type: "weakmap",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.WeakSetRemoteValue = {
   type: "weakset",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.IteratorRemoteValue = {
   type: "iterator",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.GeneratorRemoteValue = {
   type: "generator",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.ErrorRemoteValue = {
   type: "error",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.ProxyRemoteValue = {
   type: "proxy",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.PromiseRemoteValue = {
   type: "promise",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.TypedArrayRemoteValue = {
   type: "typedarray",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.ArrayBufferRemoteValue = {
   type: "arraybuffer",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
 }
 
 script.NodeListRemoteValue = {
   type: "nodelist",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
-  ?value: script.ListRemoteValue,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
+  ? value: script.ListRemoteValue,
 }
 
 script.HTMLCollectionRemoteValue = {
   type: "htmlcollection",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
-  ?value: script.ListRemoteValue,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
+  ? value: script.ListRemoteValue,
 }
 
 script.NodeRemoteValue = {
   type: "node",
-  ?sharedId: script.SharedId,
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
-  ?value: script.NodeProperties,
+  ? sharedId: script.SharedId,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId,
+  ? value: script.NodeProperties,
 }
 
 script.NodeProperties = {
   nodeType: js-uint,
   childNodeCount: js-uint,
-  ?attributes: {*text => text},
-  ?children: [*script.NodeRemoteValue],
-  ?localName: text,
-  ?mode: "open" / "closed",
-  ?namespaceURI: text,
-  ?nodeValue: text,
-  ?shadowRoot: script.NodeRemoteValue / null,
+  ? attributes: {*text => text},
+  ? children: [*script.NodeRemoteValue],
+  ? localName: text,
+  ? mode: "open" / "closed",
+  ? namespaceURI: text,
+  ? nodeValue: text,
+  ? shadowRoot: script.NodeRemoteValue / null,
 }
 
 script.WindowProxyRemoteValue = {
   type: "window",
-  ?handle: script.Handle,
-  ?internalId: script.InternalId,
+  value: script.WindowProxyProperties,
+  ? handle: script.Handle,
+  ? internalId: script.InternalId
+}
+
+script.WindowProxyProperties = {
+  context: browsingContext.BrowsingContext
 }
 
 script.ResultOwnership = "root" / "none"
 
 script.SerializationOptions = {
-  ?maxDomDepth: (js-uint / null) .default 0,
-  ?maxObjectDepth: (js-uint / null) .default null,
-  ?includeShadowTree: ("none" / "open" / "all") .default "none",
+  ? maxDomDepth: (js-uint / null) .default 0,
+  ? maxObjectDepth: (js-uint / null) .default null,
+  ? includeShadowTree: ("none" / "open" / "all") .default "none",
 }
 
 script.SharedId = text;
@@ -591,84 +878,80 @@ script.RealmTarget = {
 
 script.ContextTarget = {
   context: browsingContext.BrowsingContext,
-  ?sandbox: text
+  ? sandbox: text
 }
 
 script.Target = (
-  script.RealmTarget //
+  script.RealmTarget /
   script.ContextTarget
 );
 
-script.AddPreloadScriptCommand = {
+script.AddPreloadScript = (
   method: "script.addPreloadScript",
   params: script.AddPreloadScriptParameters
-}
+)
 
 script.AddPreloadScriptParameters = {
   functionDeclaration: text,
-  ?arguments: [*script.ChannelValue],
-  ?sandbox: text
+  ? arguments: [*script.ChannelValue],
+  ? contexts: [+browsingContext.BrowsingContext],
+  ? sandbox: text
 }
 
-script.Disown = {
+script.Disown = (
   method: "script.disown",
   params: script.DisownParameters
-}
+)
 
 script.DisownParameters = {
-  handles: [script.Handle]
+  handles: [*script.Handle]
   target: script.Target;
 }
 
-script.CallFunction = {
+script.CallFunction = (
   method: "script.callFunction",
   params: script.CallFunctionParameters
-}
+)
 
 script.CallFunctionParameters = {
   functionDeclaration: text,
   awaitPromise: bool,
   target: script.Target,
-  ?arguments: [*script.ArgumentValue],
-  ?resultOwnership: script.ResultOwnership,
-  ?serializationOptions: script.SerializationOptions,
-  ?this: script.ArgumentValue,
+  ? arguments: [*script.LocalValue],
+  ? resultOwnership: script.ResultOwnership,
+  ? serializationOptions: script.SerializationOptions,
+  ? this: script.LocalValue,
+  ? userActivation: bool .default false,
 }
 
-script.ArgumentValue = (
-  script.RemoteReference //
-  script.LocalValue //
-  script.ChannelValue
-);
-
-
-script.Evaluate = {
+script.Evaluate = (
   method: "script.evaluate",
   params: script.EvaluateParameters
-}
+)
 
 script.EvaluateParameters = {
   expression: text,
   target: script.Target,
   awaitPromise: bool,
-  ?resultOwnership: script.ResultOwnership,
-  ?serializationOptions: script.SerializationOptions,
+  ? resultOwnership: script.ResultOwnership,
+  ? serializationOptions: script.SerializationOptions,
+  ? userActivation: bool .default false,
 }
 
-script.GetRealms = {
+script.GetRealms = (
   method: "script.getRealms",
   params: script.GetRealmsParameters
-}
+)
 
 script.GetRealmsParameters = {
-  ?context: browsingContext.BrowsingContext,
-  ?type: script.RealmType,
+  ? context: browsingContext.BrowsingContext,
+  ? type: script.RealmType,
 }
 
-script.RemovePreloadScriptCommand = {
+script.RemovePreloadScript = (
   method: "script.removePreloadScript",
   params: script.RemovePreloadScriptParameters
-}
+)
 
 script.RemovePreloadScriptParameters = {
   script: script.PreloadScript
@@ -685,10 +968,10 @@ input.ElementOrigin = {
   element: script.SharedReference
 }
 
-input.PerformActions = {
+input.PerformActions = (
   method: "input.performActions",
   params: input.PerformActionsParameters
-};
+)
 
 input.PerformActionsParameters = {
   context: browsingContext.BrowsingContext,
@@ -696,9 +979,9 @@ input.PerformActionsParameters = {
 }
 
 input.SourceActions = (
-  input.NoneSourceActions //
-  input.KeySourceActions //
-  input.PointerSourceActions //
+  input.NoneSourceActions /
+  input.KeySourceActions /
+  input.PointerSourceActions /
   input.WheelSourceActions
 )
 
@@ -717,8 +1000,8 @@ input.KeySourceActions = {
 }
 
 input.KeySourceAction = (
-  input.PauseAction //
-  input.KeyDownAction //
+  input.PauseAction /
+  input.KeyDownAction /
   input.KeyUpAction
 )
 
@@ -732,13 +1015,13 @@ input.PointerSourceActions = {
 input.PointerType = "mouse" / "pen" / "touch"
 
 input.PointerParameters = {
-  ?pointerType: input.PointerType .default "mouse"
+  ? pointerType: input.PointerType .default "mouse"
 }
 
 input.PointerSourceAction = (
-  input.PauseAction //
-  input.PointerDownAction //
-  input.PointerUpAction //
+  input.PauseAction /
+  input.PointerDownAction /
+  input.PointerUpAction /
   input.PointerMoveAction
 )
 
@@ -749,7 +1032,7 @@ input.WheelSourceActions = {
 }
 
 input.WheelSourceAction = (
-  input.PauseAction //
+  input.PauseAction /
   input.WheelScrollAction
 )
 
@@ -804,26 +1087,19 @@ input.PointerCommonProperties = (
   ? height: js-uint .default 1,
   ? pressure: float .default 0.0,
   ? tangentialPressure: float .default 0.0,
-  ? twist: 0..359 .default 0,
-  (input.TiltProperties // input.AngleProperties)
-)
-
-input.AngleProperties = (
-  ? altitudeAngle: float .default 0.0,
-  ? azimuthAngle: float .default 0.0,
-)
-
-input.TiltProperties = (
-  ? tiltX: -90..90 .default 0,
-  ? tiltY: -90..90 .default 0,
+  ? twist: (0..359) .default 0,
+  ; 0 .. Math.PI / 2
+  ? altitudeAngle: (0.0..1.5707963267948966) .default 0.0,
+  ; 0 .. 2 * Math.PI
+  ? azimuthAngle: (0.0..6.283185307179586) .default 0.0,
 )
 
 input.Origin = "viewport" / "pointer" / input.ElementOrigin
 
-input.ReleaseActions = {
+input.ReleaseActions = (
   method: "input.releaseActions",
   params: input.ReleaseActionsParameters
-};
+)
 
 input.ReleaseActionsParameters = {
   context: browsingContext.BrowsingContext,
