@@ -62,7 +62,7 @@ console.log(ast)
  */
 ```
 
-The CDDL AST is defined in [source files](./src/ast.ts). The `parse` method returns `Assignment[]`.
+Read the full documentation on this AST in the [`/docs`](/docs/README.md) directory.
 
 ---
 
