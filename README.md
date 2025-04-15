@@ -8,6 +8,10 @@ CDDL expresses Concise Binary Object Representation (CBOR) data structures ([RFC
 There are also CDDL parsers for other languages:
 - Rust: [anweiss/cddl](https://github.com/anweiss/cddl)
 
+The package is currently mostly used to help generate typed interfaces for the WebDriver Bidi specification in the following projects:
+- [WebdriverIO](https://webdriver.io) - via the [`cddl2ts`](https://www.npmjs.com/package/cddl2ts) package and [this script](https://github.com/webdriverio/webdriverio/blob/a2ae35332f9b3fc9490136df1ac3d2e14c1e35b6/scripts/bidi/index.ts)
+- [Selenium](https://selenium.dev) - via the [`cddl2java`](https://github.com/christian-bromann/cddl2java) package
+
 __Note:__ this is __work in progress__, feel free to have a look at the code or contribute but don't use this for anything yet!
 
 ## Install
