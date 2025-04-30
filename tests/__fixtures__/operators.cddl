@@ -24,3 +24,12 @@ someGroup = {
 
 optional = tstr .default "foobar"
 orientation = ("portrait" / "landscape") .default "portrait"
+
+group1 = {
+    name: tstr
+    value: tstr
+}
+
+group2 = {
+    handle: tstr
+} .and group1

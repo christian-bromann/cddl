@@ -2108,6 +2108,76 @@ exports[`parser > can parse operators 1`] = `
     ],
     "Type": "variable",
   },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "group1",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "name",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "tstr",
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "value",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "tstr",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "group2",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "handle",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "tstr",
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Operator": {
+          "Type": "and",
+          "Value": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "group1",
+          },
+        },
+        "Type": "group",
+      },
+    ],
+    "Type": "group",
+  },
 ]
 `;
 

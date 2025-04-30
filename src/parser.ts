@@ -420,6 +420,32 @@ export default class Parser {
              * if `}` is found we are at the end of the group
              */
             if (closingTokens.includes(this.curToken.Type)) {
+                /**
+                 * Handle the case where a group is followed by an inclusion operator, e.g.
+                 *
+                 * group1 = {
+                 *   name: tstr,
+                 *   age: number,
+                 * }
+                 *
+                 * group2 = {
+                 *   handle: tstr
+                 * } .and group1
+                 *
+                 */
+                while (this.peekToken.Type === Tokens.DOT) {
+                    this.nextToken()
+                    if (this.isOperator()) {
+                        valuesOrProperties.push({
+                            Name: '',
+                            Type: 'group',
+                            Occurrence: DEFAULT_OCCURRENCE,
+                            Operator: this.parseOperator(),
+                            Comments: [],
+                            HasCut: false,
+                        })
+                    }
+                }
                 break
             }
 
