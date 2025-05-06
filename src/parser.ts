@@ -173,9 +173,11 @@ export default class Parser {
          * parse operator assignments, e.g. `ip4 = (float .ge 0.0) .default 1.0`
          */
         if (closingTokens.length === 1 && this.peekToken.Type === Tokens.DOT) {
+            const propertyType = this.parsePropertyType()
+            const operator = this.isOperator() ? this.parseOperator() : undefined
             const prop: PropertyType = {
-                Type: this.parsePropertyType(),
-                Operator: this.parseOperator()
+                Type: propertyType,
+                ...(operator ? { Operator: operator } : {})
             } as NativeTypeWithOperator
 
             this.nextToken() // eat closing token
@@ -372,7 +374,7 @@ export default class Parser {
              */
             const props = this.parseAssignmentValue()
             const operator = this.isOperator() ? this.parseOperator() : undefined
-            if (!isChoice &&this.curToken.Type === Tokens.SLASH) {
+            if (!isChoice && this.curToken.Type === Tokens.SLASH) {
                 this.nextToken()
                 const nextType = this.parsePropertyType()
                 if (Array.isArray(props)) {
@@ -780,7 +782,13 @@ export default class Parser {
         while (this.curToken.Type === Tokens.SLASH) {
             this.nextToken() // eat `/`
             propertyTypes.push(this.parsePropertyType())
-            this.nextToken()
+            if (!this.isOperator()) {
+                /**
+                 * If we are not parsing an operator, we need to eat the next token;
+                 * otherwise, the operator will be parsed by the caller
+                 */
+                this.nextToken()
+            }
 
             /**
              * ensure we don't go into the next choice, e.g.:
