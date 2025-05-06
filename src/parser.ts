@@ -372,6 +372,18 @@ export default class Parser {
              */
             const props = this.parseAssignmentValue()
             const operator = this.isOperator() ? this.parseOperator() : undefined
+            if (!isChoice &&this.curToken.Type === Tokens.SLASH) {
+                this.nextToken()
+                const nextType = this.parsePropertyType()
+                if (Array.isArray(props)) {
+                    /**
+                     * property has not yet been flagged as a choice, but is part
+                     * of one, e.g. `(float .ge 1.0) / null`
+                     */
+                    props.push(nextType)
+                    this.nextToken()
+                }
+            }
             if (Array.isArray(props)) {
                 /**
                  * property has multiple types (e.g. `float / tstr / int`)
@@ -683,6 +695,29 @@ export default class Parser {
                     Max: this.parsePropertyType() as RangePropertyReference
                 },
                 Unwrapped: isUnwrapped
+            }
+
+            if (!isGroupedRange && this.peekToken.Literal === Tokens.RPAREN) {
+                /**
+                 * If we are at the end of a grouped range, and this was called
+                 * on the first item of the range as opposed to the opening
+                 * parenthesis, isGroupedRange will not be set to true at this
+                 * point. We need to advance to the closing parenthesis, and if
+                 * the next token is an operator, we need to advance to the dot
+                 * so that parseOperator will work properly.
+                 * e.g.
+                 *
+                 * ```
+                 * (1.0..2.0) .default 1.5
+                 * ```
+                 *
+                 * This will be called on the `1.0` and then the `2.0` will be parsed
+                 * as a grouped range.
+                 */
+                this.nextToken()
+                if (this.peekToken.Type === Tokens.DOT) {
+                    isGroupedRange = true
+                }
             }
 
             if (isGroupedRange) {
