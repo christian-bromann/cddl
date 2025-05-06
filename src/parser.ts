@@ -783,6 +783,10 @@ export default class Parser {
             this.nextToken() // eat `/`
             propertyTypes.push(this.parsePropertyType())
             if (!this.isOperator()) {
+                /**
+                 * If we are not parsing an operator, we need to eat the next token;
+                 * otherwise, the operator will be parsed by the caller
+                 */
                 this.nextToken()
             }
 
