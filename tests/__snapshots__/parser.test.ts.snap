@@ -2178,6 +2178,87 @@ exports[`parser > can parse operators 1`] = `
     ],
     "Type": "group",
   },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "groupedRangeWithOperator",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "name",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "tstr",
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "range",
+        "Occurrence": {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": [
+          {
+            "Operator": {
+              "Type": "default",
+              "Value": {
+                "Type": "literal",
+                "Unwrapped": false,
+                "Value": 1.5,
+              },
+            },
+            "Type": {
+              "Type": "range",
+              "Unwrapped": false,
+              "Value": {
+                "Inclusive": true,
+                "Max": {
+                  "Type": "literal",
+                  "Unwrapped": false,
+                  "Value": 2,
+                },
+                "Min": {
+                  "Type": "literal",
+                  "Unwrapped": false,
+                  "Value": 1,
+                },
+              },
+            },
+          },
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "nullable",
+        "Occurrence": {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": [
+          {
+            "Operator": {
+              "Type": "ge",
+              "Value": {
+                "Type": "literal",
+                "Unwrapped": false,
+                "Value": 1,
+              },
+            },
+            "Type": "float",
+          },
+          "null",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
 ]
 `;
 
