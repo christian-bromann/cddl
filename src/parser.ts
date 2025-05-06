@@ -374,7 +374,7 @@ export default class Parser {
              */
             const props = this.parseAssignmentValue()
             const operator = this.isOperator() ? this.parseOperator() : undefined
-            if (!isChoice &&this.curToken.Type === Tokens.SLASH) {
+            if (!isChoice && this.curToken.Type === Tokens.SLASH) {
                 this.nextToken()
                 const nextType = this.parsePropertyType()
                 if (Array.isArray(props)) {
@@ -782,7 +782,9 @@ export default class Parser {
         while (this.curToken.Type === Tokens.SLASH) {
             this.nextToken() // eat `/`
             propertyTypes.push(this.parsePropertyType())
-            this.nextToken()
+            if (!this.isOperator()) {
+                this.nextToken()
+            }
 
             /**
              * ensure we don't go into the next choice, e.g.:

@@ -38,5 +38,6 @@ groupedRangeWithOperator = {
     name: tstr,
     ? range: (1.0..2.0) .default 1.5,
     ? nullable: (float .ge 1.0) / null,
-    ? rangeOrNull: (0.0...360.0) / null
+    ? rangeOrNull: (0.0...360.0) / null,
+    ? choiceWithPostFixOperator: float / null .default null
 }
