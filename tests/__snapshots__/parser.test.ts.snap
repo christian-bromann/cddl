@@ -2203,16 +2203,16 @@ exports[`parser > can parse operators 1`] = `
           "m": Infinity,
           "n": 0,
         },
+        "Operator": {
+          "Type": "default",
+          "Value": {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 1.5,
+          },
+        },
         "Type": [
           {
-            "Operator": {
-              "Type": "default",
-              "Value": {
-                "Type": "literal",
-                "Unwrapped": false,
-                "Value": 1.5,
-              },
-            },
             "Type": {
               "Type": "range",
               "Unwrapped": false,
@@ -2301,6 +2301,68 @@ exports[`parser > can parse operators 1`] = `
         },
         "Type": [
           "float",
+          "null",
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "anotherChoice",
+        "Occurrence": {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Operator": {
+          "Type": "default",
+          "Value": "null",
+        },
+        "Type": [
+          {
+            "Type": {
+              "Type": "range",
+              "Unwrapped": false,
+              "Value": {
+                "Inclusive": false,
+                "Max": {
+                  "Type": "literal",
+                  "Unwrapped": false,
+                  "Value": 360,
+                },
+                "Min": {
+                  "Type": "literal",
+                  "Unwrapped": false,
+                  "Value": 0,
+                },
+              },
+            },
+          },
+          "null",
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "yetAnotherChoice",
+        "Occurrence": {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Operator": {
+          "Type": "default",
+          "Value": "null",
+        },
+        "Type": [
+          {
+            "Operator": {
+              "Type": "ge",
+              "Value": {
+                "Type": "literal",
+                "Unwrapped": false,
+                "Value": 1,
+              },
+            },
+            "Type": "float",
+          },
           "null",
         ],
       },

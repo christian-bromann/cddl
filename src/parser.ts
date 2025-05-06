@@ -373,7 +373,7 @@ export default class Parser {
              * parse property value
              */
             const props = this.parseAssignmentValue()
-            const operator = this.isOperator() ? this.parseOperator() : undefined
+            let operator = this.isOperator() ? this.parseOperator() : undefined
             if (!isChoice && this.curToken.Type === Tokens.SLASH) {
                 this.nextToken()
                 const nextType = this.parsePropertyType()
@@ -383,8 +383,13 @@ export default class Parser {
                      * of one, e.g. `(float .ge 1.0) / null`
                      */
                     props.push(nextType)
-                    this.nextToken()
+                    if (!this.isOperator()) {
+                        this.nextToken()
+                    }
                 }
+            }
+            if (this.isOperator()) {
+                operator = this.parseOperator()
             }
             if (Array.isArray(props)) {
                 /**
@@ -717,7 +722,7 @@ export default class Parser {
                  * as a grouped range.
                  */
                 this.nextToken()
-                if (this.peekToken.Type === Tokens.DOT) {
+                if (this.isOperator()) {
                     isGroupedRange = true
                 }
             }
