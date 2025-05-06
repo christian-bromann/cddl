@@ -395,9 +395,6 @@ export default class Parser {
                 propertyType.push(props)
             }
 
-            // const postOperator = this.isOperator() ? this.parseOperator() : undefined
-
-
             /**
              * advance comma
              */
