@@ -173,9 +173,11 @@ export default class Parser {
          * parse operator assignments, e.g. `ip4 = (float .ge 0.0) .default 1.0`
          */
         if (closingTokens.length === 1 && this.peekToken.Type === Tokens.DOT) {
+            const propertyType = this.parsePropertyType()
+            const operator = this.isOperator() ? this.parseOperator() : undefined
             const prop: PropertyType = {
-                Type: this.parsePropertyType(),
-                Operator: this.parseOperator()
+                Type: propertyType,
+                ...(operator ? { Operator: operator } : {})
             } as NativeTypeWithOperator
 
             this.nextToken() // eat closing token
@@ -392,6 +394,9 @@ export default class Parser {
             } else {
                 propertyType.push(props)
             }
+
+            // const postOperator = this.isOperator() ? this.parseOperator() : undefined
+
 
             /**
              * advance comma
