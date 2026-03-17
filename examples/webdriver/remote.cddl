@@ -866,7 +866,7 @@ network.ContinueWithAuthParameters = {
 }
 
 network.ContinueWithAuthCredentials = (
-  action: "provideCredentials",
+  action: "provideCredentials", 
   credentials: network.AuthCredentials
 )
 
@@ -1116,14 +1116,14 @@ script.RemoteReference = (
 
 script.SharedReference = {
    sharedId: script.SharedId
-
+   
    ? handle: script.Handle,
    Extensible
 }
 
 script.RemoteObjectReference = {
    handle: script.Handle,
-
+   
    ? sharedId: script.SharedId
    Extensible
 }
