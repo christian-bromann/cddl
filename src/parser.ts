@@ -35,6 +35,7 @@ export default class Parser {
 
     curToken: Token = NIL_TOKEN;
     peekToken: Token = NIL_TOKEN;
+    peekBelowToken: Token = NIL_TOKEN;
 
     constructor (filePath: string) {
         this.#filePath = filePath
@@ -42,11 +43,13 @@ export default class Parser {
 
         this.nextToken()
         this.nextToken()
+        this.nextToken()
     }
 
     private nextToken () {
         this.curToken = this.peekToken
-        this.peekToken = this.l.nextToken()
+        this.peekToken = this.peekBelowToken
+        this.peekBelowToken = this.l.nextToken()
         return true
     }
 
@@ -134,7 +137,12 @@ export default class Parser {
          *       attireBlock
          *   )
          */
-        if (closingTokens.length && this.peekToken.Type === Tokens.SLASH) {
+        if (
+            closingTokens.includes(Tokens.RPAREN) &&
+            this.peekToken.Type === Tokens.SLASH &&
+            this.peekBelowToken.Type !== Tokens.SLASH &&
+            !(this.curToken.Type === Tokens.SLASH && this.peekToken.Type === Tokens.SLASH)
+        ) {
             const propertyType: PropertyType[] = []
             while (!closingTokens.includes(this.curToken.Type)) {
                 propertyType.push(...this.parsePropertyTypes())
@@ -149,7 +157,9 @@ export default class Parser {
                     this.nextToken()
                 }
             }
-
+            if (this.curToken.Type === Tokens.RPAREN) {
+                this.nextToken();
+            }
             if (groupName) {
                 const variable: Variable = {
                     Type: 'variable',
@@ -198,6 +208,24 @@ export default class Parser {
         }
 
         while (!closingTokens.includes(this.curToken.Type)) {
+            /**
+             * check if we have a group choice instead of an assignment
+             */
+            if (this.curToken.Type === Tokens.SLASH && this.peekToken.Type === Tokens.SLASH) {
+                if (valuesOrProperties.length === 0) {
+                    throw this.parserError('Unexpected group choice operator "//" at start of group')
+                }
+
+                if (!isChoice) {
+                    const last = valuesOrProperties.pop() as Property
+                    valuesOrProperties.push([last])
+                    isChoice = true
+                }
+                this.nextToken()
+                this.nextToken()
+                continue
+            }
+
             const propertyType: PropertyType[] = []
             const comments: Comment[] = []
             let isUnwrapped = false
@@ -238,13 +266,24 @@ export default class Parser {
                 this.curToken.Literal === Tokens.LPAREN
             ) {
                 const innerGroup = this.parseAssignmentValue() as Group
-                valuesOrProperties.push({
+                const prop = {
                     HasCut: false,
                     Occurrence: occurrence,
                     Name: '',
                     Type: innerGroup,
                     Comments: []
-                })
+                }
+
+                if (isChoice) {
+                    (valuesOrProperties[valuesOrProperties.length - 1] as Property[]).push(prop)
+                } else {
+                    valuesOrProperties.push(prop)
+                }
+
+                if (this.curToken.Type === Tokens.COMMA) {
+                    this.nextToken()
+                    isChoice = false
+                }
                 continue
             }
 
@@ -374,7 +413,7 @@ export default class Parser {
              */
             const props = this.parseAssignmentValue()
             let operator = this.isOperator() ? this.parseOperator() : undefined
-            if (!isChoice && this.curToken.Type === Tokens.SLASH) {
+            if (!isChoice && this.curToken.Type === Tokens.SLASH && this.peekToken.Type !== Tokens.SLASH) {
                 this.nextToken()
                 const nextType = this.parsePropertyType()
                 if (Array.isArray(props)) {
@@ -556,11 +595,6 @@ export default class Parser {
     private openSegment (): string[] {
         if (this.curToken.Type === Tokens.LBRACE) {
             this.nextToken()
-
-            if (this.peekToken.Type === Tokens.LPAREN) {
-                this.nextToken()
-                return [Tokens.RPAREN, Tokens.RBRACE]
-            }
             return [Tokens.RBRACE]
         } else if (this.curToken.Type === Tokens.LPAREN) {
             this.nextToken()
@@ -624,6 +658,8 @@ export default class Parser {
                         Value: this.curToken.Literal === 'true',
                         Unwrapped: isUnwrapped
                     }
+                } else if (this.curToken.Literal === Tokens.LBRACE) {
+                    type = this.parseAssignmentValue();
                 } else if (this.curToken.Type === Tokens.IDENT) {
                     type = {
                         Type: 'group' as PropertyReferenceType,

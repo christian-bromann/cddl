@@ -1,0 +1,4 @@
+LiteralTest = {
+  big_int: 9007199254740995,
+  null_val: null
+}

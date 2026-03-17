@@ -1,0 +1,21 @@
+Mixins = (
+  MixinA,
+  MixinB
+)
+
+MixinA = (
+  a: int
+)
+
+MixinB = (
+  b: tstr
+)
+
+UnionMixin = (
+  MixinA / MixinB
+)
+
+ComplexMixins = (
+  (MixinA / MixinB),
+  c: bool
+)

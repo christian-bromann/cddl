@@ -1,0 +1,278 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Group Choice Parsing > Blocks with Braces > should parse bare group inside brace 1`] = `
+[
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "myrule",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": "int",
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
+
+exports[`Group Choice Parsing > Blocks with Braces > should parse nested group inside map 1`] = `
+[
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "myrule",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": "int",
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
+
+exports[`Group Choice Parsing > Group Choice (//) > should parse group choice with multiple items 1`] = `
+[
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "mygroup",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": "int",
+      },
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "text",
+          },
+        },
+      ],
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": "float",
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
+
+exports[`Group Choice Parsing > Group Choice (//) > should parse nested group choice 1`] = `
+[
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "mygroup",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": {
+          "Comments": [],
+          "IsChoiceAddition": false,
+          "Name": "",
+          "Properties": [
+            [
+              {
+                "Comments": [],
+                "HasCut": false,
+                "Name": "",
+                "Occurrence": {
+                  "m": 1,
+                  "n": 1,
+                },
+                "Type": {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "int",
+                },
+              },
+            ],
+            {
+              "Comments": [],
+              "HasCut": false,
+              "Name": "",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": "text",
+            },
+          ],
+          "Type": "group",
+        },
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
+
+exports[`Group Choice Parsing > Group Choice (//) > should verify group choice operator // 1`] = `
+[
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "mygroup",
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "int",
+          },
+        },
+      ],
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": "text",
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
+
+exports[`Group Choice Parsing > Map Group Choice > should parse group choice inside map 1`] = `
+[
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "mymap",
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "a",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": [
+            {
+              "Type": "literal",
+              "Unwrapped": false,
+              "Value": 1,
+            },
+          ],
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "b",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": [
+            {
+              "Type": "literal",
+              "Unwrapped": false,
+              "Value": 2,
+            },
+          ],
+        },
+      ],
+    ],
+    "Type": "group",
+  },
+]
+`;
+
+exports[`Group Choice Parsing > Type Choice (/) > should correctly handle slash in mixed context 1`] = `
+[
+  {
+    "Comments": [],
+    "Name": "myrule",
+    "Type": "array",
+    "Values": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "int",
+          "text",
+        ],
+      },
+    ],
+  },
+]
+`;
+
+exports[`Group Choice Parsing > Type Choice (/) > should parse type choice inside group 1`] = `
+[
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "mygroup",
+    "PropertyType": [
+      "int",
+      "text",
+    ],
+    "Type": "variable",
+  },
+]
+`;
