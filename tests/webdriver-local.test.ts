@@ -6,15 +6,9 @@ import Parser from '../src/parser.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
-describe('webdriver cddl', () => {
+describe('webdriver local cddl', () => {
     it('can parse local.cddl', () => {
         const filePath = path.join(__dirname, '../examples/webdriver/local.cddl')
-        const p = new Parser(filePath)
-        expect(p.parse()).toMatchSnapshot()
-    })
-
-    it('can parse remote.cddl', () => {
-        const filePath = path.join(__dirname, '../examples/webdriver/remote.cddl')
         const p = new Parser(filePath)
         expect(p.parse()).toMatchSnapshot()
     })
