@@ -32,7 +32,6 @@ export default class Lexer {
 
         for (const [line, lineLength] of Object.entries(sourceLineLength)) {
             i += lineLength + 1
-            const lineBegin = i - lineLength
             if (i > position) {
                 const lineBegin = i - lineLength
                 return {
