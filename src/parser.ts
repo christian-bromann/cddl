@@ -35,6 +35,7 @@ export default class Parser {
 
     curToken: Token = NIL_TOKEN;
     peekToken: Token = NIL_TOKEN;
+    peekBelowToken: Token = NIL_TOKEN;
 
     constructor (filePath: string) {
         this.#filePath = filePath
@@ -42,11 +43,13 @@ export default class Parser {
 
         this.nextToken()
         this.nextToken()
+        this.nextToken()
     }
 
     private nextToken () {
         this.curToken = this.peekToken
-        this.peekToken = this.l.nextToken()
+        this.peekToken = this.peekBelowToken
+        this.peekBelowToken = this.l.nextToken()
         return true
     }
 
@@ -134,7 +137,12 @@ export default class Parser {
          *       attireBlock
          *   )
          */
-        if (closingTokens.includes(Tokens.RPAREN) && this.peekToken.Type === Tokens.SLASH) {
+        if (
+            closingTokens.includes(Tokens.RPAREN) &&
+            this.peekToken.Type === Tokens.SLASH &&
+            this.peekBelowToken.Type !== Tokens.SLASH &&
+            !(this.curToken.Type === Tokens.SLASH && this.peekToken.Type === Tokens.SLASH)
+        ) {
             const propertyType: PropertyType[] = []
             while (!closingTokens.includes(this.curToken.Type)) {
                 propertyType.push(...this.parsePropertyTypes())
@@ -405,7 +413,7 @@ export default class Parser {
              */
             const props = this.parseAssignmentValue()
             let operator = this.isOperator() ? this.parseOperator() : undefined
-            if (!isChoice && this.curToken.Type === Tokens.SLASH) {
+            if (!isChoice && this.curToken.Type === Tokens.SLASH && this.peekToken.Type !== Tokens.SLASH) {
                 this.nextToken()
                 const nextType = this.parsePropertyType()
                 if (Array.isArray(props)) {

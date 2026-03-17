@@ -331,34 +331,83 @@ exports[`webdriver cddl > can parse local.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "EventData",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "BrowsingContextEvent",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "InputEvent",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "LogEvent",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "NetworkEvent",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "BrowsingContextEvent",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "InputEvent",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "LogEvent",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "NetworkEvent",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "ScriptEvent",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "ScriptEvent",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -2019,79 +2068,209 @@ exports[`webdriver cddl > can parse local.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "BrowsingContextEvent",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.ContextCreated",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.ContextDestroyed",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.DomContentLoaded",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.DownloadEnd",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.DownloadWillBegin",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.FragmentNavigated",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.HistoryUpdated",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.Load",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.NavigationAborted",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.NavigationCommitted",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.NavigationFailed",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.NavigationStarted",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.UserPromptClosed",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.ContextCreated",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.ContextDestroyed",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.DomContentLoaded",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.DownloadEnd",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.DownloadWillBegin",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.FragmentNavigated",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.HistoryUpdated",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.Load",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.NavigationAborted",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.NavigationCommitted",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.NavigationFailed",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.NavigationStarted",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.UserPromptClosed",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.UserPromptOpened",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.UserPromptOpened",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -3457,18 +3636,46 @@ exports[`webdriver cddl > can parse local.cddl 1`] = `
           "m": 1,
           "n": 1,
         },
-        "Type": [
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "browsingContext.DownloadCanceledParams",
-          },
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "browsingContext.DownloadCompleteParams",
-          },
-        ],
+        "Type": {
+          "Comments": [],
+          "IsChoiceAddition": false,
+          "Name": "",
+          "Properties": [
+            [
+              {
+                "Comments": [],
+                "HasCut": false,
+                "Name": "",
+                "Occurrence": {
+                  "m": 1,
+                  "n": 1,
+                },
+                "Type": {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "browsingContext.DownloadCanceledParams",
+                },
+              },
+            ],
+            {
+              "Comments": [],
+              "HasCut": false,
+              "Name": "",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "browsingContext.DownloadCompleteParams",
+                },
+              ],
+            },
+          ],
+          "Type": "group",
+        },
       },
     ],
     "Type": "group",
@@ -4215,34 +4422,83 @@ exports[`webdriver cddl > can parse local.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "NetworkEvent",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.AuthRequired",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.BeforeRequestSent",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.FetchError",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.ResponseCompleted",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.AuthRequired",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.BeforeRequestSent",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.FetchError",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.ResponseCompleted",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.ResponseStarted",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.ResponseStarted",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -6128,24 +6384,55 @@ exports[`webdriver cddl > can parse local.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "ScriptEvent",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "script.Message",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "script.RealmCreated",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "script.Message",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "script.RealmCreated",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "script.RealmDestroyed",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "script.RealmDestroyed",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -10660,6 +10947,29 @@ exports[`webdriver cddl > can parse local.cddl 1`] = `
   {
     "Comments": [],
     "IsChoiceAddition": false,
+    "Name": "InputResult",
+    "PropertyType": [
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "input.PerformActionsResult",
+      },
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "input.ReleaseActionsResult",
+      },
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "input.SetFilesResult",
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
     "Name": "input.PerformActionsResult",
     "PropertyType": [
       {
@@ -10933,54 +11243,139 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "CommandData",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "BrowserCommand",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "BrowsingContextCommand",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "EmulationCommand",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "InputCommand",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "NetworkCommand",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "ScriptCommand",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "SessionCommand",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "StorageCommand",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "BrowserCommand",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "BrowsingContextCommand",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "EmulationCommand",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "InputCommand",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "NetworkCommand",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "ScriptCommand",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "SessionCommand",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "StorageCommand",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "WebExtensionCommand",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "WebExtensionCommand",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -11080,34 +11475,83 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "SessionCommand",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "session.End",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "session.New",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "session.Status",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "session.Subscribe",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "session.End",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "session.New",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "session.Status",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "session.Subscribe",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "session.Unsubscribe",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "session.Unsubscribe",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -12245,44 +12689,111 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "BrowserCommand",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browser.Close",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browser.CreateUserContext",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browser.GetClientWindows",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browser.GetUserContexts",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browser.RemoveUserContext",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browser.SetClientWindowState",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browser.Close",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browser.CreateUserContext",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browser.GetClientWindows",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browser.GetUserContexts",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browser.RemoveUserContext",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browser.SetClientWindowState",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browser.SetDownloadBehavior",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browser.SetDownloadBehavior",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -12802,18 +13313,46 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
           "m": 1,
           "n": 1,
         },
-        "Type": [
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "browser.ClientWindowNamedState",
-          },
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "browser.ClientWindowRectState",
-          },
-        ],
+        "Type": {
+          "Comments": [],
+          "IsChoiceAddition": false,
+          "Name": "",
+          "Properties": [
+            [
+              {
+                "Comments": [],
+                "HasCut": false,
+                "Name": "",
+                "Occurrence": {
+                  "m": 1,
+                  "n": 1,
+                },
+                "Type": {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "browser.ClientWindowNamedState",
+                },
+              },
+            ],
+            {
+              "Comments": [],
+              "HasCut": false,
+              "Name": "",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "browser.ClientWindowRectState",
+                },
+              ],
+            },
+          ],
+          "Type": "group",
+        },
       },
     ],
     "Type": "group",
@@ -13052,18 +13591,46 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
           "m": 1,
           "n": 1,
         },
-        "Type": [
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "browser.DownloadBehaviorAllowed",
-          },
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "browser.DownloadBehaviorDenied",
-          },
-        ],
+        "Type": {
+          "Comments": [],
+          "IsChoiceAddition": false,
+          "Name": "",
+          "Properties": [
+            [
+              {
+                "Comments": [],
+                "HasCut": false,
+                "Name": "",
+                "Occurrence": {
+                  "m": 1,
+                  "n": 1,
+                },
+                "Type": {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "browser.DownloadBehaviorAllowed",
+                },
+              },
+            ],
+            {
+              "Comments": [],
+              "HasCut": false,
+              "Name": "",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "browser.DownloadBehaviorDenied",
+                },
+              ],
+            },
+          ],
+          "Type": "group",
+        },
       },
     ],
     "Type": "group",
@@ -13132,74 +13699,195 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "BrowsingContextCommand",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.Activate",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.CaptureScreenshot",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.Close",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.Create",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.GetTree",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.HandleUserPrompt",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.LocateNodes",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.Navigate",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.Print",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.Reload",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.SetBypassCSP",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.SetViewport",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.Activate",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.CaptureScreenshot",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.Close",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.Create",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.GetTree",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.HandleUserPrompt",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.LocateNodes",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.Navigate",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.Print",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.Reload",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.SetBypassCSP",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.SetViewport",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "browsingContext.TraverseHistory",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "browsingContext.TraverseHistory",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -15527,64 +16215,167 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "EmulationCommand",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetForcedColorsModeThemeOverride",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetGeolocationOverride",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetLocaleOverride",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetNetworkConditions",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetScreenOrientationOverride",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetScreenSettingsOverride",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetScriptingEnabled",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetScrollbarTypeOverride",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetTimezoneOverride",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetTouchOverride",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetForcedColorsModeThemeOverride",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetGeolocationOverride",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetLocaleOverride",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetNetworkConditions",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetScreenOrientationOverride",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetScreenSettingsOverride",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetScriptingEnabled",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetScrollbarTypeOverride",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetTimezoneOverride",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetTouchOverride",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "emulation.SetUserAgentOverride",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "emulation.SetUserAgentOverride",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -17530,74 +18321,195 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "NetworkCommand",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.AddDataCollector",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.AddIntercept",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.ContinueRequest",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.ContinueResponse",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.ContinueWithAuth",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.DisownData",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.FailRequest",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.GetData",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.ProvideResponse",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.RemoveDataCollector",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.RemoveIntercept",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.SetCacheBehavior",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.AddDataCollector",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.AddIntercept",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.ContinueRequest",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.ContinueResponse",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.ContinueWithAuth",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.DisownData",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.FailRequest",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.GetData",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.ProvideResponse",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.RemoveDataCollector",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.RemoveIntercept",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.SetCacheBehavior",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "network.SetExtraHeaders",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "network.SetExtraHeaders",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -19091,18 +20003,46 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
           "m": 1,
           "n": 1,
         },
-        "Type": [
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "network.ContinueWithAuthCredentials",
-          },
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "network.ContinueWithAuthNoCredentials",
-          },
-        ],
+        "Type": {
+          "Comments": [],
+          "IsChoiceAddition": false,
+          "Name": "",
+          "Properties": [
+            [
+              {
+                "Comments": [],
+                "HasCut": false,
+                "Name": "",
+                "Occurrence": {
+                  "m": 1,
+                  "n": 1,
+                },
+                "Type": {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "network.ContinueWithAuthCredentials",
+                },
+              },
+            ],
+            {
+              "Comments": [],
+              "HasCut": false,
+              "Name": "",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "network.ContinueWithAuthNoCredentials",
+                },
+              ],
+            },
+          ],
+          "Type": "group",
+        },
       },
     ],
     "Type": "group",
@@ -20015,39 +20955,97 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "ScriptCommand",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "script.AddPreloadScript",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "script.CallFunction",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "script.Disown",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "script.Evaluate",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "script.GetRealms",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "script.AddPreloadScript",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "script.CallFunction",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "script.Disown",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "script.Evaluate",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "script.GetRealms",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "script.RemovePreloadScript",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "script.RemovePreloadScript",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -23985,24 +24983,55 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "StorageCommand",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "storage.DeleteCookies",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "storage.GetCookies",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "storage.DeleteCookies",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "storage.GetCookies",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "storage.SetCookie",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "storage.SetCookie",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -24698,47 +25727,55 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "InputCommand",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "input.PerformActions",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "input.ReleaseActions",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "input.PerformActions",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "input.ReleaseActions",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "input.SetFiles",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "input.SetFiles",
+          },
+        ],
       },
     ],
-    "Type": "variable",
-  },
-  {
-    "Comments": [],
-    "IsChoiceAddition": false,
-    "Name": "InputResult",
-    "PropertyType": [
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "input.PerformActionsResult",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "input.ReleaseActionsResult",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "input.SetFilesResult",
-      },
-    ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],
@@ -26203,128 +27240,42 @@ exports[`webdriver cddl > can parse remote.cddl 1`] = `
   {
     "Comments": [],
     "IsChoiceAddition": false,
-    "Name": "input.FileDialogOpened",
-    "Properties": [
-      {
-        "Comments": [],
-        "HasCut": true,
-        "Name": "method",
-        "Occurrence": {
-          "m": 1,
-          "n": 1,
-        },
-        "Type": [
-          {
-            "Type": "literal",
-            "Unwrapped": false,
-            "Value": "input.fileDialogOpened",
-          },
-        ],
-      },
-      {
-        "Comments": [],
-        "HasCut": true,
-        "Name": "params",
-        "Occurrence": {
-          "m": 1,
-          "n": 1,
-        },
-        "Type": [
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "input.FileDialogInfo",
-          },
-        ],
-      },
-    ],
-    "Type": "group",
-  },
-  {
-    "Comments": [],
-    "IsChoiceAddition": false,
-    "Name": "input.FileDialogInfo",
-    "Properties": [
-      {
-        "Comments": [],
-        "HasCut": true,
-        "Name": "context",
-        "Occurrence": {
-          "m": 1,
-          "n": 1,
-        },
-        "Type": [
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "browsingContext.BrowsingContext",
-          },
-        ],
-      },
-      {
-        "Comments": [],
-        "HasCut": true,
-        "Name": "userContext",
-        "Occurrence": {
-          "m": Infinity,
-          "n": 0,
-        },
-        "Type": [
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "browser.UserContext",
-          },
-        ],
-      },
-      {
-        "Comments": [],
-        "HasCut": true,
-        "Name": "element",
-        "Occurrence": {
-          "m": Infinity,
-          "n": 0,
-        },
-        "Type": [
-          {
-            "Type": "group",
-            "Unwrapped": false,
-            "Value": "script.SharedReference",
-          },
-        ],
-      },
-      {
-        "Comments": [],
-        "HasCut": true,
-        "Name": "multiple",
-        "Occurrence": {
-          "m": 1,
-          "n": 1,
-        },
-        "Type": [
-          "bool",
-        ],
-      },
-    ],
-    "Type": "group",
-  },
-  {
-    "Comments": [],
-    "IsChoiceAddition": false,
     "Name": "WebExtensionCommand",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "webExtension.Install",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "webExtension.Install",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "webExtension.Uninstall",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "webExtension.Uninstall",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],

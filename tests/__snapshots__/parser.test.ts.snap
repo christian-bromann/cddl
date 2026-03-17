@@ -375,19 +375,41 @@ exports[`parser > can parse choices 1`] = `
     "Comments": [],
     "IsChoiceAddition": false,
     "Name": "attireGroup",
-    "PropertyType": [
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "attire",
+          },
+        },
+      ],
       {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "attire",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "attireBlock",
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "attireBlock",
+          },
+        ],
       },
     ],
-    "Type": "variable",
+    "Type": "group",
   },
   {
     "Comments": [],

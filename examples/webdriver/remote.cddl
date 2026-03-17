@@ -1500,12 +1500,6 @@ InputCommand = (
   input.SetFiles
 )
 
-InputResult = (
-  input.PerformActionsResult /
-  input.ReleaseActionsResult /
-  input.SetFilesResult
-)
-
 input.ElementOrigin = {
   type: "element",
   element: script.SharedReference
@@ -1656,18 +1650,6 @@ input.SetFilesParameters = {
   context: browsingContext.BrowsingContext,
   element: script.SharedReference,
   files: [*text]
-}
-
-input.FileDialogOpened = (
-   method: "input.fileDialogOpened",
-   params: input.FileDialogInfo
-)
-
-input.FileDialogInfo = {
-   context: browsingContext.BrowsingContext,
-   ? userContext: browser.UserContext,
-   ? element: script.SharedReference,
-   multiple: bool,
 }
 
 WebExtensionCommand = (

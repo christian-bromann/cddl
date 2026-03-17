@@ -1308,6 +1308,12 @@ InputEvent = (
   input.FileDialogOpened
 )
 
+InputResult = (
+  input.PerformActionsResult /
+  input.ReleaseActionsResult /
+  input.SetFilesResult
+)
+
 input.PerformActionsResult = EmptyResult
 
 input.ReleaseActionsResult = EmptyResult

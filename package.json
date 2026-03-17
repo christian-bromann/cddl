@@ -30,7 +30,7 @@
     "release:patch": "npm run release -- patch",
     "release:minor": "npm run release -- minor",
     "release:major": "npm run release -- major",
-    "test": "vitest",
+    "test": "vitest run",
     "watch": "tsc --watch"
   },
   "devDependencies": {
