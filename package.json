@@ -12,6 +12,10 @@
   "keywords": [
     "cddl"
   ],
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
   "bugs": {
     "url": "https://github.com/christian-bromann/cddl/issues"
   },
