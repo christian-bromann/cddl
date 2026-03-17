@@ -10923,6 +10923,29 @@ exports[`webdriver cddl > can parse local.cddl 1`] = `
   {
     "Comments": [],
     "IsChoiceAddition": false,
+    "Name": "InputResult",
+    "PropertyType": [
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "input.PerformActionsResult",
+      },
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "input.ReleaseActionsResult",
+      },
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "input.SetFilesResult",
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
     "Name": "InputEvent",
     "Properties": [
       {
@@ -10943,29 +10966,6 @@ exports[`webdriver cddl > can parse local.cddl 1`] = `
       },
     ],
     "Type": "group",
-  },
-  {
-    "Comments": [],
-    "IsChoiceAddition": false,
-    "Name": "InputResult",
-    "PropertyType": [
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "input.PerformActionsResult",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "input.ReleaseActionsResult",
-      },
-      {
-        "Type": "group",
-        "Unwrapped": false,
-        "Value": "input.SetFilesResult",
-      },
-    ],
-    "Type": "variable",
   },
   {
     "Comments": [],
