@@ -659,7 +659,11 @@ export default class Parser {
                         Unwrapped: isUnwrapped
                     }
                 } else if (this.curToken.Literal === Tokens.LBRACE) {
-                    type = this.parseAssignmentValue();
+                   const val = this.parseAssignmentValue();
+                   if (Array.isArray(val)) {
+                     throw new Error('Unexpected array in property type parsing');
+                   }
+                   type = val
                 } else if (this.curToken.Type === Tokens.IDENT) {
                     type = {
                         Type: 'group' as PropertyReferenceType,
@@ -727,6 +731,11 @@ export default class Parser {
             }
 
             this.nextToken()
+
+            if (!type || (typeof type === 'object' && !('Value' in type))) {
+                throw new Error('Invalid type for range definition')
+            }
+
             const Min: RangePropertyReference = typeof type === 'string' || typeof type.Value === 'number'
                 ? type as string
                 : type.Value as (number | string)
@@ -766,6 +775,11 @@ export default class Parser {
             if (isGroupedRange) {
                 this.nextToken() // eat ")"
             }
+        }
+
+        if (!type) {
+            const { line, position: column } = this.l.getLocation()
+            throw new Error(`Unexpected type: ${this.curToken.Type} at line ${line} column ${column}`)
         }
 
         return type
