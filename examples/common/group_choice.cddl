@@ -1,0 +1,47 @@
+Extensible = (*text => any)
+
+ProxyConfiguration = {
+   AutodetectProxyConfiguration //
+   DirectProxyConfiguration //
+   ManualProxyConfiguration
+}
+
+AutodetectProxyConfiguration = (
+   proxyType: "autodetect",
+   Extensible
+)
+
+DirectProxyConfiguration = (
+   proxyType: "direct",
+   Extensible
+)
+
+ManualProxyConfiguration = (
+   proxyType: "manual",
+   Extensible
+)
+
+; 1. Simple Group Choice
+SimpleGroupChoice = (int // tstr)
+
+; 2. Nested Group Choice
+NestedGroupChoice = ((int // tstr))
+
+; 3. Group Choice with Multiple Items (Sequence) - interpreted as tuple
+SequenceGroupChoice = ((int, text) // float)
+
+; 4. Map Group Choice - interpreted as map (interface) union
+MapGroupChoice = {
+  "a" => 1 //
+  "b" => 2
+}
+
+; 5. Type Choice inside Group - should be value union
+TypeChoiceInsideGroup = (int / tstr)
+
+; 6. Array with Group Choice - should be array of union?
+ArrayGroupChoice = [ (int // tstr) ]
+
+; 7. Map with nested group (bare and parens) - should be object like
+MapWithBareGroup = { int }
+MapWithParensGroup = { (int) }

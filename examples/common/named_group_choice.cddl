@@ -1,0 +1,10 @@
+; This tests that named group references inside a choice (//) are correctly
+; transformed into a union of type references.
+
+Choice = (
+  OptionA //
+  OptionB
+)
+
+OptionA = (a: int)
+OptionB = (b: tstr)

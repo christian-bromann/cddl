@@ -1,0 +1,803 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`examples > common > can parse group choice 1`] = `
+[
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "Extensible",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "text",
+        "Occurrence": {
+          "m": Infinity,
+          "n": 0,
+        },
+        "Type": [
+          "any",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "ProxyConfiguration",
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "AutodetectProxyConfiguration",
+          },
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "DirectProxyConfiguration",
+          },
+        },
+      ],
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "ManualProxyConfiguration",
+          },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "AutodetectProxyConfiguration",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "proxyType",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": "autodetect",
+          },
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "Extensible",
+          },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "DirectProxyConfiguration",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "proxyType",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": "direct",
+          },
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "Extensible",
+          },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [
+      {
+        "Content": "1. Simple Group Choice",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "IsChoiceAddition": false,
+    "Name": "ManualProxyConfiguration",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "proxyType",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": "manual",
+          },
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "Extensible",
+          },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [
+      {
+        "Content": "2. Nested Group Choice",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "IsChoiceAddition": false,
+    "Name": "SimpleGroupChoice",
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "int",
+          },
+        },
+      ],
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": "tstr",
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [
+      {
+        "Content": "3. Group Choice with Multiple Items (Sequence) - interpreted as tuple",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "IsChoiceAddition": false,
+    "Name": "NestedGroupChoice",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": {
+          "Comments": [],
+          "IsChoiceAddition": false,
+          "Name": "",
+          "Properties": [
+            [
+              {
+                "Comments": [],
+                "HasCut": false,
+                "Name": "",
+                "Occurrence": {
+                  "m": 1,
+                  "n": 1,
+                },
+                "Type": {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "int",
+                },
+              },
+            ],
+            {
+              "Comments": [],
+              "HasCut": false,
+              "Name": "",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": "tstr",
+            },
+          ],
+          "Type": "group",
+        },
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [
+      {
+        "Content": "4. Map Group Choice - interpreted as map (interface) union",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "IsChoiceAddition": false,
+    "Name": "SequenceGroupChoice",
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Comments": [],
+            "IsChoiceAddition": false,
+            "Name": "",
+            "Properties": [
+              {
+                "Comments": [],
+                "HasCut": false,
+                "Name": "",
+                "Occurrence": {
+                  "m": 1,
+                  "n": 1,
+                },
+                "Type": "int",
+              },
+              {
+                "Comments": [],
+                "HasCut": false,
+                "Name": "",
+                "Occurrence": {
+                  "m": 1,
+                  "n": 1,
+                },
+                "Type": "text",
+              },
+            ],
+            "Type": "group",
+          },
+        },
+      ],
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": "float",
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [
+      {
+        "Content": "5. Type Choice inside Group - should be value union",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "IsChoiceAddition": false,
+    "Name": "MapGroupChoice",
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "a",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": [
+            {
+              "Type": "literal",
+              "Unwrapped": false,
+              "Value": 1,
+            },
+          ],
+        },
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "b",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": [
+            {
+              "Type": "literal",
+              "Unwrapped": false,
+              "Value": 2,
+            },
+          ],
+        },
+      ],
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [
+      {
+        "Content": "6. Array with Group Choice - should be array of union?",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "IsChoiceAddition": false,
+    "Name": "TypeChoiceInsideGroup",
+    "PropertyType": [
+      "int",
+      "tstr",
+    ],
+    "Type": "variable",
+  },
+  {
+    "Comments": [
+      {
+        "Content": "7. Map with nested group (bare and parens) - should be object like",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "Name": "ArrayGroupChoice",
+    "Type": "array",
+    "Values": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": {
+          "Comments": [],
+          "IsChoiceAddition": false,
+          "Name": "",
+          "Properties": [
+            [
+              {
+                "Comments": [],
+                "HasCut": false,
+                "Name": "",
+                "Occurrence": {
+                  "m": 1,
+                  "n": 1,
+                },
+                "Type": {
+                  "Type": "group",
+                  "Unwrapped": false,
+                  "Value": "int",
+                },
+              },
+            ],
+            {
+              "Comments": [],
+              "HasCut": false,
+              "Name": "",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": "tstr",
+            },
+          ],
+          "Type": "group",
+        },
+      },
+    ],
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "MapWithBareGroup",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": "int",
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "MapWithParensGroup",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": "int",
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
+
+exports[`examples > common > can parse literals 1`] = `
+[
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "LiteralTest",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "big_int",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "literal",
+            "Unwrapped": false,
+            "Value": 9007199254740996,
+          },
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "null_val",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "null",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
+
+exports[`examples > common > can parse mixin union 1`] = `
+[
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "Mixins",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "MixinA",
+          },
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "MixinB",
+          },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "MixinA",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "a",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "int",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "MixinB",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "b",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "tstr",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "UnionMixin",
+    "PropertyType": [
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "MixinA",
+      },
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "MixinB",
+      },
+    ],
+    "Type": "variable",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "ComplexMixins",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "MixinA",
+          },
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "MixinB",
+          },
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "c",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "bool",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
+
+exports[`examples > common > can parse named group choice 1`] = `
+[
+  {
+    "Comments": [
+      {
+        "Content": "This tests that named group references inside a choice (//) are correctly",
+        "Leading": false,
+        "Type": "comment",
+      },
+      {
+        "Content": "transformed into a union of type references.",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "IsChoiceAddition": false,
+    "Name": "Choice",
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "OptionA",
+          },
+        },
+      ],
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          {
+            "Type": "group",
+            "Unwrapped": false,
+            "Value": "OptionB",
+          },
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "OptionA",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "a",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "int",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "OptionB",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "b",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "tstr",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+]
+`;
