@@ -135,10 +135,62 @@ You can combine Maps and Choices to create complex validation logic:
 Response = {
     "status" => "ok",
     "data" => tstr
-} // {
+} / {
     "status" => "error",
     "code" => int,
     "message" => tstr
 }
 ```
 *This definition means a Response object must look like EITHER the first block (status="ok", data=...) OR the second block (status="error", code=...).*
+
+---
+
+## 4. Arrays
+
+Arrays in CDDL are defined using square brackets `[]`. They correspond to JSON Arrays.
+
+### Syntax
+```cddl
+MyArray = [ type1, type2, ... ]
+```
+
+### Examples
+
+**Simple Array:**
+```cddl
+; An array of an integer, a string, and a float
+Point3D = [ x: float, y: float, z: float ]
+```
+
+**Array with Group Choice:**
+You can use group choices inside arrays to allow different structures.
+
+```cddl
+; An item is either an integer OR a string
+Item = [ (int // tstr) ]
+```
+
+---
+
+## 5. Literals
+
+CDDL supports various literal values which are useful for exact matching.
+
+### Examples
+
+```cddl
+LiteralTest = {
+  ; Exact string match
+  type: "widget",
+
+  ; Exact integer match
+  version: 1,
+
+  ; Big Integers
+  big_id: 9007199254740995,
+
+  ; Null and Booleans
+  is_active: true,
+  deleted_at: null
+}
+```
