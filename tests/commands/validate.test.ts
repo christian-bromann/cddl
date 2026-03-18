@@ -22,7 +22,7 @@ describe('validate command', () => {
         const consoleLogOrig = console.log.bind(console)
         const consoleErrorOrig = console.error.bind(console)
         const processExitOrig = process.exit.bind(process)
-        
+
         beforeEach(() => {
             process.exit = vi.fn()
             console.log = vi.fn()
@@ -53,6 +53,13 @@ describe('validate command', () => {
             handler({ filePath: validCDDL, _: [], $0: '' })
             expect(process.exit).toBeCalledTimes(0)
             expect(console.log).toBeCalledTimes(1)
+        })
+
+        it('handles relative paths', () => {
+            handler({ filePath: 'relative/path/to/file.cddl', _: [], $0: '' })
+            expect(process.exit).toBeCalledTimes(1)
+            expect(console.error).toBeCalledTimes(1)
+            expect(process.exit).toBeCalledWith(1)
         })
     })
 })

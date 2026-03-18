@@ -5,7 +5,7 @@ import Lexer from '../src/lexer.js'
 
 describe('lexer', () => {
     it('should allow to read token', () => {
-        const input = '=+(){},/'
+        const input = '=+(){},/<>'
         const tests = [
             [Tokens.ASSIGN, '='],
             [Tokens.PLUS, '+'],
@@ -14,7 +14,9 @@ describe('lexer', () => {
             [Tokens.LBRACE, '{'],
             [Tokens.RBRACE, '}'],
             [Tokens.COMMA, ','],
-            [Tokens.SLASH, '/']
+            [Tokens.SLASH, '/'],
+            [Tokens.LT, '<'],
+            [Tokens.GT, '>']
         ]
 
         const l = new Lexer(input)
@@ -39,5 +41,23 @@ describe('lexer', () => {
             expect(token.Type).toBe(Type)
             expect(token.Literal).toBe(Literal)
         }
+    })
+
+    it('should correctly report location info', () => {
+        const input = 'a = 1'
+        const l = new Lexer(input)
+
+        // consume tokens until EOF
+        while (l.nextToken().Type !== 'EOF') {}
+
+        // consume more EOFs to push position further
+        for (let i = 0; i < 10; ++i) {
+            l.nextToken()
+        }
+
+        // This should trigger the fallback
+        const locEnd = l.getLocation()
+        expect(locEnd.line).toBe(0)
+        expect(locEnd.position).toBe(0)
     })
 })

@@ -66,3 +66,10 @@ MapNoComma = {
   a: { int }
   b: tstr
 }
+
+; 12. Multi-item group choice (verifies isChoice persistence)
+GroupChoiceMulti = (
+  { a: int } /
+  { b: tstr } /
+  { c: float }
+)
