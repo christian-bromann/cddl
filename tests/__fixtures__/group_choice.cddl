@@ -45,3 +45,24 @@ ArrayGroupChoice = [ (int // tstr) ]
 ; 7. Map with nested group (bare and parens) - should be object like
 MapWithBareGroup = { int }
 MapWithParensGroup = { (int) }
+
+; 8. Group wrapped in map with multiple properties
+MapGroupWrap = { (a: int, b: tstr) }
+
+; 9. Property type choice without operators
+PropChoiceNoOp = {
+  a: int / float,
+  b: tstr
+}
+
+; 10. Nested choice with group reference
+NestedChoiceRef = (
+  (int / float) /
+  tstr
+)
+
+; 11. Complex type (group) followed by property without comma
+MapNoComma = {
+  a: { int }
+  b: tstr
+}

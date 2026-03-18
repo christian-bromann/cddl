@@ -501,7 +501,13 @@ exports[`examples > common > can parse group choice 1`] = `
     "Type": "group",
   },
   {
-    "Comments": [],
+    "Comments": [
+      {
+        "Content": "8. Group wrapped in map with multiple properties",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
     "IsChoiceAddition": false,
     "Name": "MapWithParensGroup",
     "Properties": [
@@ -514,6 +520,171 @@ exports[`examples > common > can parse group choice 1`] = `
           "n": 1,
         },
         "Type": "int",
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [
+      {
+        "Content": "9. Property type choice without operators",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "IsChoiceAddition": false,
+    "Name": "MapGroupWrap",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": {
+          "Comments": [],
+          "IsChoiceAddition": false,
+          "Name": "",
+          "Properties": [
+            {
+              "Comments": [],
+              "HasCut": true,
+              "Name": "a",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                "int",
+              ],
+            },
+            {
+              "Comments": [],
+              "HasCut": true,
+              "Name": "b",
+              "Occurrence": {
+                "m": 1,
+                "n": 1,
+              },
+              "Type": [
+                "tstr",
+              ],
+            },
+          ],
+          "Type": "group",
+        },
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [
+      {
+        "Content": "10. Nested choice with group reference",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "IsChoiceAddition": false,
+    "Name": "PropChoiceNoOp",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "a",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "int",
+          "float",
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "b",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "tstr",
+        ],
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [
+      {
+        "Content": "11. Complex type (group) followed by property without comma",
+        "Leading": false,
+        "Type": "comment",
+      },
+    ],
+    "IsChoiceAddition": false,
+    "Name": "NestedChoiceRef",
+    "Properties": [
+      [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": [
+            "int",
+            "float",
+          ],
+        },
+      ],
+      {
+        "Comments": [],
+        "HasCut": false,
+        "Name": "",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": "tstr",
+      },
+    ],
+    "Type": "group",
+  },
+  {
+    "Comments": [],
+    "IsChoiceAddition": false,
+    "Name": "MapNoComma",
+    "Properties": [
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "a",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "int",
+        ],
+      },
+      {
+        "Comments": [],
+        "HasCut": true,
+        "Name": "b",
+        "Occurrence": {
+          "m": 1,
+          "n": 1,
+        },
+        "Type": [
+          "tstr",
+        ],
       },
     ],
     "Type": "group",

@@ -284,6 +284,15 @@ export default class Parser {
                     this.nextToken()
                     isChoice = false
                 }
+
+                if (this.curToken.Type === Tokens.SLASH && this.peekToken.Type !== Tokens.SLASH) {
+                    if (!isChoice) {
+                        const last = valuesOrProperties.pop() as Property
+                        valuesOrProperties.push([last])
+                        isChoice = true
+                    }
+                    this.nextToken()
+                }
                 continue
             }
 
