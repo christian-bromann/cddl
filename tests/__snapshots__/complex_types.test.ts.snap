@@ -1,0 +1,80 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`complex types > can parse complex types correctly 1`] = `
+{
+  "Comments": [],
+  "IsChoiceAddition": false,
+  "Name": "LocalValue",
+  "PropertyType": [
+    {
+      "Type": "group",
+      "Unwrapped": false,
+      "Value": "ArrayLocalValue",
+    },
+    {
+      "Comments": [],
+      "IsChoiceAddition": false,
+      "Name": "",
+      "Properties": [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": [
+            {
+              "Type": "group",
+              "Unwrapped": false,
+              "Value": "DateLocalValue",
+            },
+          ],
+        },
+      ],
+      "Type": "group",
+    },
+    {
+      "Type": "group",
+      "Unwrapped": false,
+      "Value": "MapLocalValue",
+    },
+    {
+      "Type": "group",
+      "Unwrapped": false,
+      "Value": "ObjectLocalValue",
+    },
+    {
+      "Comments": [],
+      "IsChoiceAddition": false,
+      "Name": "",
+      "Properties": [
+        {
+          "Comments": [],
+          "HasCut": false,
+          "Name": "",
+          "Occurrence": {
+            "m": 1,
+            "n": 1,
+          },
+          "Type": [
+            {
+              "Type": "group",
+              "Unwrapped": false,
+              "Value": "RegExpLocalValue",
+            },
+          ],
+        },
+      ],
+      "Type": "group",
+    },
+    {
+      "Type": "group",
+      "Unwrapped": false,
+      "Value": "SetLocalValue",
+    },
+  ],
+  "Type": "variable",
+}
+`;

@@ -193,4 +193,39 @@ LiteralTest = {
   is_active: true,
   deleted_at: null
 }
+
+---
+
+## 6. Groups as Maps
+
+Wrap a **Group** in curly braces `{}` to treat it as a **Map**.
+
+```cddl
+; A reusable Group of fields
+DateFields = ( year: int, month: int, day: int )
+
+; 1. Mix it into a Map
+Appointment = {
+  description: tstr,
+  DateFields
+}
+
+; 2. Standalone Map
+DateObject = { DateFields }
+```
+
+### Choices with Groups and Maps
+
+You can mix explicit Maps and Groups-as-Maps in type choices:
+
+```cddl
+ArrayMap = { type: "array", values: [...] }
+DateGroup = ( type: "date", value: tstr )
+
+; Matches either map structure
+MixedValue = (
+  ArrayMap /      ; Map defined elsewhere
+  { DateGroup }   ; Group wrapped in Map
+)
+```
 ```

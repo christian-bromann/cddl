@@ -146,7 +146,7 @@ export default class Parser {
             const propertyType: PropertyType[] = []
             while (!closingTokens.includes(this.curToken.Type)) {
                 propertyType.push(...this.parsePropertyTypes())
-                if (this.curToken.Type === Tokens.RPAREN) {
+                if (closingTokens.includes(this.curToken.Type)) {
                     this.nextToken()
                     break
                 }
@@ -814,8 +814,8 @@ export default class Parser {
                 Type: prop,
                 Operator: this.parseOperator()
             } as NativeTypeWithOperator
-        } else {
-            this.nextToken() // eat `/`
+        } else if (this.curToken.Type !== Tokens.SLASH) {
+            this.nextToken() // eat Property if not already consumed (e.g. by Group parsing)
         }
 
         propertyTypes.push(prop)
@@ -837,7 +837,7 @@ export default class Parser {
         while (this.curToken.Type === Tokens.SLASH) {
             this.nextToken() // eat `/`
             propertyTypes.push(this.parsePropertyType())
-            if (!this.isOperator()) {
+            if (!this.isOperator() && this.curToken.Type !== Tokens.SLASH) {
                 /**
                  * If we are not parsing an operator, we need to eat the next token;
                  * otherwise, the operator will be parsed by the caller

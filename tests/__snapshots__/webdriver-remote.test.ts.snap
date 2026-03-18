@@ -10255,6 +10255,11 @@ exports[`webdriver remote cddl > can parse remote.cddl 1`] = `
       {
         "Type": "group",
         "Unwrapped": false,
+        "Value": "script.MapLocalValue",
+      },
+      {
+        "Type": "group",
+        "Unwrapped": false,
         "Value": "script.ObjectLocalValue",
       },
       {
@@ -10280,6 +10285,11 @@ exports[`webdriver remote cddl > can parse remote.cddl 1`] = `
           },
         ],
         "Type": "group",
+      },
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "script.SetLocalValue",
       },
     ],
     "Type": "variable",
