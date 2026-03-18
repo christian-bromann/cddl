@@ -1,0 +1,43 @@
+
+LocalValue = (
+  ArrayLocalValue /
+  { DateLocalValue } /
+  MapLocalValue /
+  ObjectLocalValue /
+  { RegExpLocalValue } /
+  SetLocalValue
+)
+
+ArrayLocalValue = {
+  type: "array",
+  value: ListLocalValue,
+}
+
+DateLocalValue = (
+  type: "date",
+  value: text
+)
+
+MapLocalValue = {
+  type: "map",
+  value: MappingLocalValue,
+}
+
+ObjectLocalValue = {
+  type: "object",
+  value: MappingLocalValue,
+}
+
+RegExpLocalValue = (
+  type: "regexp",
+  value: text
+)
+
+SetLocalValue = {
+  type: "set",
+  value: ListLocalValue,
+}
+
+MappingLocalValue = [*[(LocalValue / text), LocalValue]];
+
+ListLocalValue = [*LocalValue];

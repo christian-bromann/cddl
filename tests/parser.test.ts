@@ -1,6 +1,7 @@
 import url from 'node:url'
 import path from 'node:path'
-import { describe, it, expect } from 'vitest'
+import fs from 'node:fs'
+import { describe, it, expect, vi } from 'vitest'
 
 import Lexer from '../src/lexer.js'
 import Parser from '../src/parser.js'
@@ -27,4 +28,18 @@ describe('parser', () => {
             expect(p.parse()).toMatchSnapshot()
         })
     }
+
+    it('throws if group identifier is missing', () => {
+        vi.spyOn(fs, 'readFileSync').mockReturnValue('=')
+        const p = new Parser('foo.cddl')
+        expect(() => p.parse()).toThrow('group identifier expected')
+        vi.restoreAllMocks()
+    })
+
+    it('throws if assignment operator is missing', () => {
+        vi.spyOn(fs, 'readFileSync').mockReturnValue('groupName bar')
+        const p = new Parser('foo.cddl')
+        expect(() => p.parse()).toThrow('group identifier expected')
+        vi.restoreAllMocks()
+    })
 })

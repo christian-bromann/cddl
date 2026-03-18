@@ -6823,6 +6823,11 @@ exports[`webdriver local cddl > can parse local.cddl 1`] = `
       {
         "Type": "group",
         "Unwrapped": false,
+        "Value": "script.MapLocalValue",
+      },
+      {
+        "Type": "group",
+        "Unwrapped": false,
         "Value": "script.ObjectLocalValue",
       },
       {
@@ -6848,6 +6853,11 @@ exports[`webdriver local cddl > can parse local.cddl 1`] = `
           },
         ],
         "Type": "group",
+      },
+      {
+        "Type": "group",
+        "Unwrapped": false,
+        "Value": "script.SetLocalValue",
       },
     ],
     "Type": "variable",
